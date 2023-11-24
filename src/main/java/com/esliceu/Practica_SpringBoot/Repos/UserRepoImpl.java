@@ -18,20 +18,40 @@ public class UserRepoImpl implements UserRepo{
 
     @Override
     public boolean userExists(String userName) {
-        Integer amount = jdbcTemplate.queryForObject("SELECT count(*) FROM usuaris WHERE userName = ?",
+        Integer count = jdbcTemplate.queryForObject(
+                "SELECT count(*) FROM usuaris WHERE userName = ?",
                 new Object[]{userName},
-                Integer.class);
-        System.out.println("Amount: " + amount);
-        if (amount > 0){
-            System.out.println("True");
+                Integer.class
+        );
+        if (count > 0){
             return true;
         }
-        System.out.println("False");
         return false;
     }
 
     @Override
-    public User findUserByPassword(User userName, String password) {
+    public boolean logUser(String userName, String password) {
+        //logUser es diferent a userExists perque també tenim en compte la password
+        Integer count = jdbcTemplate.queryForObject(
+                "SELECT COUNT(*) FROM usuaris WHERE userName = ? AND password = ?",
+                new Object[]{userName, password},
+                Integer.class
+        );
+        if (count > 0){
+            return true;
+        }
+        return false;
+    }
+
+    @Override
+    public User findUserByuserName(String userName) {
+        /*String userResult = jdbcTemplate.queryForObject(
+                "SELECT userName FROM usuaris WHERE userName = ?",
+                new Object[]{userName},
+                String.class
+        );
+
+        return userResult;*/
         return null;
     }
 }

@@ -1,5 +1,6 @@
 package com.esliceu.Practica_SpringBoot.Controllers;
 
+import com.esliceu.Practica_SpringBoot.services.DrawingService;
 import com.esliceu.Practica_SpringBoot.services.UserService;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,8 +16,10 @@ public class IndexController {
     HttpSession session;
 
     UserService userService;
+
     IndexController(UserService userService) {
         this.userService = userService;
+
     }
 
     //Login
@@ -31,7 +34,7 @@ public class IndexController {
                            @RequestParam String userName,
                            @RequestParam String password) {
 
-        if(userService.userExists(userName)){
+        if(userService.logUser(userName, password)){
             session.setAttribute("userName", userName);
             return "draw";
         } else {
@@ -39,6 +42,7 @@ public class IndexController {
             model.addAttribute("errMsg", "Aseguri de que les dades intoduides son correctes, " +
                     "o crei un nou compte.");
             return "logErr";
+            //return "redirect:/logErr";
         }
     }
 
@@ -70,8 +74,6 @@ public class IndexController {
         } else {
             System.out.println("Usuari guardat");
             userService.saveUser(userName, password);
-            /*HttpSession session = req.getSession();
-            session.setAttribute("user", userName);*/
             return "draw";
         }
     }

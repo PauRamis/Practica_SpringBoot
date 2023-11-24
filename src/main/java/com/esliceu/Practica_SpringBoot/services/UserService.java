@@ -10,15 +10,19 @@ public class UserService {
     @Autowired
     UserRepo userRepo;
 
-    public void saveUser(String user, String cont) {
-        userRepo.save(user, cont);
+    public void saveUser(String userName, String password) {
+        userRepo.save(userName, password);
+    }
+
+    public boolean logUser(String userName, String password) {
+        return userRepo.logUser(userName, password);
     }
 
     public boolean userExists(String userName) {
         return userRepo.userExists(userName);
     }
 
-    public User findUserByPassword(User u, String p){
-        return userRepo.findUserByPassword(u, p);
+    public User findUserByuserName(String userName){
+        return userRepo.findUserByuserName(userName);
     }
 }

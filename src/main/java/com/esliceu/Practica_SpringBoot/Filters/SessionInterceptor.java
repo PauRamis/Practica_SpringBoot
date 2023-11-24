@@ -16,6 +16,7 @@ public class SessionInterceptor implements HandlerInterceptor {
         if (user == null)
             return false;
         return true;
+        //return "redirect:/login";
     }
 }
 
