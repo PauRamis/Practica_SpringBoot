@@ -1,6 +1,5 @@
 package com.esliceu.Practica_SpringBoot.Controllers;
 
-import com.esliceu.Practica_SpringBoot.entities.User;
 import com.esliceu.Practica_SpringBoot.services.UserService;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +22,7 @@ public class IndexController {
     //Login
     @GetMapping("/login")
     public String login(){
+        System.out.println("Dins login");
         return "login";
     }
 
