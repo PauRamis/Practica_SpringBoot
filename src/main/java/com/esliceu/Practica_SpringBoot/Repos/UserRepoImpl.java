@@ -1,13 +1,19 @@
 package com.esliceu.Practica_SpringBoot.Repos;
 
 import com.esliceu.Practica_SpringBoot.entities.User;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 @Repository
 public class UserRepoImpl implements UserRepo{
-    @Override
-    public void save(String usuari, String contrasenya) {
+    @Autowired
+    JdbcTemplate jdbcTemplate;
 
+    @Override
+    public void save(String userName, String password) {
+        jdbcTemplate.update("insert into usuaris (userName,password) values (?,?)",
+                userName, password);
     }
 
     @Override
