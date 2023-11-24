@@ -14,8 +14,8 @@ public class UserService {
         userRepo.save(user, cont);
     }
 
-    public boolean userExists(String user, String pw) {
-        return userRepo.userExists(new User(user, pw));
+    public boolean userExists(String userName) {
+        return userRepo.userExists(userName);
     }
 
     public User findUserByPassword(User u, String p){

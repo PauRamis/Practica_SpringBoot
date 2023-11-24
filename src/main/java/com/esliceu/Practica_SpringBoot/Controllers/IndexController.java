@@ -31,7 +31,7 @@ public class IndexController {
                            @RequestParam String userName,
                            @RequestParam String password) {
 
-        if(userService.userExists(userName, password)){
+        if(userService.userExists(userName)){
             session.setAttribute("userName", userName);
             return "draw";
         } else {
@@ -52,7 +52,7 @@ public class IndexController {
     public String registrePost(Model model,
                             @RequestParam String userName,
                             @RequestParam String password) {
-        if (userService.userExists(userName, password)) {
+        if (userService.userExists(userName)) {
             model.addAttribute("errType", "Usuari ja existent");
             model.addAttribute("errMsg", "Provi amb un altre nom o amb variacións del mateix");
             return "logErr";

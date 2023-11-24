@@ -17,12 +17,21 @@ public class UserRepoImpl implements UserRepo{
     }
 
     @Override
-    public boolean userExists(User u) {
+    public boolean userExists(String userName) {
+        Integer amount = jdbcTemplate.queryForObject("SELECT count(*) FROM usuaris WHERE userName = ?",
+                new Object[]{userName},
+                Integer.class);
+        System.out.println("Amount: " + amount);
+        if (amount > 0){
+            System.out.println("True");
+            return true;
+        }
+        System.out.println("False");
         return false;
     }
 
     @Override
-    public User findUserByPassword(User u, String p) {
+    public User findUserByPassword(User userName, String password) {
         return null;
     }
 }
