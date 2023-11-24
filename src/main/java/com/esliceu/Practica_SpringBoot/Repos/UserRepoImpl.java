@@ -1,7 +1,9 @@
 package com.esliceu.Practica_SpringBoot.Repos;
 
 import com.esliceu.Practica_SpringBoot.entities.User;
+import org.springframework.stereotype.Repository;
 
+@Repository
 public class UserRepoImpl implements UserRepo{
     @Override
     public void save(String usuari, String contrasenya) {

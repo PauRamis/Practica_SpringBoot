@@ -1,9 +1,11 @@
 package com.esliceu.Practica_SpringBoot.Repos;
 
 import com.esliceu.Practica_SpringBoot.entities.Drawing;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
+@Repository
 public class DrawingRepoImpl implements DrawingRepo{
     @Override
     public void storeDrawing(Drawing drawing) {

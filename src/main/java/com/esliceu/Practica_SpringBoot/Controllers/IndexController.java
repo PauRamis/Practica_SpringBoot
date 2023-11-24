@@ -32,7 +32,7 @@ public class IndexController {
                            @RequestParam String password) {
 
         if(userService.userExists(userName, password)){
-            session.setAttribute("username", userName);
+            session.setAttribute("userName", userName);
             return "draw";
         } else {
             model.addAttribute("errType", "Usuari no existent");
