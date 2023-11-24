@@ -25,7 +25,6 @@ public class IndexController {
     //Login
     @GetMapping("/login")
     public String login(){
-        System.out.println("Dins login");
         return "login";
     }
 
