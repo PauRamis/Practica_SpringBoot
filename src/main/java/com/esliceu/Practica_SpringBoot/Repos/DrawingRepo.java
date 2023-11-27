@@ -9,11 +9,9 @@ public interface DrawingRepo {
 
     List<Drawing> showDrawings();
 
-    List<Drawing> showUserDrawings(String user);
+    List<Drawing> showUserDrawings(String userName);
 
     Drawing getDrawingById(int id);
-
-    boolean idUsed(int id);
 
     void deleteDrawing(int id);
 }

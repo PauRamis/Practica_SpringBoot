@@ -1,7 +1,9 @@
 package com.esliceu.Practica_SpringBoot.Repos;
 
+import com.esliceu.Practica_SpringBoot.entities.Drawing;
 import com.esliceu.Practica_SpringBoot.entities.User;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
@@ -31,7 +33,7 @@ public class UserRepoImpl implements UserRepo{
 
     @Override
     public boolean logUser(String userName, String password) {
-        //logUser es diferent a userExists perque també tenim en compte la password
+        //logUser es com userExists però comprobant també la password
         Integer count = jdbcTemplate.queryForObject(
                 "SELECT COUNT(*) FROM usuaris WHERE userName = ? AND password = ?",
                 new Object[]{userName, password},
@@ -45,13 +47,7 @@ public class UserRepoImpl implements UserRepo{
 
     @Override
     public User findUserByuserName(String userName) {
-        /*String userResult = jdbcTemplate.queryForObject(
-                "SELECT userName FROM usuaris WHERE userName = ?",
-                new Object[]{userName},
-                String.class
-        );
-
-        return userResult;*/
-        return null;
+        String sql = "SELECT * FROM userName WHERE userName = ?";
+        return jdbcTemplate.queryForObject(sql, new Object[]{userName}, new BeanPropertyRowMapper<>(User.class));
     }
 }
