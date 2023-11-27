@@ -4,6 +4,7 @@ public class Drawing {
     private String json;
     private User usuari;
     private int id;
+    private int name;
 
     public String getJson() {
         return json;
@@ -27,5 +28,13 @@ public class Drawing {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public int getName() {
+        return name;
+    }
+
+    public void setName(int name) {
+        this.name = name;
     }
 }

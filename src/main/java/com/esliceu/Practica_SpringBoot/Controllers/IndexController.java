@@ -1,5 +1,6 @@
 package com.esliceu.Practica_SpringBoot.Controllers;
 
+import com.esliceu.Practica_SpringBoot.entities.Drawing;
 import com.esliceu.Practica_SpringBoot.services.DrawingService;
 import com.esliceu.Practica_SpringBoot.services.UserService;
 import jakarta.servlet.http.HttpSession;
@@ -10,16 +11,19 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.util.List;
+
 @Controller
 public class IndexController {
     @Autowired
     HttpSession session;
 
     UserService userService;
+    DrawingService drawingService;
 
-    IndexController(UserService userService) {
+    IndexController(UserService userService, DrawingService drawingService) {
         this.userService = userService;
-
+        this.drawingService = drawingService;
     }
 
     //Login
@@ -75,5 +79,34 @@ public class IndexController {
             userService.saveUser(userName, password);
             return "draw";
         }
+    }
+
+    //Drawing
+    @GetMapping("/draw")
+    public String draw(){
+        return "draw";
+    }
+
+    @PostMapping("/draw")
+    public String drawPost(Model model){
+        return null;
+    }
+
+    //Gallery
+    @GetMapping("/gallery")
+    public String gallery(Model model){
+        String userName = (String) session.getAttribute("userName");
+        List<Drawing> allDrawings = drawingService.showDrawings();
+        List<Drawing> userDrawings = drawingService.showUserDrawings(userName);
+
+        model.addAttribute("userName", userName);
+        model.addAttribute("allDrawings", allDrawings);
+        model.addAttribute("userDrawings", userDrawings);
+        return "gallery";
+    }
+
+    @PostMapping("/gallery")
+    public String galleryPost(Model model){
+        return null;
     }
 }
