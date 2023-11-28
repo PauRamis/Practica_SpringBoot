@@ -3,8 +3,12 @@ const ctx = canvas.getContext("2d");
 let figures = [];
 let figure;
 
+var maCheckbox = document.getElementById('ma');
+var liniaCheckbox = document.getElementById('linia');
+var figuraCheckbox = document.getElementById('figura');
+
 //Seleccionam figura per defecte
-let toolDefault = document.getElementById("ma");
+let toolDefault = maCheckbox;
       toolDefault.checked = true;
 let tool = "ma";
 hideTools();
@@ -13,6 +17,17 @@ function getTool(){
     let thisTool = document.querySelector('input[name="tool"]:checked').value;
     return thisTool;
 }
+
+
+maCheckbox.addEventListener("change", function (){
+    hideTools();
+});
+liniaCheckbox.addEventListener("change", function (){
+    hideTools();
+});
+figuraCheckbox.addEventListener("change", function (){
+    showTools();
+});
 
 function showTools() {
   let x = document.getElementById("selectFigura");
@@ -23,6 +38,7 @@ function hideTools() {
   let x = document.getElementById("selectFigura");
       x.style.display = "none";
 }
+
 import {startDrawing, draw, stopDrawing, doLine, doFigura} from '/js/doDraw.js';
 canvas.addEventListener("mousedown", function (event) {
     const boundingRect = canvas.getBoundingClientRect();
@@ -91,3 +107,30 @@ function clear() {
     figures = [];
     console.log("cleared");
 }
+
+////LocalStorage, guardar en local////
+//localStorage.setItem("json", JSON.stringify(figura))
+//let jsonString = JSON.parse(localStorage.getItem("json"))
+
+
+/*document.querySelector("select").value =
+localStorage.getItem("figure") || ""*/
+
+/*document.querySelector("select").addEventListener("change", (e) => {
+    localStorage.setItem("figure", document.querySelector("select").value)
+});*/
+
+////Promise////
+/*
+fetch(url)
+    then((response) => response.json())
+    then((body) => console.log(body))
+    catch((error) => console.error(error));
+//Vs Await
+try {
+    const response = await fetch(url);
+    const body = await response.json();
+    console.log(body);
+} catch (error) {
+    console.log(error);
+}*/
