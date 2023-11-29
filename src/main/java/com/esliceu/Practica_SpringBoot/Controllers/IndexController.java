@@ -125,4 +125,20 @@ public class IndexController {
     public String galleryPost(Model model){
         return null;
     }
+
+    //View
+    @GetMapping("/view")
+    public String view(Model model,
+                       @RequestParam(name = "currentDrawingId")
+                       int currentDrawingId){
+
+        //model.addAttribute("currentJson", currentJson);
+        model.addAttribute("currentDrawingId", currentDrawingId);
+        return "view";
+    }
+
+    @PostMapping("/view")
+    public String viewPost(Model model){
+        return null;
+    }
 }
