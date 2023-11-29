@@ -49,7 +49,7 @@
 
             <div class="subMenu">
                 <p>Color: <input id="color" name="color" type="color" value="#ff0000"></p>
-                <p>Nom: <input id="fName" name="name" type="text" value="defaultName"></p>
+
             </div>
 
             <div id="selectFigura" class="subMenu">
@@ -69,7 +69,8 @@
     <div>
         <button id="clear">Clear</button>
         <form action="/draw" method="post">
-            <input id="drawingInput" type="hidden" value="" name="drawing"/>
+            <input id="drawingInput" type="hidden" value="" name="drawingInput"/>
+            <p>Nom: <input id="DrawingName" name="DrawingName" type="text" value="defaultName"></p>
             <p><input type="submit" value="Envia"></p>
         </form>
     </div>

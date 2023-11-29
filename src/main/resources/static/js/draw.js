@@ -40,6 +40,7 @@ function hideTools() {
 }
 
 import {startDrawing, draw, stopDrawing, doLine, doFigura} from '/js/doDraw.js';
+
 canvas.addEventListener("mousedown", function (event) {
     const boundingRect = canvas.getBoundingClientRect();
     const x = event.offsetX;
@@ -72,6 +73,7 @@ canvas.addEventListener("mousedown", function (event) {
                 figures.push(figure);
                 console.log(figures);
                 document.getElementById("drawingInput").value = JSON.stringify(figures);
+                console.log(JSON.stringify(figures));
                 break;
 
             case "figura":
@@ -86,13 +88,13 @@ canvas.addEventListener("mousedown", function (event) {
                     y: y,
                     size: size,
                     color: color,
-                    name: document.getElementById("fName").value,
+                    name: document.getElementById("DrawingName").value,
                     fill: fill,
                 };
                 figures.push(figure);
                 console.log(figures);
                 document.getElementById("drawingInput").value = JSON.stringify(figures);
-
+                console.log(JSON.stringify(figures));
                 //TODO render(figures);
                 doFigura(fill, x, y, size, color, type);
                 break;

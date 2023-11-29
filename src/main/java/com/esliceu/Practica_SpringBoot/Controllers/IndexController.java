@@ -1,6 +1,7 @@
 package com.esliceu.Practica_SpringBoot.Controllers;
 
 import com.esliceu.Practica_SpringBoot.entities.Drawing;
+import com.esliceu.Practica_SpringBoot.entities.User;
 import com.esliceu.Practica_SpringBoot.services.DrawingService;
 import com.esliceu.Practica_SpringBoot.services.UserService;
 import jakarta.servlet.http.HttpSession;
@@ -88,7 +89,18 @@ public class IndexController {
     }
 
     @PostMapping("/draw")
-    public String drawPost(Model model){
+    public String drawPost(Model model,
+                           @RequestParam String drawingInput,
+                           @RequestParam String DrawingName){
+
+        String userName = (String) session.getAttribute("userName");
+        System.out.println("username: " + userName);
+        User actualUser = userService.findUserByuserName(userName);
+
+        /*Drawing savedDrawing = new Drawing();
+        savedDrawing.setJson(drawingInput);
+        savedDrawing.setName(DrawingName);
+        savedDrawing.setUsuari(actualUser);*/
         return null;
     }
 

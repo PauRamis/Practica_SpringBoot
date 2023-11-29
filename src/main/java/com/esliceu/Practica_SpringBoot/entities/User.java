@@ -5,9 +5,18 @@ public class User {
     String password;
     int id;
 
+    public User() {
+    }
+
     public User(String userName, String password) {
         this.userName = userName;
         this.password = password;
+    }
+
+    public User(String userName, String password, int id) {
+        this.userName = userName;
+        this.password = password;
+        this.id = id;
     }
 
     public String getUserName() {
