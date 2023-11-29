@@ -97,10 +97,11 @@ public class IndexController {
         System.out.println("username: " + userName);
         User actualUser = userService.findUserByuserName(userName);
 
-        /*Drawing savedDrawing = new Drawing();
+        Drawing savedDrawing = new Drawing();
         savedDrawing.setJson(drawingInput);
         savedDrawing.setName(DrawingName);
-        savedDrawing.setUsuari(actualUser);*/
+        savedDrawing.setUsuari(actualUser);
+        drawingService.saveDrawing(savedDrawing);
         return null;
     }
 

@@ -48,9 +48,7 @@ public class UserRepoImpl implements UserRepo{
     @Override
     public User findUserByuserName(String userName) {
         String sql = "SELECT * FROM usuaris WHERE userName = ?";
-        System.out.println("finding user..");
         User foundUser = jdbcTemplate.queryForObject(sql, new Object[]{userName}, new BeanPropertyRowMapper<>(User.class));
-        System.out.println("fondUser: " + foundUser);
         return foundUser;
     }
 }

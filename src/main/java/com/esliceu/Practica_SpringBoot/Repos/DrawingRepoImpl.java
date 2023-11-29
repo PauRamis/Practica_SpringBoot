@@ -16,8 +16,11 @@ public class DrawingRepoImpl implements DrawingRepo{
 
     @Override
     public void storeDrawing(Drawing drawing) {
-        jdbcTemplate.update("insert into usuaris (json,user) values (?,?)",
-                drawing.getJson(), drawing.getUsuari());
+        System.out.println(drawing.getJson());
+        System.out.println(drawing.getUsuari().getUserName());
+        System.out.println(drawing.getName());
+        jdbcTemplate.update("insert into drawings (json,user,name) values (?,?,?)",
+                drawing.getJson(), drawing.getUsuari().getUserName(), drawing.getName());
     }
 
     @Override
