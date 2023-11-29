@@ -24,11 +24,11 @@
         </nav>
     </header>
     <h1>Galeria de Dibuixos</h1>
-    <h2>Els teus dibuixos, ${userName}</h2>
+    <h2>Els teus dibuixos, [[${userName}]]</h2>
     <ul>
         <li th:each="drawing : ${allDrawings}">
-            <a href="/view?id=${drawing.getId()}" class="btn btn-secondary">${drawing.getName}</a>
-            <p th:text="${drawing.description}"></p>
+            <a th:href="@{/view(id=${drawing.id})}" class="btn btn-secondary" th:text="${drawing.name}"></a>
+            <p th:text="${drawing.name}"></p>
         </li>
     </ul>
     <h2>Tots els dibuixos</h2>

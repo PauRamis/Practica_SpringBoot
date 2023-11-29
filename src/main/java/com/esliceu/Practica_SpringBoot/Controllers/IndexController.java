@@ -98,6 +98,9 @@ public class IndexController {
         String userName = (String) session.getAttribute("userName");
         List<Drawing> allDrawings = drawingService.showDrawings();
         List<Drawing> userDrawings = drawingService.showUserDrawings(userName);
+        System.out.println(userName);
+        System.out.println(allDrawings.size());
+        System.out.println(userDrawings.size());
 
         model.addAttribute("userName", userName);
         model.addAttribute("allDrawings", allDrawings);
