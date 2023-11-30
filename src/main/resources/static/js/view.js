@@ -2,12 +2,21 @@ const canvas = document.querySelector("canvas");
 const ctx = canvas.getContext("2d");
 
 function dibuixa(){
-    console.log("draw");
-    let json = document.getElementById("currentJson").innerHTML;
-    console.log("json: "+json);
-    let figures = transformJSON(json);
-    figures.forEach(draw);
+    let jsonElement = document.getElementById("currentJson");
+    let jsonString = decodeEntities(jsonElement.textContent);
+    console.log(jsonString);
+    let json = JSON.parse(jsonString);
+    console.log("json: " + json);
+    console.log("json: " + JSON.stringify(json));
+    json.forEach(draw);
 }
+
+function decodeEntities(encodedString) {
+    var textArea = document.createElement('textarea');
+    textArea.innerHTML = encodedString;
+    return textArea.value;
+}
+
 export { dibuixa };
 function transformJSON(json) {
     try {
@@ -16,10 +25,12 @@ function transformJSON(json) {
             return parsedJson;
         } else {
             console.error("Json no es un array vaild.");
+            console.log(parsedJson);
             return [];
         }
     } catch (error) {
         console.error("Error al analitzar la cadena JSON:", error);
+        console.log(parsedJson);
         return [];
     }
 }
