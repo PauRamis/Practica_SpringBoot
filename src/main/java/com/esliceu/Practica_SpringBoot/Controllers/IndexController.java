@@ -112,8 +112,6 @@ public class IndexController {
         List<Drawing> allDrawings = drawingService.showDrawings();
         List<Drawing> userDrawings = drawingService.showUserDrawings(userName);
         System.out.println(userName);
-        System.out.println(allDrawings.size());
-        System.out.println(userDrawings.size());
 
         model.addAttribute("userName", userName);
         model.addAttribute("allDrawings", allDrawings);
@@ -135,7 +133,7 @@ public class IndexController {
         model.addAttribute("currentDrawingId", currentDrawingId);
         Drawing currentDrawing = drawingService.getDrawingById(currentDrawingId);
         model.addAttribute("currentJson", currentDrawing.getJson());
-        System.out.println(currentDrawing.getJson());
+        System.out.println("Current JSON: " + currentDrawing.getJson());
         return "view";
     }
 

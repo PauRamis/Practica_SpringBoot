@@ -53,13 +53,14 @@ canvas.addEventListener("mousedown", function (event) {
         switch(tool){
             case "ma":
                 startHandDrawing(x, y, color);
-
                 canvas.onmouseup = () => {
                     console.log("onmouseup");
                     const figure = finishHandDrawing();
                     console.log(figure);
                     if (figure!=null){
+                        console.log("pushed");
                         figures.push(figure);
+                        console.log(figures);
                     }
 
                 };
@@ -68,7 +69,9 @@ canvas.addEventListener("mousedown", function (event) {
                     const figure = finishHandDrawing();
                     console.log(figure);
                     if (figure!=null){
+                        console.log("pushed");
                         figures.push(figure);
+                        console.log(figures);
                     }
                 };
                 break;
