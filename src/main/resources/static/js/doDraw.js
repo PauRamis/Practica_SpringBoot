@@ -2,7 +2,6 @@ const canvas = document.querySelector("canvas");
 const ctx = canvas.getContext("2d");
 
 //Dibux a ma
-//TODO cambiar
 let handDrawingPoints = [];
 let isDrawing = false;
 
@@ -14,6 +13,7 @@ export function startHandDrawing(x, y, color) {
     ctx.strokeStyle = color;
 }
 
+//Guardar els punts
 export function addPointToHandDrawing(x, y) {
     if (isDrawing) {
         handDrawingPoints.push({ x, y });
@@ -21,6 +21,7 @@ export function addPointToHandDrawing(x, y) {
     }
 }
 
+//Dibuixar els punts
 export function redrawHandDrawing() {
     for (let i = 0; i < handDrawingPoints.length - 1; i++) {
         ctx.beginPath();
@@ -30,6 +31,7 @@ export function redrawHandDrawing() {
     }
 }
 
+//Finalitzar i enviar la figura
 export function finishHandDrawing() {
     isDrawing = false;
     figure = {
@@ -44,9 +46,20 @@ export function finishHandDrawing() {
     return figure;
 }
 
+//A partir de una figura, dibuixarla a ma
+function drawHandDrawing(points, color) {
+    ctx.strokeStyle = color;
+    for (let i = 0; i < points.length - 1; i++) {
+        ctx.beginPath();
+        ctx.moveTo(points[i].x, points[i].y);
+        ctx.lineTo(points[i + 1].x, points[i + 1].y);
+        ctx.stroke();
+    }
+}
+
 //Dibuxar linies
 let needStart = true;
-export function doLine(x, y, color){
+function doLine(x, y, color){
     if(needStart){
         ctx.strokeStyle = color;
         ctx.beginPath();
@@ -61,7 +74,13 @@ export function doLine(x, y, color){
 
 //Dibuixar figures
 export function doFigura(fill, x, y, size, color, type){
-    if (type == "quadrat"){
+    if (type == "handDrawing"){
+        drawHandDrawing(x, color);
+
+    } else if (type == "line"){
+        doLine(x, y, color);
+
+    } else if (type == "quadrat"){
         square(fill, x, y, size, color);
 
     } else if (type == "triangle"){

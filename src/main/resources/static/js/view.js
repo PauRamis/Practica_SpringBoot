@@ -18,22 +18,6 @@ function decodeEntities(encodedString) {
 }
 
 export { dibuixa };
-function transformJSON(json) {
-    try {
-        const parsedJson = JSON.parse(json);
-            if (Array.isArray(parsedJson)) {
-            return parsedJson;
-        } else {
-            console.error("Json no es un array vaild.");
-            console.log(parsedJson);
-            return [];
-        }
-    } catch (error) {
-        console.error("Error al analitzar la cadena JSON:", error);
-        console.log(parsedJson);
-        return [];
-    }
-}
 
 import {doLine, doFigura} from '/js/doDraw.js';
 
