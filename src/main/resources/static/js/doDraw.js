@@ -8,6 +8,7 @@ let figure;
 
 //Començam a dibuixar, i cridam a addPointToHandDrawing amb les coordenades inicials
 export function startHandDrawing(x, y, color) {
+    console.log("StartDrawing");
     isDrawing = true;
     handDrawingPoints = [];
     addPointToHandDrawing(x, y);
@@ -16,6 +17,7 @@ export function startHandDrawing(x, y, color) {
 
 //Guardar els punts
 export function addPointToHandDrawing(x, y) {
+
     if (isDrawing) {
         handDrawingPoints.push({ x, y });
         redrawHandDrawing();
@@ -24,6 +26,8 @@ export function addPointToHandDrawing(x, y) {
 
 //Dibuixar els punts
 export function redrawHandDrawing() {
+    console.log("redraw");
+    console.log(handDrawingPoints.length);
     for (let i = 0; i < handDrawingPoints.length - 1; i++) {
         ctx.beginPath();
         ctx.moveTo(handDrawingPoints[i].x, handDrawingPoints[i].y);
@@ -34,6 +38,9 @@ export function redrawHandDrawing() {
 
 //Finalitzar i enviar la figura
 export function finishHandDrawing() {
+    if (isDrawing == false) {
+        return null
+    }
     isDrawing = false;
     figure = {
         type: "handDrawing",

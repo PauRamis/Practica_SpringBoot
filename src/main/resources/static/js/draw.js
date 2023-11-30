@@ -53,14 +53,24 @@ canvas.addEventListener("mousedown", function (event) {
         switch(tool){
             case "ma":
                 startHandDrawing(x, y, color);
+
                 canvas.onmouseup = () => {
+                    console.log("onmouseup");
                     const figure = finishHandDrawing();
+                    console.log(figure);
+                    if (figure!=null){
+                        figures.push(figure);
+                    }
+
                 };
                 canvas.onmouseleave = () => {
+                    console.log("onmouseleave");
                     const figure = finishHandDrawing();
+                    console.log(figure);
+                    if (figure!=null){
+                        figures.push(figure);
+                    }
                 };
-
-                figures.push(figure);
                 break;
 
             case "linia":
