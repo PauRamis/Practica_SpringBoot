@@ -2,6 +2,7 @@ const canvas = document.querySelector("canvas");
 const ctx = canvas.getContext("2d");
 
 function dibuixa(){
+    //Descodificam el JSON i feim un draw a cada figura
     let jsonElement = document.getElementById("currentJson");
     console.log("jsonElement:" + jsonElement);
     let jsonString = decodeEntities(jsonElement.textContent);
@@ -23,11 +24,7 @@ export { dibuixa };
 import {doFigura} from '/js/doDraw.js';
 
 function draw(figure){
-console.log(figure);
-
-figure = {"type":"triangle","x":412,"y":150,"size":"50","color":"#ff0000","name":"defaultName","fill":false};
-console.log(figure.fill);
-
+    console.log(figure);
 
     const fill = figure.fill;
     const x = figure.x;

@@ -135,6 +135,7 @@ public class IndexController {
         model.addAttribute("currentDrawingId", currentDrawingId);
         Drawing currentDrawing = drawingService.getDrawingById(currentDrawingId);
         model.addAttribute("currentJson", currentDrawing.getJson());
+        System.out.println(currentDrawing.getJson());
         return "view";
     }
 
