@@ -7,7 +7,7 @@
     <title>View Drawing</title>
 </head>
 <script type="application/json" id="currentJson">"[[${currentJson}]]"</script>
-<body onload="dibuixa()">
+<body>
     <header>
         <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
             <div class="container-fluid">
@@ -32,11 +32,12 @@
     <a href="/edit" class="btn btn-secondary">Editar</a>
 
     <form action="/view" method="post">
-
-
         <script type="application/json" id="currentDrawingId">"[[${currentDrawingId}]]"</script>
         <p><input type="submit" value="Esborrar"></p>
     </form>
-    <script src="/js/view.js"></script>
+    <script type="module">
+        import { dibuixa } from "/js/view.js";
+        window.onload = dibuixa;
+    </script>
 </body>
 </html>

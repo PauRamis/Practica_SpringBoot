@@ -8,7 +8,7 @@ function dibuixa(){
     let figures = transformJSON(json);
     figures.forEach(draw);
 }
-
+export { dibuixa };
 function transformJSON(json) {
     try {
         const parsedJson = JSON.parse(json);
