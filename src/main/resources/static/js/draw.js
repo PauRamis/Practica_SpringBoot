@@ -53,9 +53,13 @@ canvas.addEventListener("mousedown", function (event) {
         switch(tool){
             case "ma":
                 startHandDrawing(x, y, color);
-                canvas.onmouseup = finishHandDrawing(figures);
-                canvas.mouseleave = finishHandDrawing(figures);
-                figure = //TODO recuperar figure;
+                canvas.onmouseup = () => {
+                    const figure = finishHandDrawing();
+                };
+                canvas.onmouseleave = () => {
+                    const figure = finishHandDrawing();
+                };
+
                 figures.push(figure);
                 break;
 

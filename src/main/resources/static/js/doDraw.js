@@ -32,40 +32,17 @@ export function redrawHandDrawing() {
 
 export function finishHandDrawing() {
     isDrawing = false;
-    figures.push({
+    figure = {
         type: "handDrawing",
-        points: handDrawingPoints,
+        x: handDrawingPoints,
+        y: null,
+        size: null,
         color: ctx.strokeStyle,
         name: "handDrawing",
         fill: fill,
-    });
-    console.log(figures);
-    document.getElementById("drawingInput").value = JSON.stringify(figures);
-    console.log(JSON.stringify(figures));
+    };
+    return figure;
 }
-
-
-
-/*let isDrawing = false;
-export function startDrawing(e) {
-    isDrawing = true;
-    ctx.beginPath();
-}
-
-export function draw(e) {
-  if (isDrawing == true) {
-     var x = event.offsetX;
-     var y = event.offsetY;
-
-     ctx.strokeStyle = document.getElementById("color").value;
-     ctx.lineTo(x, y);
-     ctx.stroke();
-  }
-}
-
-export function stopDrawing() {
-  isDrawing = false;
-}*/
 
 //Dibuxar linies
 let needStart = true;
