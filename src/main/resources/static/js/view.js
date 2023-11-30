@@ -6,11 +6,16 @@ function dibuixa(){
     let jsonElement = document.getElementById("currentJson");
     console.log("jsonElement:" + jsonElement);
     let jsonString = decodeEntities(jsonElement.textContent);
-    console.log("jsonString:" + jsonString);
-    let json = JSON.parse(jsonString);
-    console.log("pasredJSON: " + json);
-    console.log("stringifiedJSON: " + JSON.stringify(json));
-    json.forEach(draw);
+    if (jsonString=="") {
+        console.log("jsonString: empty");
+    } else  {
+        console.log("jsonString:" + jsonString);
+        let json = JSON.parse(jsonString);
+        console.log("pasredJSON: " + json);
+        console.log("stringifiedJSON: " + JSON.stringify(json));
+        json.forEach(draw);
+    }
+
 }
 
 function decodeEntities(encodedString) {
@@ -25,6 +30,7 @@ import {doFigura} from '/js/doDraw.js';
 
 function draw(figure){
     console.log(figure);
+    //console.log(figure.fill);
 
     const fill = figure.fill;
     const x = figure.x;

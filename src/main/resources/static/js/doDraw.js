@@ -17,8 +17,9 @@ export function startHandDrawing(x, y, color) {
 
 //Guardar els punts
 export function addPointToHandDrawing(x, y) {
-
+    console.log("add");
     if (isDrawing) {
+        console.log("adding");
         handDrawingPoints.push({ x, y });
         redrawHandDrawing();
     }
