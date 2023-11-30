@@ -2,7 +2,51 @@ const canvas = document.querySelector("canvas");
 const ctx = canvas.getContext("2d");
 
 //Dibux a ma
+//TODO cambiar
+let handDrawingPoints = [];
 let isDrawing = false;
+
+//Començam a dibuixar, i cridam a addPointToHandDrawing amb les coordenades inicials
+export function startHandDrawing(x, y, color) {
+    isDrawing = true;
+    handDrawingPoints = [];
+    addPointToHandDrawing(x, y);
+    ctx.strokeStyle = color;
+}
+
+export function addPointToHandDrawing(x, y) {
+    if (isDrawing) {
+        handDrawingPoints.push({ x, y });
+        redrawHandDrawing();
+    }
+}
+
+export function redrawHandDrawing() {
+    for (let i = 0; i < handDrawingPoints.length - 1; i++) {
+        ctx.beginPath();
+        ctx.moveTo(handDrawingPoints[i].x, handDrawingPoints[i].y);
+        ctx.lineTo(handDrawingPoints[i + 1].x, handDrawingPoints[i + 1].y);
+        ctx.stroke();
+    }
+}
+
+export function finishHandDrawing() {
+    isDrawing = false;
+    figures.push({
+        type: "handDrawing",
+        points: handDrawingPoints,
+        color: ctx.strokeStyle,
+        name: "handDrawing",
+        fill: fill,
+    });
+    console.log(figures);
+    document.getElementById("drawingInput").value = JSON.stringify(figures);
+    console.log(JSON.stringify(figures));
+}
+
+
+
+/*let isDrawing = false;
 export function startDrawing(e) {
     isDrawing = true;
     ctx.beginPath();
@@ -21,7 +65,7 @@ export function draw(e) {
 
 export function stopDrawing() {
   isDrawing = false;
-}
+}*/
 
 //Dibuxar linies
 let needStart = true;
