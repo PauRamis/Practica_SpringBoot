@@ -90,7 +90,7 @@ function triangle(fill, x, y, size, color){
     ctx.lineTo(x, y+ +size);
     ctx.closePath();
     if(fill == true){
-        doFill();
+        doFill(color);
     }
     ctx.stroke();
 
@@ -103,7 +103,7 @@ function cercle(fill, x, y, size, color){
     ctx.strokeStyle = color;
     ctx.ellipse(x, y, half, half, 0, 0, 2*Math.PI);
     if(fill == true){
-        doFill();
+        doFill(color);
     }
     ctx.stroke();
 }
@@ -126,14 +126,14 @@ function estrella(fill, x, y, size, color){
     }
 
     if(fill == true){
-        doFill();
+        doFill(color);
     }
     ctx.closePath();
     ctx.stroke();
 }
 
 //Omplir de blanc
-function doFill(){
-    ctx.fillStyle = document.getElementById("color").value;
+function doFill(color){
+    ctx.fillStyle = color;
     ctx.fill();
 }
