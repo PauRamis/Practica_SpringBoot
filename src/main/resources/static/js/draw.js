@@ -38,7 +38,7 @@ function hideTools() {
   let x = document.getElementById("selectFigura");
       x.style.display = "none";
 }
-import {startDrawing, keepDrawing, stopDrawing, doFigura } from '/js/doDraw.js';
+import {startDrawing, keepDrawing, stopDrawing, getFigure, doFigura } from '/js/doDraw.js';
 
 canvas.addEventListener("mousedown", function (event) {
     const boundingRect = canvas.getBoundingClientRect();
@@ -55,7 +55,18 @@ canvas.addEventListener("mousedown", function (event) {
                 startDrawing(event);
                 canvas.onmousemove = keepDrawing;
                 canvas.onmouseup = stopDrawing;
+                canvas.addEventListener('mouseup', () => {
+                    console.log("getFigure")
+                    figure = getFigure;
+                    if(figure == null){
+                        console.log("empty");
+                    }
+                });
 
+                figures.push(figure);
+                console.log(figures);
+                document.getElementById("drawingInput").value = JSON.stringify(figures);
+                console.log(JSON.stringify(figures));
                 break;
 
             case "linia":

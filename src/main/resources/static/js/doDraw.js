@@ -40,15 +40,14 @@ console.log("stopDrawing");
       name: "handDrawing",
       fill: false,
   };
+}
 
-  figures.push(figure);
-  console.log(figures);
-  document.getElementById("drawingInput").value = JSON.stringify(figures);
-  console.log(JSON.stringify(figures));
+export function getFigure(){
+    return figure;
 }
 
 //A partir de una figura, dibuixarla a ma
-function drawHandDrawing(points, color) {
+/*function drawHandDrawing(points, color) {
     ctx.strokeStyle = color;
     for (let i = 0; i < points.length - 1; i++) {
         ctx.beginPath();
@@ -56,7 +55,7 @@ function drawHandDrawing(points, color) {
         ctx.lineTo(points[i + 1].x, points[i + 1].y);
         ctx.stroke();
     }
-}
+}*/
 
 //Dibuxar linies
 let needStart = true;
