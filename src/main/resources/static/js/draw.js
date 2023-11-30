@@ -60,13 +60,14 @@ canvas.addEventListener("mousedown", function (event) {
                     figure = getFigure;
                     if(figure == null){
                         console.log("empty");
+                    } else {
+                        figures.push(figure);
+                        console.log(figure);
+                        console.log(figures);
+                        document.getElementById("drawingInput").value = JSON.stringify(figures);
+                        console.log(JSON.stringify(figures));
                     }
                 });
-
-                figures.push(figure);
-                console.log(figures);
-                document.getElementById("drawingInput").value = JSON.stringify(figures);
-                console.log(JSON.stringify(figures));
                 break;
 
             case "linia":
