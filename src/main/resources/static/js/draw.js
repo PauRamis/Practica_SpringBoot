@@ -38,7 +38,7 @@ function hideTools() {
   let x = document.getElementById("selectFigura");
       x.style.display = "none";
 }
-import { startHandDrawing, addPointToHandDrawing, redrawHandDrawing, finishHandDrawing, doFigura } from '/js/doDraw.js';
+import {startDrawing, keepDrawing, stopDrawing, doFigura } from '/js/doDraw.js';
 
 canvas.addEventListener("mousedown", function (event) {
     const boundingRect = canvas.getBoundingClientRect();
@@ -52,28 +52,10 @@ canvas.addEventListener("mousedown", function (event) {
         let fill = document.getElementById("fill").checked;
         switch(tool){
             case "ma":
-                startHandDrawing(x, y, color);
-                canvas.onmouseup = () => {
-                    console.log("onmouseup");
-                    const figure = finishHandDrawing();
-                    console.log(figure);
-                    if (figure!=null){
-                        console.log("pushed");
-                        figures.push(figure);
-                        console.log(figures);
-                    }
+                startDrawing(event);
+                canvas.onmousemove = keepDrawing;
+                canvas.onmouseup = stopDrawing;
 
-                };
-                canvas.onmouseleave = () => {
-                    console.log("onmouseleave");
-                    const figure = finishHandDrawing();
-                    console.log(figure);
-                    if (figure!=null){
-                        console.log("pushed");
-                        figures.push(figure);
-                        console.log(figures);
-                    }
-                };
                 break;
 
             case "linia":

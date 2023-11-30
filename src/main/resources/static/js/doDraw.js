@@ -2,57 +2,49 @@ const canvas = document.querySelector("canvas");
 const ctx = canvas.getContext("2d");
 
 //Dibux a ma
-let handDrawingPoints = [];
 let isDrawing = false;
+let coordenades = [];
 let figure;
-
-//Començam a dibuixar, i cridam a addPointToHandDrawing amb les coordenades inicials
-export function startHandDrawing(x, y, color) {
-    console.log("StartDrawing");
+export function startDrawing() {
+console.log("startDrawing");
     isDrawing = true;
-    handDrawingPoints = [];
-    addPointToHandDrawing(x, y);
-    ctx.strokeStyle = color;
+    ctx.beginPath();
 }
 
-//Guardar els punts
-export function addPointToHandDrawing(x, y) {
-    console.log("add");
-    if (isDrawing) {
-        console.log("adding");
-        handDrawingPoints.push({ x, y });
-        redrawHandDrawing();
-    }
+export function keepDrawing(e) {
+  if (isDrawing == true) {
+    console.log("keepDrawing");
+     var x = event.offsetX;
+     var y = event.offsetY;
+
+     coordenades.push({ x, y });
+
+     ctx.strokeStyle = document.getElementById("color").value;
+     ctx.lineTo(x, y);
+     ctx.stroke();
+  }
 }
 
-//Dibuixar els punts
-export function redrawHandDrawing() {
-    console.log("redraw");
-    console.log(handDrawingPoints.length);
-    for (let i = 0; i < handDrawingPoints.length - 1; i++) {
-        ctx.beginPath();
-        ctx.moveTo(handDrawingPoints[i].x, handDrawingPoints[i].y);
-        ctx.lineTo(handDrawingPoints[i + 1].x, handDrawingPoints[i + 1].y);
-        ctx.stroke();
-    }
-}
+export function stopDrawing() {
+console.log("stopDrawing");
+  if (isDrawing == false) {
+      return null;
+  }
+  isDrawing = false;
+  figure = {
+      type: "handDrawing",
+      x: coordenades,
+      y: null,
+      size: null,
+      color: ctx.strokeStyle,
+      name: "handDrawing",
+      fill: false,
+  };
 
-//Finalitzar i enviar la figura
-export function finishHandDrawing() {
-    if (isDrawing == false) {
-        return null
-    }
-    isDrawing = false;
-    figure = {
-        type: "handDrawing",
-        x: handDrawingPoints,
-        y: null,
-        size: null,
-        color: ctx.strokeStyle,
-        name: "handDrawing",
-        fill: fill,
-    };
-    return figure;
+  figures.push(figure);
+  console.log(figures);
+  document.getElementById("drawingInput").value = JSON.stringify(figures);
+  console.log(JSON.stringify(figures));
 }
 
 //A partir de una figura, dibuixarla a ma
