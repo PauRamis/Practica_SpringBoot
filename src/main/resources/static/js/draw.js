@@ -38,7 +38,7 @@ function hideTools() {
   let x = document.getElementById("selectFigura");
       x.style.display = "none";
 }
-import { startHandDrawing, addPointToHandDrawing, redrawHandDrawing, finishHandDrawing, doLine, doFigura } from '/js/doDraw.js';
+import { startHandDrawing, addPointToHandDrawing, redrawHandDrawing, finishHandDrawing, doFigura } from '/js/doDraw.js';
 
 canvas.addEventListener("mousedown", function (event) {
     const boundingRect = canvas.getBoundingClientRect();
@@ -64,7 +64,7 @@ canvas.addEventListener("mousedown", function (event) {
                 break;
 
             case "linia":
-                doLine(x, y, color);
+                doFigura(fill, x, y, null, color, "line");
                 //Guardam la figura
                 figure = {
                     type: "line",

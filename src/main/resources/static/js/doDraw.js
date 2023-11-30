@@ -4,6 +4,7 @@ const ctx = canvas.getContext("2d");
 //Dibux a ma
 let handDrawingPoints = [];
 let isDrawing = false;
+let figure;
 
 //Començam a dibuixar, i cridam a addPointToHandDrawing amb les coordenades inicials
 export function startHandDrawing(x, y, color) {

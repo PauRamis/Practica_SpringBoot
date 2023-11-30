@@ -3,11 +3,12 @@ const ctx = canvas.getContext("2d");
 
 function dibuixa(){
     let jsonElement = document.getElementById("currentJson");
+    console.log("jsonElement:" + jsonElement);
     let jsonString = decodeEntities(jsonElement.textContent);
-    console.log(jsonString);
+    console.log("jsonString:" + jsonString);
     let json = JSON.parse(jsonString);
-    console.log("json: " + json);
-    console.log("json: " + JSON.stringify(json));
+    console.log("pasredJSON: " + json);
+    console.log("stringifiedJSON: " + JSON.stringify(json));
     json.forEach(draw);
 }
 
@@ -19,21 +20,21 @@ function decodeEntities(encodedString) {
 
 export { dibuixa };
 
-import {doLine, doFigura} from '/js/doDraw.js';
+import {doFigura} from '/js/doDraw.js';
 
 function draw(figure){
-    const fill = figure.fill;
-        const x = figure.x;
-        const y = figure.y;
-        const size = figure.size;
-        const color = figure.color;
-        const type = figure.type;
+console.log(figure);
 
-        if(type == "line"){
-            doLine(x, y, color);
-            console.log("line");
-        } else {
-            doFigura(fill, x, y, size, color, type);
-            console.log("figura");
-        }
+figure = {"type":"triangle","x":412,"y":150,"size":"50","color":"#ff0000","name":"defaultName","fill":false};
+console.log(figure.fill);
+
+
+    const fill = figure.fill;
+    const x = figure.x;
+    const y = figure.y;
+    const size = figure.size;
+    const color = figure.color;
+    const type = figure.type;
+
+    doFigura(fill, x, y, size, color, type);
 }
