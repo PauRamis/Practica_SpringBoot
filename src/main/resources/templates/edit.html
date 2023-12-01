@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="/css/style.css">
+    <meta charset="UTF-8">
+    <title>Edit Drawing</title>
+</head>
+
+
+<body>
+    <header>
+        <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
+            <div class="container-fluid">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/login">Login</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/draw">Dibuixa</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/gallery">Galeria</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <h2>Edita el dibuix</h2>
+    <div>
+        <canvas id="canvas"  width="800" height="400"></canvas>
+        <div class="menu">
+            <div class="subMenu">
+                <p>Tria una eina per dibuixar:</p>
+                <input type="radio" id="ma" value="ma" name="tool">
+                <label for="ma">A mà alçada</label><br>
+
+                <input type="radio" id="linia" value="linia" name="tool">
+                <label for="linia">Linia</label><br>
+
+                <input type="radio" id="figura" value="figura" name="tool">
+                <label for="figura">Figura</label>
+            </div>
+
+            <div class="subMenu">
+                <p>Color: <input id="color" name="color" type="color" value="#ff0000"></p>
+            </div>
+
+            <div id="selectFigura" class="subMenu">
+                <label for="tipusFigura">Tria una figura:</label>
+                <select name="figura" id="tipusFigura">
+                    <option value="triangle">Triangle</option>
+                    <option value="quadrat">Quadrat</option>
+                    <option value="cercle">Cercle</option>
+                    <option value="estrella">Estrella</option>
+                </select>
+
+                <p>Tamany: <input id="fSize" name="size" type="number" value=50></p>
+                <label for="fill">Omplir:</label>
+                <input type="checkbox" id="fill">
+            </div>
+        </div>
+        <div>
+            <button id="clear">Clear</button>
+            <form action="/draw" method="post">
+                <input id="drawingInput" type="hidden" value="" name="drawingInput"/>
+                <p>Nom: <input id="DrawingName" name="DrawingName" type="text" value="defaultName"></p>
+                <p><input type="submit" value="Envia"></p>
+            </form>
+        </div>
+    </div>
+</body>
+</html>

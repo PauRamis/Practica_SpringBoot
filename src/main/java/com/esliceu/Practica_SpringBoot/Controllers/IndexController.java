@@ -151,4 +151,17 @@ public class IndexController {
         }
         return "redirect:/gallery";
     }
+
+    //Edit
+    @GetMapping("/edit")
+    public String edit(){
+
+        return "edit";
+    }
+
+    @PostMapping("/edit")
+    public String editPost(){
+
+        return "redirect:/gallery";
+    }
 }
