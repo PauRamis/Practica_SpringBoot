@@ -133,7 +133,12 @@ public class IndexController {
         Drawing currentDrawing = drawingService.getDrawingById(currentDrawingId);
         model.addAttribute("currentDrawingId", currentDrawingId);
         model.addAttribute("currentJson", currentDrawing.getJson());
-        model.addAttribute("drawingUser", currentDrawing.getUsuari().getUserName());
+        System.out.println("Current drawing: ");
+        System.out.println(currentDrawing.getUsuari());
+        System.out.println(currentDrawing.getName());
+        System.out.println(currentDrawing.getId());
+        System.out.println(currentDrawing.getJson());
+        //model.addAttribute("drawingUser", currentDrawing.getUsuari().getUserName());
         return "view";
     }
 
