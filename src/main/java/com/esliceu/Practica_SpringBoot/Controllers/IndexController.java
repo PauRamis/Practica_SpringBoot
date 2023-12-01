@@ -46,7 +46,6 @@ public class IndexController {
             model.addAttribute("errMsg", "Aseguri de que les dades intoduides son correctes, " +
                     "o crei un nou compte.");
             return "logErr";
-            //return "redirect:/logErr";
         }
     }
 
@@ -151,6 +150,6 @@ public class IndexController {
         if (author.equals(currentUser)){
             drawingService.deleteDrawing(Integer.parseInt(currentDrawingId));
         }
-        return "gallery";
+        return "redirect:/gallery";
     }
 }
