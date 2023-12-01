@@ -61,31 +61,14 @@ canvas.addEventListener("mousedown", function (event) {
                     if(figure == null){
                         console.log("empty");
                     } else {
-                        figures.push(figure);
-                        console.log(figure);
-                        console.log(figures);
-                        document.getElementById("drawingInput").value = JSON.stringify(figures);
-                        console.log(JSON.stringify(figures));
+                        save(false, figure.x, null, null, color, "handDrawing");
                     }
                 });
                 break;
 
             case "linia":
                 doFigura(fill, x, y, null, color, "line");
-                //Guardam la figura
-                figure = {
-                    type: "line",
-                    x: x,
-                    y: y,
-                    size: null,
-                    color: color,
-                    name: "line",
-                    fill: fill,
-                };
-                figures.push(figure);
-                console.log(figures);
-                document.getElementById("drawingInput").value = JSON.stringify(figures);
-                console.log(JSON.stringify(figures));
+                save(fill, x, y, null, color, "line");
                 break;
 
             case "figura":
@@ -93,32 +76,37 @@ canvas.addEventListener("mousedown", function (event) {
                 let size = document.getElementById("fSize").value;
                 let type = document.getElementById("tipusFigura").value;
 
-                //Guardam la figura
-                figure = {
-                    type: type,
-                    x: x,
-                    y: y,
-                    size: size,
-                    color: color,
-                    name: document.getElementById("DrawingName").value,
-                    fill: fill,
-                };
-                figures.push(figure);
-                console.log(figures);
-                document.getElementById("drawingInput").value = JSON.stringify(figures);
-                console.log(JSON.stringify(figures));
                 //TODO render(figures);
                 doFigura(fill, x, y, size, color, type);
+                save(fill, x, y, size, color, type);
                 break;
         }
     }
 });
+
+function save(fill, x, y, size, color, type){
+    //Guardam la figura
+    figure = {
+        type: type,
+        x: x,
+        y: y,
+        size: size,
+        color: color,
+        name: document.getElementById("DrawingName").value,
+        fill: fill,
+    };
+    figures.push(figure);
+    document.getElementById("drawingInput").value = JSON.stringify(figures);
+    console.log(JSON.stringify(figures));
+}
 
 document.getElementById("clear").onclick = function() {clear()};
 //Esborrar
 function clear() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     figures = [];
+    document.getElementById("drawingInput").value = JSON.stringify(figures);
+    console.log(JSON.stringify(figures));
     console.log("cleared");
 }
 

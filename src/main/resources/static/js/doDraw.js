@@ -43,7 +43,9 @@ console.log("stopDrawing");
 }
 
 export function getFigure(){
-    return figure;
+    let retunFigure = figure;
+    figure = null;
+    return retunFigure;
 }
 
 //A partir de una figura, dibuixarla a ma
