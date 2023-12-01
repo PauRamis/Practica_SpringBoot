@@ -47,7 +47,7 @@ export function getFigure(){
 }
 
 //A partir de una figura, dibuixarla a ma
-/*function drawHandDrawing(points, color) {
+function drawHandDrawing(points, color) {
     ctx.strokeStyle = color;
     for (let i = 0; i < points.length - 1; i++) {
         ctx.beginPath();
@@ -55,7 +55,7 @@ export function getFigure(){
         ctx.lineTo(points[i + 1].x, points[i + 1].y);
         ctx.stroke();
     }
-}*/
+}
 
 //Dibuxar linies
 let needStart = true;

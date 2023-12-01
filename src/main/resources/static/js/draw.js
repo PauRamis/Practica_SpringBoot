@@ -57,7 +57,7 @@ canvas.addEventListener("mousedown", function (event) {
                 canvas.onmouseup = stopDrawing;
                 canvas.addEventListener('mouseup', () => {
                     console.log("getFigure")
-                    figure = getFigure;
+                    figure = getFigure();
                     if(figure == null){
                         console.log("empty");
                     } else {
