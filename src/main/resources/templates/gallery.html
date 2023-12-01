@@ -26,15 +26,15 @@
     <h1>Galeria de Dibuixos</h1>
     <h2>Els teus dibuixos, [[${userName}]]</h2>
     <ul>
-        <li th:each="drawing : ${allDrawings}">
-                <a th:href="@{/view(currentDrawingId=${drawing.id})}" class="btn btn-secondary" th:text="${drawing.name}"></a>
+        <li th:each="drawing : ${userDrawings}">
+            <a th:href="@{/view(currentDrawingId=${drawing.id})}" class="btn btn-secondary" th:text="${drawing.name}"></a>
             <p th:text="${drawing.name}"></p>
         </li>
     </ul>
     <h2>Tots els dibuixos</h2>
     <ul>
-        <li th:each="drawing : ${userDrawings}">
-            <a th:href="@{/view(id=${drawing.id})}" class="btn btn-secondary" th:text="${drawing.name}"></a>
+        <li th:each="drawing : ${allDrawings}">
+            <a th:href="@{/view(currentDrawingId=${drawing.id})}" class="btn btn-secondary" th:text="${drawing.name}"></a>
             <p th:text="${drawing.name}"></p>
         </li>
     </ul>

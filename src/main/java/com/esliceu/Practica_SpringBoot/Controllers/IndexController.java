@@ -108,13 +108,12 @@ public class IndexController {
     @GetMapping("/gallery")
     public String gallery(Model model){
         String userName = (String) session.getAttribute("userName");
-        List<Drawing> allDrawings = drawingService.showDrawings();
         List<Drawing> userDrawings = drawingService.showUserDrawings(userName);
-        System.out.println(userName);
+        List<Drawing> allDrawings = drawingService.showDrawings();
 
         model.addAttribute("userName", userName);
-        model.addAttribute("allDrawings", allDrawings);
         model.addAttribute("userDrawings", userDrawings);
+        model.addAttribute("allDrawings", allDrawings);
         return "gallery";
     }
 
