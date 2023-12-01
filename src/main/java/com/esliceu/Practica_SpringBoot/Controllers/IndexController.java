@@ -130,10 +130,10 @@ public class IndexController {
                        @RequestParam(name = "currentDrawingId")
                        int currentDrawingId){
 
-        model.addAttribute("currentDrawingId", currentDrawingId);
         Drawing currentDrawing = drawingService.getDrawingById(currentDrawingId);
+        model.addAttribute("currentDrawingId", currentDrawingId);
         model.addAttribute("currentJson", currentDrawing.getJson());
-        System.out.println("Current JSON: " + currentDrawing.getJson());
+        model.addAttribute("drawingUser", currentDrawing.getUsuari().getUserName());
         return "view";
     }
 
