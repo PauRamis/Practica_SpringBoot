@@ -144,7 +144,13 @@ public class IndexController {
     }
 
     @PostMapping("/view")
-    public String viewPost(Model model){
+    public String viewPost(Model model,
+                           @RequestParam("currentDrawingId") int currentDrawingId){
+        String author = drawingService.getDrawingById(currentDrawingId).getUser();
+        String currentUser = (String) session.getAttribute("userName");
+        if (author.equals(currentUser)){
+            drawingService.deleteDrawing(currentDrawingId);
+        }
         return null;
     }
 }
