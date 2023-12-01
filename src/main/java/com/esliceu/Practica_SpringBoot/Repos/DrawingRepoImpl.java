@@ -46,4 +46,15 @@ public class DrawingRepoImpl implements DrawingRepo{
         String sql = "DELETE FROM drawings WHERE id = ?";
         jdbcTemplate.update(sql, id);
     }
+
+    @Override
+    public void editDrawing(Drawing newDrawing) {
+        int id = newDrawing.getId();
+        String newJson = newDrawing.getJson();
+        String newName = newDrawing.getName();
+
+        String sql = "UPDATE drawings SET name = ?, jdbc = ? WHERE id = ?";
+        Object[] params = {newName, newJson, id};
+        jdbcTemplate.update(sql, params);
+    }
 }

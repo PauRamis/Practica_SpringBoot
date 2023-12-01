@@ -30,4 +30,7 @@ public class DrawingService {
     }
 
     public void deleteDrawing(int id){ drawingRepo.deleteDrawing(id); }
+
+    public void editDrawing(Drawing newDrawing){ drawingRepo.editDrawing(newDrawing);}
+
 }
