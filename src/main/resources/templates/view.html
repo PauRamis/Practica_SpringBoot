@@ -35,7 +35,7 @@
         <a href="/edit" class="btn btn-secondary">Editar</a>
 
         <form action="/view" method="post" onclick="return confirm('Segur que vols esborrar el dibuix?')" >
-            <script type="application/json" id="currentDrawingId" th:text="${currentDrawingId}"></script>
+            <input type="hidden" name="currentDrawingId" th:value="${currentDrawingId}" />
             <p><input type="submit" value="Esborrar"></p>
         </form>
     </div>
