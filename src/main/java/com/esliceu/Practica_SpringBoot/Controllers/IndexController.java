@@ -100,7 +100,7 @@ public class IndexController {
         Drawing savedDrawing = new Drawing();
         savedDrawing.setJson(drawingInput);
         savedDrawing.setName(DrawingName);
-        savedDrawing.setUsuari(actualUser);
+        savedDrawing.setUser(actualUser.getUserName());
         drawingService.saveDrawing(savedDrawing);
         return null;
     }
@@ -125,6 +125,7 @@ public class IndexController {
     }
 
     //View
+    boolean author = false;
     @GetMapping("/view")
     public String view(Model model,
                        @RequestParam(name = "currentDrawingId")
@@ -133,12 +134,12 @@ public class IndexController {
         Drawing currentDrawing = drawingService.getDrawingById(currentDrawingId);
         model.addAttribute("currentDrawingId", currentDrawingId);
         model.addAttribute("currentJson", currentDrawing.getJson());
-        System.out.println("Current drawing: ");
-        System.out.println(currentDrawing.getUsuari());
-        System.out.println(currentDrawing.getName());
-        System.out.println(currentDrawing.getId());
-        System.out.println(currentDrawing.getJson());
-        //model.addAttribute("drawingUser", currentDrawing.getUsuari().getUserName());
+        model.addAttribute("drawingUser", currentDrawing.getUser());
+
+        //Comprobam si es el autor del actual dibuix
+        String currentUser = (String) session.getAttribute("userName");
+        author = currentUser.equals(currentDrawing.getUser());
+        model.addAttribute("author", author);
         return "view";
     }
 

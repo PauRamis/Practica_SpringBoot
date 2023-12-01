@@ -2,7 +2,7 @@ package com.esliceu.Practica_SpringBoot.entities;
 
 public class Drawing {
     private String json;
-    private User usuari;
+    private String  user;
     private int id;
     private String name;
 
@@ -14,12 +14,12 @@ public class Drawing {
         this.json = json;
     }
 
-    public User getUsuari() {
-        return usuari;
+    public String getUser() {
+        return user;
     }
 
-    public void setUsuari(User usuari) {
-        this.usuari = usuari;
+    public void setUser(String user) {
+        this.user = user;
     }
 
     public int getId() {

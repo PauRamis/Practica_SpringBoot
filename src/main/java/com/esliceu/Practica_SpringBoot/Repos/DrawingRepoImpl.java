@@ -17,10 +17,10 @@ public class DrawingRepoImpl implements DrawingRepo{
     @Override
     public void storeDrawing(Drawing drawing) {
         System.out.println(drawing.getJson());
-        System.out.println(drawing.getUsuari().getUserName());
+        System.out.println(drawing.getUser());
         System.out.println(drawing.getName());
         jdbcTemplate.update("insert into drawings (json,user,name) values (?,?,?)",
-                drawing.getJson(), drawing.getUsuari().getUserName(), drawing.getName());
+                drawing.getJson(), drawing.getUser(), drawing.getName());
     }
 
     @Override
