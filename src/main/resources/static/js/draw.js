@@ -64,6 +64,9 @@ canvas.addEventListener("mousedown", function (event) {
                         console.log("empty");
                     } else {
                         save(false, figure.x, null, null, color, "handDrawing");
+                        console.log("saved, rendering..");
+                        render(figures);
+                        updateList();
                     }
                 });
                 break;
@@ -81,7 +84,6 @@ canvas.addEventListener("mousedown", function (event) {
                 break;
 
         }
-
         updateList();
     }
 });
