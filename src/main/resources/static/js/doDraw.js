@@ -2,6 +2,7 @@ const canvas = document.querySelector("canvas");
 const ctx = canvas.getContext("2d");
 let firstCall = true;
 
+
 //Dibux a ma
 let isDrawing = false;
 let coordenades = [];
