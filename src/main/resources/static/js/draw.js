@@ -81,17 +81,36 @@ canvas.addEventListener("mousedown", function (event) {
                 break;
 
         }
-        let figureList = document.getElementById('figureList');
-        figures.forEach(function(figure) {
-            // Crea un elemento de lista y establece su contenido
-            let listItem = document.createElement('li');
-            listItem.textContent = JSON.stringify(figure);
 
-            // Agrega el elemento de lista a la lista en el HTML
-            figureList.appendChild(listItem);
-        });
+        updateList();
     }
 });
+
+function updateList(){
+    let figureList = document.getElementById('figureList');
+    figureList.innerHTML = '';
+    figures.forEach(function(figure) {
+        // Crea un element li i un button
+        let listItem = document.createElement('li');
+        let button = document.createElement('button');
+
+        //Donar format al button
+        button.textContent = 'X';
+        button.addEventListener('click', function() {
+            alert(JSON.stringify(figure));  //TODO del instead of show
+        });
+
+        // Afegir el button al li
+        listItem.appendChild(button);
+
+        //Afegir text
+        let text = document.createTextNode(figure.type);
+        listItem.appendChild(text);
+
+        // Agrega l'element
+        figureList.appendChild(listItem);
+    });
+}
 
 function save(fill, x, y, size, color, type){
     //Guardam la figura
@@ -113,7 +132,10 @@ document.getElementById("clear").onclick = function() {clear()};
 //Esborrar
 function clear() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
+    let figureList = document.getElementById('figureList');
+    figureList.innerHTML = '';
     figures = [];
+
     document.getElementById("drawingInput").value = JSON.stringify(figures);
     console.log(JSON.stringify(figures));
     console.log("cleared");
