@@ -38,8 +38,10 @@ function hideTools() {
   let x = document.getElementById("selectFigura");
       x.style.display = "none";
 }
+
 import {startDrawing, keepDrawing, stopDrawing, getFigure, render } from '/js/doDraw.js';
 
+//Click al canvas
 canvas.addEventListener("mousedown", function (event) {
     const boundingRect = canvas.getBoundingClientRect();
     const x = event.offsetX;
@@ -75,8 +77,6 @@ canvas.addEventListener("mousedown", function (event) {
                 let size = document.getElementById("fSize").value;
                 let type = document.getElementById("tipusFigura").value;
                 save(fill, x, y, size, color, type);
-                console.log("Sending figures");
-                console.log(figures);
                 render(figures);
                 break;
 

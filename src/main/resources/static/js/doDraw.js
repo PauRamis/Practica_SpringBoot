@@ -5,6 +5,8 @@ const ctx = canvas.getContext("2d");
 let isDrawing = false;
 let coordenades = [];
 let figure;
+let firstCall = true;
+
 export function startDrawing() {
 console.log("startDrawing");
     isDrawing = true;
@@ -49,12 +51,49 @@ export function getFigure(){
 }
 
 export function render(figures){
-console.log("render");
-console.log(figures);
+    console.log("render");
+    console.log(figures);
 
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     console.log("RenderClear");
+    firstCall = true;
+    console.log(firstCall);
     figures.forEach(doFigura);
+}
+
+//Dibuixar figures
+function doFigura(currentFigure){
+    console.log("currentFigure");
+    console.log(currentFigure);
+    console.log(firstCall);
+    let type = currentFigure.type;
+    let x = currentFigure.x;
+    let y = currentFigure.y;
+    let size = currentFigure.size;
+    let color = currentFigure.color;
+    let name = currentFigure.name;
+    let fill = currentFigure.fill;
+
+    if (type == "handDrawing"){
+        drawHandDrawing(x, color);
+        drawHandDrawing(x, color);
+
+    } else if (type == "line"){
+        console.log(firstCall);
+        doLine(x, y, color);
+
+    } else if (type == "quadrat"){
+        square(fill, x, y, size, color);
+
+    } else if (type == "triangle"){
+        triangle(fill, x, y, size, color);
+
+    } else if (type == "cercle"){
+        cercle(fill, x, y, size, color);
+
+    } else if (type == "estrella"){
+        estrella(fill, x, y, size, color);
+    }
 }
 
 //A partir de una figura, dibuixarla a ma
@@ -69,49 +108,19 @@ function drawHandDrawing(points, color) {
 }
 
 //Dibuxar linies
-let needStart = true;
 function doLine(x, y, color){
-    if(needStart){
+    console.log(firstCall);
+    if(firstCall){
+        console.log("First call");
         ctx.strokeStyle = color;
         ctx.beginPath();
         ctx.moveTo(x, y);
-        needStart = false;
+        firstCall = false;
     } else {
+    console.log("Second call");
         ctx.lineTo(x, y);
         ctx.stroke();
-        needStart = true;
-    }
-}
-
-//Dibuixar figures
-function doFigura(currentFigure){
-    console.log("currentFigure");
-    console.log(currentFigure);
-    let type = currentFigure.type;
-    let x = currentFigure.x;
-    let y = currentFigure.y;
-    let size = currentFigure.size;
-    let color = currentFigure.color;
-    let name = currentFigure.name;
-    let fill = currentFigure.fill;
-
-    if (type == "handDrawing"){
-        drawHandDrawing(x, color);
-
-    } else if (type == "line"){
-        doLine(x, y, color);
-
-    } else if (type == "quadrat"){
-        square(fill, x, y, size, color);
-
-    } else if (type == "triangle"){
-        triangle(fill, x, y, size, color);
-
-    } else if (type == "cercle"){
-        cercle(fill, x, y, size, color);
-
-    } else if (type == "estrella"){
-        estrella(fill, x, y, size, color);
+        firstCall = true;
     }
 }
 
