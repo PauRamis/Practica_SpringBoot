@@ -79,7 +79,17 @@ canvas.addEventListener("mousedown", function (event) {
                 console.log(figures);
                 render(figures);
                 break;
+
         }
+        let figureList = document.getElementById('figureList');
+        figures.forEach(function(figure) {
+            // Crea un elemento de lista y establece su contenido
+            let listItem = document.createElement('li');
+            listItem.textContent = JSON.stringify(figure);
+
+            // Agrega el elemento de lista a la lista en el HTML
+            figureList.appendChild(listItem);
+        });
     }
 });
 
