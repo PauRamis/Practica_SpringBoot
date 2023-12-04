@@ -1,5 +1,6 @@
 const canvas = document.querySelector("canvas");
 const ctx = canvas.getContext("2d");
+import {render} from '/js/doDraw.js';
 
 function dibuixa(){
     //Descodificam el JSON i feim un draw a cada figura
@@ -13,9 +14,8 @@ function dibuixa(){
         let json = JSON.parse(jsonString);
         console.log("pasredJSON: " + json);
         console.log("stringifiedJSON: " + JSON.stringify(json));
-        json.forEach(draw);
+        render(json);
     }
-
 }
 
 function decodeEntities(encodedString) {
@@ -26,18 +26,3 @@ function decodeEntities(encodedString) {
 
 export { dibuixa };
 
-import {doFigura} from '/js/doDraw.js';
-
-function draw(figure){
-    console.log(figure);
-    //console.log(figure.fill);
-
-    const fill = figure.fill;
-    const x = figure.x;
-    const y = figure.y;
-    const size = figure.size;
-    const color = figure.color;
-    const type = figure.type;
-
-    doFigura(fill, x, y, size, color, type);
-}

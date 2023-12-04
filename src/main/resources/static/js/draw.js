@@ -38,7 +38,7 @@ function hideTools() {
   let x = document.getElementById("selectFigura");
       x.style.display = "none";
 }
-import {startDrawing, keepDrawing, stopDrawing, getFigure, doFigura } from '/js/doDraw.js';
+import {startDrawing, keepDrawing, stopDrawing, getFigure, render } from '/js/doDraw.js';
 
 canvas.addEventListener("mousedown", function (event) {
     const boundingRect = canvas.getBoundingClientRect();
@@ -67,18 +67,17 @@ canvas.addEventListener("mousedown", function (event) {
                 break;
 
             case "linia":
-                doFigura(fill, x, y, null, color, "line");
                 save(fill, x, y, null, color, "line");
+                render(figures);
                 break;
 
             case "figura":
-                //Obtenim les dades
                 let size = document.getElementById("fSize").value;
                 let type = document.getElementById("tipusFigura").value;
-
-                //TODO render(figures);
-                doFigura(fill, x, y, size, color, type);
                 save(fill, x, y, size, color, type);
+                console.log("Sending figures");
+                console.log(figures);
+                render(figures);
                 break;
         }
     }
@@ -92,7 +91,7 @@ function save(fill, x, y, size, color, type){
         y: y,
         size: size,
         color: color,
-        name: document.getElementById("DrawingName").value,
+        name: type,
         fill: fill,
     };
     figures.push(figure);

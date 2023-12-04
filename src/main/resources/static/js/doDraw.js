@@ -48,6 +48,15 @@ export function getFigure(){
     return retunFigure;
 }
 
+export function render(figures){
+console.log("render");
+console.log(figures);
+
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    console.log("RenderClear");
+    figures.forEach(doFigura);
+}
+
 //A partir de una figura, dibuixarla a ma
 function drawHandDrawing(points, color) {
     ctx.strokeStyle = color;
@@ -75,7 +84,17 @@ function doLine(x, y, color){
 }
 
 //Dibuixar figures
-export function doFigura(fill, x, y, size, color, type){
+function doFigura(currentFigure){
+    console.log("currentFigure");
+    console.log(currentFigure);
+    let type = currentFigure.type;
+    let x = currentFigure.x;
+    let y = currentFigure.y;
+    let size = currentFigure.size;
+    let color = currentFigure.color;
+    let name = currentFigure.name;
+    let fill = currentFigure.fill;
+
     if (type == "handDrawing"){
         drawHandDrawing(x, color);
 
