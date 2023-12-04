@@ -89,7 +89,7 @@ canvas.addEventListener("mousedown", function (event) {
 function updateList(){
     let figureList = document.getElementById('figureList');
     figureList.innerHTML = '';
-    figures.forEach(function(figure) {
+    figures.forEach(function(figure, index) {
         // Crea un element li i un button
         let listItem = document.createElement('li');
         let button = document.createElement('button');
@@ -97,7 +97,10 @@ function updateList(){
         //Donar format al button
         button.textContent = 'X';
         button.addEventListener('click', function() {
-            alert(JSON.stringify(figure));  //TODO del instead of show
+            // Elimina la figura
+            figures.splice(index, 1);
+            updateList();
+            render(figures);
         });
 
         // Afegir el button al li
