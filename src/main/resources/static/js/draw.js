@@ -52,6 +52,7 @@ canvas.addEventListener("mousedown", function (event) {
         tool = getTool();
         let color = document.getElementById("color").value;
         let fill = document.getElementById("fill").checked;
+
         switch(tool){
             case "ma":
                 startDrawing(event);
