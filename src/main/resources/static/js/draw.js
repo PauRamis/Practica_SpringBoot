@@ -71,6 +71,8 @@ canvas.addEventListener("mousedown", function (event) {
                // save(fill, x, y, null, color, "line");
                 doLine(x, y, color);
                 figure = getFigure();
+                console.log("line figure: ");
+                console.log(figure);
                 if(figure != null){
                     figures.push(figure);
                     document.getElementById("drawingInput").value = JSON.stringify(figures);

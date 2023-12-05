@@ -50,13 +50,15 @@ console.log("stopDrawing");
 
 export function getFigure(){
     let retunFigure = figure;
+    console.log("figure")
+    console.log(figure);
     figure = null;
     return retunFigure;
 }
 
 export function render(figures){
     console.log("render");
-
+    console.log(figures);
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     firstCall = true;
     figures.forEach(doFigura);
@@ -64,7 +66,7 @@ export function render(figures){
 
 //Dibuixar figures
 function doFigura(currentFigure){
-    console.log("currentFigure");
+    console.log("currentFigure: ");
     console.log(currentFigure);
     let type = currentFigure.type;
     let x = currentFigure.x;
@@ -109,22 +111,26 @@ function drawHandDrawing(points, color) {
 //Dibuxar linies
 export function doLine(x1, y1, color){
     console.log("doTrueLine");
+    console.log(x1);
+    console.log(y1);
     if (typeof x1 === 'object'){
-        console.log("LineArr");
         //Si x1 es un object, el conjunt és x1:[x1, x2], y1:[y1, y2]
         x2 = x1.x2;
         y2 = y1.y2;
         x1 = x1.x1;
         y1 = y1.y1;
-    } else if (typeof x1 === 'number') {
-        console.log("number");
     }
-
+    console.log("---")
+    console.log(x1);
+    console.log(y1);
+    console.log(x2);
+    console.log(y2);
     if(x2 == null){
         //Si x2 es null, es el primer click
         console.log("First call");
         x2 = x1;
         y2 = y1;
+        figure = null;
     } else {
         //Dibuixar la linia
         console.log("Second call");
