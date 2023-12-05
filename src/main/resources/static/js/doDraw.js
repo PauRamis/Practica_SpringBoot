@@ -56,12 +56,9 @@ export function getFigure(){
 
 export function render(figures){
     console.log("render");
-    console.log(figures);
 
     ctx.clearRect(0, 0, canvas.width, canvas.height);
-    console.log("RenderClear");
     firstCall = true;
-    console.log(firstCall);
     figures.forEach(doFigura);
 }
 
@@ -112,15 +109,17 @@ function drawHandDrawing(points, color) {
 //Dibuxar linies
 export function doLine(x1, y1, color){
     console.log("doTrueLine");
-    if (Array.isArray(x1)){
-        //Si x1 es un array, el conjunt és x1:[x1, x2], y1:[y1, y2]
+    if (typeof x1 === 'object'){
         console.log("LineArr");
-        x2 = x1[1];
-        y2 = y1[1];
-        x1 = x1[0];
-        y1 = y1[0];
-
+        //Si x1 es un object, el conjunt és x1:[x1, x2], y1:[y1, y2]
+        x2 = x1.x2;
+        y2 = y1.y2;
+        x1 = x1.x1;
+        y1 = y1.y1;
+    } else if (typeof x1 === 'number') {
+        console.log("number");
     }
+
     if(x2 == null){
         //Si x2 es null, es el primer click
         console.log("First call");
