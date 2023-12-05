@@ -78,6 +78,7 @@ canvas.addEventListener("mousedown", function (event) {
                     document.getElementById("drawingInput").value = JSON.stringify(figures);
                     console.log(JSON.stringify(figures));
                     render(figures);
+                    updateList();
                 }
                 break;
 
@@ -93,15 +94,10 @@ canvas.addEventListener("mousedown", function (event) {
     }
 });
 
-//Todo evitar el segundo X
 function updateList(){
     let figureList = document.getElementById('figureList');
     figureList.innerHTML = '';
     figures.forEach(function(figure, index) {
-        if(figure.type == "linia"){
-            //Todo unificar els 2 punts de una linia
-        }
-
         // Crea un element li i un button
         let listItem = document.createElement('li');
         let button = document.createElement('button');
