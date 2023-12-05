@@ -1,7 +1,8 @@
 const canvas = document.querySelector("canvas");
 const ctx = canvas.getContext("2d");
 let firstCall = true;
-
+let x2 = null;
+let y2 = null;
 
 //Dibux a ma
 let isDrawing = false;
@@ -68,7 +69,6 @@ export function render(figures){
 function doFigura(currentFigure){
     console.log("currentFigure");
     console.log(currentFigure);
-    console.log(firstCall);
     let type = currentFigure.type;
     let x = currentFigure.x;
     let y = currentFigure.y;
@@ -82,7 +82,6 @@ function doFigura(currentFigure){
         drawHandDrawing(x, color);
 
     } else if (type == "line"){
-        console.log(firstCall);
         doLine(x, y, color);
 
     } else if (type == "quadrat"){
@@ -111,19 +110,42 @@ function drawHandDrawing(points, color) {
 }
 
 //Dibuxar linies
-function doLine(x, y, color){
-    console.log(firstCall);
-    if(firstCall){
+export function doLine(x1, y1, color){
+    console.log("doTrueLine");
+    if (Array.isArray(x1)){
+        //Si x1 es un array, el conjunt és x1:[x1, x2], y1:[y1, y2]
+        console.log("LineArr");
+        x2 = x1[1];
+        y2 = y1[1];
+        x1 = x1[0];
+        y1 = y1[0];
+
+    }
+    if(x2 == null){
+        //Si x2 es null, es el primer click
         console.log("First call");
+        x2 = x1;
+        y2 = y1;
+    } else {
+        //Dibuixar la linia
+        console.log("Second call");
         ctx.strokeStyle = color;
         ctx.beginPath();
-        ctx.moveTo(x, y);
-        firstCall = false;
-    } else {
-    console.log("Second call");
-        ctx.lineTo(x, y);
+        ctx.moveTo(x1, y1);
+        ctx.lineTo(x2, y2);
         ctx.stroke();
-        firstCall = true;
+
+        figure = {
+          type: "line",
+          x: {x1, x2},
+          y: {y1, y2},
+          size: null,
+          color: ctx.strokeStyle,
+          name: "line",
+          fill: false,
+        };
+        x2 = null;
+        y2 = null;
     }
 }
 

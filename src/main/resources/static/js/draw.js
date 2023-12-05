@@ -39,7 +39,7 @@ function hideTools() {
       x.style.display = "none";
 }
 
-import {startDrawing, keepDrawing, stopDrawing, getFigure, render } from '/js/doDraw.js';
+import {startDrawing, keepDrawing, stopDrawing, getFigure, doLine, render } from '/js/doDraw.js';
 
 //Click al canvas
 canvas.addEventListener("mousedown", function (event) {
@@ -58,22 +58,25 @@ canvas.addEventListener("mousedown", function (event) {
                 canvas.onmousemove = keepDrawing;
                 canvas.onmouseup = stopDrawing;
                 canvas.addEventListener('mouseup', () => {
-                    console.log("getFigure")
                     figure = getFigure();
                     if(figure == null){
                         console.log("empty");
                     } else {
                         save(false, figure.x, null, null, color, "handDrawing");
-                        console.log("saved, rendering..");
-                        render(figures);
-                        updateList();
                     }
                 });
                 break;
 
             case "linia":
-                save(fill, x, y, null, color, "line");
-                render(figures);
+               // save(fill, x, y, null, color, "line");
+                doLine(x, y, color);
+                figure = getFigure();
+                if(figure != null){
+                    figures.push(figure);
+                    document.getElementById("drawingInput").value = JSON.stringify(figures);
+                    console.log(JSON.stringify(figures));
+                    render(figures);
+                }
                 break;
 
             case "figura":
@@ -84,7 +87,7 @@ canvas.addEventListener("mousedown", function (event) {
                 break;
 
         }
-        updateList();
+
     }
 });
 
@@ -136,6 +139,8 @@ function save(fill, x, y, size, color, type){
     figures.push(figure);
     document.getElementById("drawingInput").value = JSON.stringify(figures);
     console.log(JSON.stringify(figures));
+    render(figures);
+    updateList();
 }
 
 document.getElementById("clear").onclick = function() {clear()};
