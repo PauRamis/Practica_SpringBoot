@@ -41,7 +41,6 @@ console.log("stopDrawing");
       y: null,
       size: null,
       color: ctx.strokeStyle,
-      name: "handDrawing",
       fill: false,
   };
   //Reiniciam les coordenades
@@ -73,7 +72,6 @@ function doFigura(currentFigure){
     let y = currentFigure.y;
     let size = currentFigure.size;
     let color = currentFigure.color;
-    let name = currentFigure.name;
     let fill = currentFigure.fill;
 
     if (type == "handDrawing"){
@@ -146,7 +144,6 @@ export function doLine(x1, y1, color){
           y: {y1, y2},
           size: null,
           color: ctx.strokeStyle,
-          name: "line",
           fill: false,
         };
         x2 = null;

@@ -131,7 +131,6 @@ function save(fill, x, y, size, color, type){
         y: y,
         size: size,
         color: color,
-        name: type,
         fill: fill,
     };
     figures.push(figure);
