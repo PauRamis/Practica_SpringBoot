@@ -31,13 +31,13 @@ public class DrawingRepoImpl implements DrawingRepo{
     @Override
     public List<Drawing> showUserDrawings(String userName) {
         String sql = "SELECT * FROM drawings WHERE user = ?";
-        return jdbcTemplate.query(sql, new Object[]{userName}, new BeanPropertyRowMapper<>(Drawing.class));
+        return jdbcTemplate.query(sql, new BeanPropertyRowMapper<>(Drawing.class), userName);
     }
 
     @Override
     public Drawing getDrawingById(int id) {
         String sql = "SELECT * FROM drawings WHERE id = ?";
-        return jdbcTemplate.queryForObject(sql, new Object[]{id}, new BeanPropertyRowMapper<>(Drawing.class));
+        return jdbcTemplate.queryForObject(sql, new BeanPropertyRowMapper<>(Drawing.class), id);
     }
 
     @Override

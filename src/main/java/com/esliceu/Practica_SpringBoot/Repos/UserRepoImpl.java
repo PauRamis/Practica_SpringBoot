@@ -22,8 +22,8 @@ public class UserRepoImpl implements UserRepo{
     public boolean userExists(String userName) {
         Integer count = jdbcTemplate.queryForObject(
                 "SELECT count(*) FROM usuaris WHERE userName = ?",
-                new Object[]{userName},
-                Integer.class
+                Integer.class,
+                userName
         );
         if (count > 0){
             return true;
@@ -36,8 +36,8 @@ public class UserRepoImpl implements UserRepo{
         //logUser es com userExists però comprobant també la password
         Integer count = jdbcTemplate.queryForObject(
                 "SELECT COUNT(*) FROM usuaris WHERE userName = ? AND password = ?",
-                new Object[]{userName, password},
-                Integer.class
+                Integer.class,
+                userName, password
         );
         if (count > 0){
             return true;
@@ -48,7 +48,11 @@ public class UserRepoImpl implements UserRepo{
     @Override
     public User findUserByuserName(String userName) {
         String sql = "SELECT * FROM usuaris WHERE userName = ?";
-        User foundUser = jdbcTemplate.queryForObject(sql, new Object[]{userName}, new BeanPropertyRowMapper<>(User.class));
+        User foundUser = jdbcTemplate.queryForObject(
+                sql,
+                new BeanPropertyRowMapper<>(User.class),
+                userName
+        );
         return foundUser;
     }
 }
