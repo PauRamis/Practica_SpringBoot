@@ -148,9 +148,7 @@ function clear() {
     let figureList = document.getElementById('figureList');
     figureList.innerHTML = '';
     figures = [];
-
     document.getElementById("drawingInput").value = JSON.stringify(figures);
-    console.log(JSON.stringify(figures));
     console.log("cleared");
 }
 
