@@ -134,6 +134,7 @@ public class IndexController {
         model.addAttribute("currentJson", currentDrawing.getJson());
         model.addAttribute("drawingUser", currentDrawing.getUser());
 
+
         //Comprobam si es el autor del actual dibuix
         String currentUser = (String) session.getAttribute("userName");
         author = currentUser.equals(currentDrawing.getUser());
@@ -143,7 +144,8 @@ public class IndexController {
 
     @PostMapping("/view")
     public String viewPost(Model model,
-                           @RequestParam("currentDrawingId") String currentDrawingId){
+                           @RequestParam("currentDrawingId")
+                           String currentDrawingId){
         String author = drawingService.getDrawingById(Integer.parseInt(currentDrawingId)).getUser();
         String currentUser = (String) session.getAttribute("userName");
         if (author.equals(currentUser)){
@@ -154,7 +156,14 @@ public class IndexController {
 
     //Edit
     @GetMapping("/edit")
-    public String edit(){
+    public String edit(Model model,
+                       @RequestParam(name = "currentDrawingId")
+                       int currentDrawingId){
+        /*Drawing currentDrawing = drawingService.getDrawingById(currentDrawingId);
+        model.addAttribute("currentDrawingId", currentDrawingId);
+        model.addAttribute("currentJson", currentDrawing.getJson());
+        model.addAttribute("drawingUser", currentDrawing.getUser());
+        model.addAttribute("drawingName", currentDrawing.getName());*/
 
         return "edit";
     }
