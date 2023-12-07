@@ -96,6 +96,7 @@ canvas.addEventListener("mousedown", function (event) {
 });
 
 function updateList(){
+    console.log("updateList");
     let figureList = document.getElementById('figureList');
     figureList.innerHTML = '';
     figures.forEach(function(figure, index) {
@@ -105,9 +106,17 @@ function updateList(){
 
         //Donar format al button
         button.textContent = 'X';
+        button.dataset.index = index;
         button.addEventListener('click', function() {
+            //Obtenim l'index
+            let currentIndex = parseInt(button.dataset.index, 10);
+
             // Elimina la figura
-            figures.splice(index, 1);
+            figures.splice(currentIndex , 1);
+
+            console.log("figures: ");
+            console.log(figures);
+
             updateList();
             render(figures);
         });
@@ -126,6 +135,7 @@ function updateList(){
 
 function save(fill, x, y, size, color, type){
     //Guardam la figura
+    console.log("save");
     figure = {
         type: type,
         x: x,
@@ -138,6 +148,7 @@ function save(fill, x, y, size, color, type){
     document.getElementById("drawingInput").value = JSON.stringify(figures);
     console.log(JSON.stringify(figures));
     render(figures);
+    console.log("updatelist");
     updateList();
 }
 
