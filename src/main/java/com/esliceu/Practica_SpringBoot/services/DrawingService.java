@@ -21,6 +21,10 @@ public class DrawingService {
         return drawingRepo.showDrawings();
     }
 
+    public List<Drawing> showPublicDrawings() {
+        return drawingRepo.showPublicDrawings();
+    }
+
     public List<Drawing> showUserDrawings(String user) {
         return drawingRepo.showUserDrawings(user);
     }

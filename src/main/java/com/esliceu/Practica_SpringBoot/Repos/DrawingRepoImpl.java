@@ -18,13 +18,19 @@ public class DrawingRepoImpl implements DrawingRepo{
         System.out.println(drawing.getJson());
         System.out.println(drawing.getUser());
         System.out.println(drawing.getName());
-        jdbcTemplate.update("insert into drawings (json,user,name) values (?,?,?)",
-                drawing.getJson(), drawing.getUser(), drawing.getName());
+        jdbcTemplate.update("insert into drawings (json,user,name,isPublic) values (?,?,?,?)",
+                drawing.getJson(), drawing.getUser(), drawing.getName(), drawing.isPublic());
     }
 
     @Override
     public List<Drawing> showDrawings() {
         String sql = "SELECT * FROM drawings";
+        return jdbcTemplate.query(sql, new BeanPropertyRowMapper<>(Drawing.class));
+    }
+
+    @Override
+    public List<Drawing> showPublicDrawings() {
+        String sql = "SELECT * FROM drawings WHERE isPublic = 1";
         return jdbcTemplate.query(sql, new BeanPropertyRowMapper<>(Drawing.class));
     }
 

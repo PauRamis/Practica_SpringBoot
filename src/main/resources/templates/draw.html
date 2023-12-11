@@ -67,10 +67,15 @@
         <div>
             <button id="clear">Clear</button>
             <form action="/draw" method="post">
-                <input id="drawingInput" type="hidden" value="" name="drawingInput"/>
+                <label>
+                    <input type="checkbox" id="isPublic" name="isPublic" value="true" />
+                    Public (Altres podran veure el dibuix)
+                </label>
+                <input id="drawingInput" type="hidden" value="" name="drawingInput" />
                 <p>Nom: <input id="DrawingName" name="DrawingName" type="text" value="defaultName"></p>
                 <p><input type="submit" value="Envia"></p>
             </form>
+
         </div>
     </div>
 

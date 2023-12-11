@@ -16,4 +16,6 @@ public interface DrawingRepo {
     void deleteDrawing(int id);
 
     void editDrawing(Drawing newDrawing);
+
+    List<Drawing> showPublicDrawings();
 }

@@ -5,6 +5,7 @@ public class Drawing {
     private String  user;
     private int id;
     private String name;
+    private boolean isPublic;
 
     public String getJson() {
         return json;
@@ -36,5 +37,13 @@ public class Drawing {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public boolean isPublic() {
+        return isPublic;
+    }
+
+    public void setPublic(boolean aPublic) {
+        isPublic = aPublic;
     }
 }

@@ -90,7 +90,11 @@ public class IndexController {
     @PostMapping("/draw")
     public String drawPost(Model model,
                            @RequestParam String drawingInput,
+                           @RequestParam(value = "isPublic", defaultValue = "false") boolean isPublic,
                            @RequestParam String DrawingName){
+
+        System.out.printf("PUBLIC");
+        System.out.printf(String.valueOf(isPublic));
 
         String userName = (String) session.getAttribute("userName");
         System.out.println("username: " + userName);
@@ -100,6 +104,7 @@ public class IndexController {
         savedDrawing.setJson(drawingInput);
         savedDrawing.setName(DrawingName);
         savedDrawing.setUser(actualUser.getUserName());
+        savedDrawing.setPublic(isPublic);
         drawingService.saveDrawing(savedDrawing);
         return null;
     }
@@ -109,7 +114,7 @@ public class IndexController {
     public String gallery(Model model){
         String userName = (String) session.getAttribute("userName");
         List<Drawing> userDrawings = drawingService.showUserDrawings(userName);
-        List<Drawing> allDrawings = drawingService.showDrawings();
+        List<Drawing> allDrawings = drawingService.showPublicDrawings();
 
         model.addAttribute("userName", userName);
         model.addAttribute("userDrawings", userDrawings);
