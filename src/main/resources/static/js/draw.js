@@ -1,3 +1,5 @@
+import {startDrawing, keepDrawing, stopDrawing, getFigure, doLine, render } from '/js/doDraw.js';
+
 const canvas = document.querySelector("canvas");
 const ctx = canvas.getContext("2d");
 let figures = [];
@@ -39,7 +41,7 @@ function hideTools() {
       x.style.display = "none";
 }
 
-import {startDrawing, keepDrawing, stopDrawing, getFigure, doLine, render } from '/js/doDraw.js';
+
 
 //Click al canvas
 canvas.addEventListener("mousedown", function (event) {
@@ -146,7 +148,10 @@ function save(fill, x, y, size, color, type){
         color: color,
         fill: fill,
     };
+    //TODO this figure is wrong
     figures.push(figure);
+    console.log(figure);
+    figure = null;
     document.getElementById("drawingInput").value = JSON.stringify(figures);
     console.log(JSON.stringify(figures));
     render(figures);
