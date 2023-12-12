@@ -64,22 +64,18 @@ canvas.addEventListener("mousedown", function (event) {
                         console.log("empty");
                     } else {
                         save(false, figure.x, null, null, color, "handDrawing");
+                        figure = null;
                     }
                 });
                 break;
 
             case "linia":
-               // save(fill, x, y, null, color, "line");
                 doLine(x, y, color);
                 figure = getFigure();
                 console.log("line figure: ");
                 console.log(figure);
                 if(figure != null){
-                    figures.push(figure);
-                    document.getElementById("drawingInput").value = JSON.stringify(figures);
-                    console.log(JSON.stringify(figures));
-                    render(figures);
-                    updateList();
+                    saveWhole(figure);
                 }
                 break;
 
@@ -87,7 +83,6 @@ canvas.addEventListener("mousedown", function (event) {
                 let size = document.getElementById("fSize").value;
                 let type = document.getElementById("tipusFigura").value;
                 save(fill, x, y, size, color, type);
-                render(figures);
                 break;
 
         }
@@ -104,7 +99,7 @@ function updateList(){
         let listItem = document.createElement('li');
         let button = document.createElement('button');
 
-        //Donar format al button
+        //Donar la funcio al button
         button.textContent = 'X';
         button.dataset.index = index;
         button.addEventListener('click', function() {
@@ -116,9 +111,9 @@ function updateList(){
 
             console.log("figures: ");
             console.log(figures);
-
             updateList();
             render(figures);
+            document.getElementById("drawingInput").value = JSON.stringify(figures);
         });
 
         // Afegir el button al li
@@ -131,6 +126,13 @@ function updateList(){
         // Agrega l'element
         figureList.appendChild(listItem);
     });
+}
+function saveWhole(figure){
+    figures.push(figure);
+    document.getElementById("drawingInput").value = JSON.stringify(figures);
+    console.log(JSON.stringify(figures));
+    render(figures);
+    updateList();
 }
 
 function save(fill, x, y, size, color, type){
@@ -148,7 +150,6 @@ function save(fill, x, y, size, color, type){
     document.getElementById("drawingInput").value = JSON.stringify(figures);
     console.log(JSON.stringify(figures));
     render(figures);
-    console.log("updatelist");
     updateList();
 }
 

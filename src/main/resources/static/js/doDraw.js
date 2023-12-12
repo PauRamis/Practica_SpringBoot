@@ -65,8 +65,6 @@ export function render(figures){
 
 //Dibuixar figures
 function doFigura(currentFigure){
-    console.log("currentFigure: ");
-    console.log(currentFigure);
     let type = currentFigure.type;
     let x = currentFigure.x;
     let y = currentFigure.y;
@@ -108,9 +106,6 @@ function drawHandDrawing(points, color) {
 
 //Dibuxar linies
 export function doLine(x1, y1, color){
-    console.log("doTrueLine");
-    console.log(x1);
-    console.log(y1);
     if (typeof x1 === 'object'){
         //Si x1 es un object, el conjunt és x1:[x1, x2], y1:[y1, y2]
         x2 = x1.x2;
@@ -118,7 +113,6 @@ export function doLine(x1, y1, color){
         x1 = x1.x1;
         y1 = y1.y1;
     }
-    console.log("---")
     console.log(x1);
     console.log(y1);
     console.log(x2);
