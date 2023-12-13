@@ -1,5 +1,6 @@
 import {startDrawing, keepDrawing, stopDrawing, getFigure, doLine, render } from '/js/doDraw.js';
 
+//TODO after hand, line dobuble saves as hand
 const canvas = document.querySelector("canvas");
 const ctx = canvas.getContext("2d");
 let figures = [];

@@ -18,4 +18,8 @@ public interface DrawingRepo {
     void editDrawing(Drawing newDrawing);
 
     List<Drawing> showPublicDrawings();
+
+    void sendToTrash(int drawingId);
+
+    List<Drawing> showUserTrash(String userName);
 }

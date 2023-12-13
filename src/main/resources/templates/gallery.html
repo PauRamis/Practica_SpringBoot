@@ -31,6 +31,9 @@
             <p th:text="${drawing.name}"></p>
         </li>
     </ul>
+    <div>
+        <a th:href="@{/trash}" class="btn btn-secondary">Paperera</a>
+    </div>
     <h2>Tots els dibuixos</h2>
     <ul>
         <li th:each="drawing : ${allDrawings}">

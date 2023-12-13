@@ -154,7 +154,8 @@ public class IndexController {
         String author = drawingService.getDrawingById(Integer.parseInt(currentDrawingId)).getUser();
         String currentUser = (String) session.getAttribute("userName");
         if (author.equals(currentUser)){
-            drawingService.deleteDrawing(Integer.parseInt(currentDrawingId));
+            drawingService.sendToTrash(Integer.parseInt(currentDrawingId));
+            //drawingService.deleteDrawing(Integer.parseInt(currentDrawingId));
         }
         return "redirect:/gallery";
     }
@@ -177,5 +178,28 @@ public class IndexController {
     public String editPost(){
 
         return "redirect:/gallery";
+    }
+
+    //Trash can
+    @GetMapping("/trash")
+    public String trash(Model model){
+        String userName = (String) session.getAttribute("userName");
+        List<Drawing> userTrash = drawingService.showUserTrash(userName);
+
+        model.addAttribute("userName", userName);
+        model.addAttribute("userTrash", userTrash);
+        return "trash";
+    }
+
+    @PostMapping("/trash")
+    public String trashPost(Model model,
+                            @RequestParam("currentDrawingId")
+                            String currentDrawingId) {
+        String author = drawingService.getDrawingById(Integer.parseInt(currentDrawingId)).getUser();
+        String currentUser = (String) session.getAttribute("userName");
+        if (author.equals(currentUser)) {
+            drawingService.deleteDrawing(Integer.parseInt(currentDrawingId));
+        }
+        return "trash";
     }
 }

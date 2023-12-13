@@ -37,4 +37,9 @@ public class DrawingService {
 
     public void editDrawing(Drawing newDrawing){ drawingRepo.editDrawing(newDrawing);}
 
+    public void sendToTrash(int drawingId){ drawingRepo.sendToTrash(drawingId);}
+
+    public List<Drawing> showUserTrash(String userName) {
+        return drawingRepo.showUserTrash(userName);
+    }
 }

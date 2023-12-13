@@ -53,6 +53,18 @@ public class DrawingRepoImpl implements DrawingRepo{
     }
 
     @Override
+    public void sendToTrash(int drawingId) {
+        String sql = "UPDATE drawings SET inTrash = 1 WHERE id = ?";
+        jdbcTemplate.update(sql, drawingId);
+    }
+
+    @Override
+    public List<Drawing> showUserTrash(String userName) {
+        String sql = "SELECT * FROM drawings WHERE user = ? AND inTrash = 1";
+        return jdbcTemplate.query(sql, new BeanPropertyRowMapper<>(Drawing.class), userName);
+    }
+
+    @Override
     public void editDrawing(Drawing newDrawing) {
         int id = newDrawing.getId();
         String newJson = newDrawing.getJson();
