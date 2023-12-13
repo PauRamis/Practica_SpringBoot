@@ -30,13 +30,13 @@ public class DrawingRepoImpl implements DrawingRepo{
 
     @Override
     public List<Drawing> showPublicDrawings() {
-        String sql = "SELECT * FROM drawings WHERE isPublic = 1";
+        String sql = "SELECT * FROM drawings WHERE isPublic = 1 AND inTrash = 0";
         return jdbcTemplate.query(sql, new BeanPropertyRowMapper<>(Drawing.class));
     }
 
     @Override
     public List<Drawing> showUserDrawings(String userName) {
-        String sql = "SELECT * FROM drawings WHERE user = ?";
+        String sql = "SELECT * FROM drawings WHERE user = ? AND inTrash = 0";
         return jdbcTemplate.query(sql, new BeanPropertyRowMapper<>(Drawing.class), userName);
     }
 

@@ -10,22 +10,25 @@
 
 <body>
     <header>
-        <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
-            <div class="container-fluid">
-                <ul class="navbar-nav">
-                    <li class="nav-item">
-                        <a class="nav-link" href="/login">Login</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/draw">Dibuixa</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/gallery">Galeria</a>
-                    </li>
-                </ul>
-            </div>
-        </nav>
-    </header>
+    <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
+        <div class="container-fluid">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link" href="/login">Login</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/draw">Dibuixa</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/gallery">Galeria</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/trash">Paperera</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+</header>
 
     <h2>El dibuix, [[${currentDrawingId}]], de [[${drawingUser}]]</h2>
     <canvas id="canvas"  width="800" height="400"></canvas>
