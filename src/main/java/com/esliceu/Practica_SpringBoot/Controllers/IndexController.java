@@ -163,8 +163,8 @@ public class IndexController {
     //Edit
     @GetMapping("/edit")
     public String edit(Model model,
-                       @RequestParam(name = "currentDrawingId")
-                       int currentDrawingId){
+                       @RequestParam("currentDrawingId")
+                       String currentDrawingId){
         /*Drawing currentDrawing = drawingService.getDrawingById(currentDrawingId);
         model.addAttribute("currentDrawingId", currentDrawingId);
         model.addAttribute("currentJson", currentDrawing.getJson());

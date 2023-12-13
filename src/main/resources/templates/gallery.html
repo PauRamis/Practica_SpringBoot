@@ -41,7 +41,6 @@
     <ul>
         <li th:each="drawing : ${allDrawings}">
             <a th:href="@{/view(currentDrawingId=${drawing.id})}" class="btn btn-secondary" th:text="${drawing.name}"></a>
-            <p th:text="${drawing.name}"></p>
         </li>
     </ul>
 </body>
