@@ -22,4 +22,6 @@ public interface DrawingRepo {
     void sendToTrash(int drawingId);
 
     List<Drawing> showUserTrash(String userName);
+
+    void retriveFromTrash(int drawingId);
 }

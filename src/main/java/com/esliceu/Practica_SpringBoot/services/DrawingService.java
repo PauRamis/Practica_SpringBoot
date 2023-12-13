@@ -42,4 +42,9 @@ public class DrawingService {
     public List<Drawing> showUserTrash(String userName) {
         return drawingRepo.showUserTrash(userName);
     }
+
+    public void retriveFromTrash(int drawingId) {
+        drawingRepo.retriveFromTrash(drawingId);
+    }
+
 }

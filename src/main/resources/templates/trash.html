@@ -29,11 +29,17 @@
 </header>
     <h1>Paperera de [[${userName}]]</h1>
     <ul>
-        <li th:each="drawing : ${userTrash}">
+        <li class="smallBox" th:each="drawing : ${userTrash}">
             <a th:href="@{/view(currentDrawingId=${drawing.id})}" class="btn btn-secondary" th:text="${drawing.name}"></a>
             <form action="/trash" method="post" onclick="return confirm('Segur que vols esborrar el dibuix definitivament?')" >
                 <input type="hidden" name="currentDrawingId" th:value="${drawing.id}" />
+                <input type="hidden" name="formAction" value="Esborrar" />
                 <p><input type="submit" value="Esborrar"></p>
+            </form>
+            <form action="/trash" method="post" onclick="return confirm('Segur que vols recuperar el dibuix?')" >
+                <input type="hidden" name="currentDrawingId" th:value="${drawing.id}" />
+                <input type="hidden" name="formAction" value="Recuperar" />
+                <p><input type="submit" value="Recuperar"></p>
             </form>
         </li>
     </ul>

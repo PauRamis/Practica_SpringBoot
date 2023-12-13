@@ -193,12 +193,18 @@ public class IndexController {
 
     @PostMapping("/trash")
     public String trashPost(Model model,
+                            @RequestParam("formAction") String formAction,
                             @RequestParam("currentDrawingId")
                             String currentDrawingId) {
         String author = drawingService.getDrawingById(Integer.parseInt(currentDrawingId)).getUser();
         String currentUser = (String) session.getAttribute("userName");
         if (author.equals(currentUser)) {
-            drawingService.deleteDrawing(Integer.parseInt(currentDrawingId));
+            if ("Esborrar".equals(formAction)) {
+                drawingService.deleteDrawing(Integer.parseInt(currentDrawingId));
+            } else if ("Recuperar".equals(formAction)) {
+                drawingService.retriveFromTrash(Integer.parseInt(currentDrawingId));
+            }
+
         }
         return "trash";
     }
