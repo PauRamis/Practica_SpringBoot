@@ -206,6 +206,6 @@ public class IndexController {
             }
 
         }
-        return "trash";
+        return "redirect:/trash";
     }
 }

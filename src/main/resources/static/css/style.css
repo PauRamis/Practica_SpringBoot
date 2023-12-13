@@ -51,3 +51,11 @@ aside {
     background-color: white;
     padding: 10px;
 }
+
+.smallBox {
+    margin-top: 10px;
+    width: 25%;
+    display: flex;
+    justify-content: flex-start;
+    background-color: #543f8d;
+}
