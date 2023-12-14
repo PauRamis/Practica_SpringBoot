@@ -176,9 +176,26 @@ public class IndexController {
     }
 
     @PostMapping("/edit")
-    public String editPost(){
+    public String editPost(Model model,
+                           @RequestParam String drawingInput,
+                           @RequestParam int currentDrawingId,
+                           @RequestParam(value = "isPublic", defaultValue = "false") boolean isPublic,
+                           @RequestParam String DrawingName){
 
-        return "redirect:/gallery";
+        System.out.println(isPublic);
+
+        String userName = (String) session.getAttribute("userName");
+        System.out.println("username: " + userName);
+        User actualUser = userService.findUserByuserName(userName);
+
+        Drawing savedDrawing = new Drawing();
+        savedDrawing.setJson(drawingInput);
+        savedDrawing.setName(DrawingName);
+        savedDrawing.setUser(actualUser.getUserName());
+        savedDrawing.setPublic(isPublic);
+        savedDrawing.setId(currentDrawingId);
+        drawingService.editDrawing(savedDrawing);
+        return null;
     }
 
     //Trash can

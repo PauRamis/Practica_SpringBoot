@@ -70,15 +70,16 @@ public class DrawingRepoImpl implements DrawingRepo{
         jdbcTemplate.update(sql, drawingId);
     }
 
-    //retriveFromTrash
-
     @Override
     public void editDrawing(Drawing newDrawing) {
         int id = newDrawing.getId();
+        System.out.println(id);
         String newJson = newDrawing.getJson();
+        System.out.println(newJson);
         String newName = newDrawing.getName();
+        System.out.println(newName);
 
-        String sql = "UPDATE drawings SET name = ?, jdbc = ? WHERE id = ?";
+        String sql = "UPDATE drawings SET name = ?, json = ? WHERE id = ?";
         Object[] params = {newName, newJson, id};
         jdbcTemplate.update(sql, params);
     }
