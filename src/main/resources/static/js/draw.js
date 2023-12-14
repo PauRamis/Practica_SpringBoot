@@ -33,12 +33,15 @@ function getTool(){
 
 maCheckbox.addEventListener("change", function (){
     hideTools();
+    setStorage();
 });
 liniaCheckbox.addEventListener("change", function (){
     hideTools();
+    setStorage();
 });
 figuraCheckbox.addEventListener("change", function (){
     showTools();
+    setStorage();
 });
 
 function showTools() {
@@ -182,6 +185,29 @@ function clear() {
 ////LocalStorage, guardar en local////
 //localStorage.setItem("json", JSON.stringify(figura))
 //let jsonString = JSON.parse(localStorage.getItem("json"))
+
+function setStorage(){
+console.log("setStorage");
+    const subMenu = document.querySelector('.subMenu');
+    const radioButtons = subMenu.querySelectorAll('input[type="radio"]');
+
+    radioButtons.forEach(radioButton => {
+        localStorage.setItem(radioButton.id, radioButton.checked);
+    });
+}
+export function getStorage(){
+console.log("getStorage");
+    const subMenu = document.querySelector('.subMenu');
+    const radioButtons = subMenu.querySelectorAll('input[type="radio"]');
+
+    radioButtons.forEach(radioButton => {
+        const value = localStorage.getItem(radioButton.id);
+        if (value !== null) {
+            radioButton.checked = value === 'true';
+        }
+    });
+}
+
 
 
 /*document.querySelector("select").value =
