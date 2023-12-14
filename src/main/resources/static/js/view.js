@@ -14,6 +14,8 @@ function dibuixa(){
         let json = JSON.parse(jsonString);
         console.log("pasredJSON: " + json);
         console.log("stringifiedJSON: " + JSON.stringify(json));
+        document.getElementById("currentJson").value = JSON.stringify(json);
+
         render(json);
     }
 }

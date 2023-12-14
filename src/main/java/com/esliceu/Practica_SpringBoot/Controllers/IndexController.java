@@ -165,11 +165,12 @@ public class IndexController {
     public String edit(Model model,
                        @RequestParam("currentDrawingId")
                        String currentDrawingId){
-        /*Drawing currentDrawing = drawingService.getDrawingById(currentDrawingId);
+        Drawing currentDrawing = drawingService.getDrawingById(Integer.parseInt(currentDrawingId));
+
         model.addAttribute("currentDrawingId", currentDrawingId);
         model.addAttribute("currentJson", currentDrawing.getJson());
         model.addAttribute("drawingUser", currentDrawing.getUser());
-        model.addAttribute("drawingName", currentDrawing.getName());*/
+        model.addAttribute("drawingName", currentDrawing.getName());
 
         return "edit";
     }

@@ -16,6 +16,15 @@ let toolDefault = maCheckbox;
 let tool = "ma";
 hideTools();
 
+//Per la pagina /edit
+export function importFigures(imporedFigures){
+    let curretDrawing = document.getElementById("currentJson");
+    console.log(curretDrawing.value); //[{...}]
+
+    figures = JSON.parse(curretDrawing.value);
+    console.log(figures);
+}
+
 function getTool(){
     let thisTool = document.querySelector('input[name="tool"]:checked').value;
     return thisTool;
