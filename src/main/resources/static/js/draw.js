@@ -228,6 +228,11 @@ export function getStorage(){
     radioButtons.forEach(radioButton => {
         const value = localStorage.getItem(radioButton.id);
         if (value !== null) {
+            console.log(radioButton.id)
+            console.log(value);
+            if(radioButton.id == "figura"){
+               showTools();
+            }
             radioButton.checked = value === 'true';
         }
     });
