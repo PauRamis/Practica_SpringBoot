@@ -200,9 +200,24 @@ function setStorage(){
     const colorInput = document.getElementById('color');
         if (colorInput) {
             localStorage.setItem('colorValue', colorInput.value);
-        } else {
-            console.error("El elemento con id 'color' no fue encontrado.");
         }
+    //tipus figura
+    const tipoFiguraSelect = document.getElementById('tipusFigura');
+    if (tipoFiguraSelect) {
+        localStorage.setItem('tipoFiguraValue', tipoFiguraSelect.value);
+    }
+
+    //size
+    const fSizeInput = document.getElementById('fSize');
+    if (fSizeInput) {
+        localStorage.setItem('fSizeValue', fSizeInput.value);
+    }
+
+    //fill
+    const fillCheckbox = document.getElementById('fill');
+    if (fillCheckbox) {
+        localStorage.setItem('fillValue', fillCheckbox.checked);
+    }
 }
 export function getStorage(){
     console.log("getStorage");
@@ -219,24 +234,38 @@ export function getStorage(){
 
     //color
     const colorInput = document.getElementById('color');
-        if (colorInput) {
-            const colorValue = localStorage.getItem('colorValue');
-            if (colorValue !== null) {
-                colorInput.value = colorValue;
-            }
-        } else {
-            console.error("El elemento con id 'color' no fue encontrado.");
+    if (colorInput) {
+        const colorValue = localStorage.getItem('colorValue');
+        if (colorValue !== null) {
+            colorInput.value = colorValue;
         }
+    }
+
+    //type
+    const tipoFiguraSelect = document.getElementById('tipusFigura');
+    if (tipoFiguraSelect) {
+        const tipoFiguraValue = localStorage.getItem('tipoFiguraValue');
+        if (tipoFiguraValue !== null) {
+            tipoFiguraSelect.value = tipoFiguraValue;
+        }
+    }
+    //fsize
+    const fSizeInput = document.getElementById('fSize');
+    if (fSizeInput) {
+        const fSizeValue = localStorage.getItem('fSizeValue');
+        if (fSizeValue !== null) {
+            fSizeInput.value = fSizeValue;
+        }
+    }
+    //fill
+    const fillCheckbox = document.getElementById('fill');
+    if (fillCheckbox) {
+        const fillValue = localStorage.getItem('fillValue');
+        if (fillValue !== null) {
+            fillCheckbox.checked = fillValue === 'true';
+        }
+    }
 }
-
-
-
-/*document.querySelector("select").value =
-localStorage.getItem("figure") || ""*/
-
-/*document.querySelector("select").addEventListener("change", (e) => {
-    localStorage.setItem("figure", document.querySelector("select").value)
-});*/
 
 ////Promise////
 /*
