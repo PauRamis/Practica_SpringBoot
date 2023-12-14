@@ -187,25 +187,46 @@ function clear() {
 //let jsonString = JSON.parse(localStorage.getItem("json"))
 
 function setStorage(){
-console.log("setStorage");
+    console.log("setStorage");
+
+    //RadioButtons
     const subMenu = document.querySelector('.subMenu');
     const radioButtons = subMenu.querySelectorAll('input[type="radio"]');
-
     radioButtons.forEach(radioButton => {
         localStorage.setItem(radioButton.id, radioButton.checked);
     });
+
+    //color
+    const colorInput = document.getElementById('color');
+        if (colorInput) {
+            localStorage.setItem('colorValue', colorInput.value);
+        } else {
+            console.error("El elemento con id 'color' no fue encontrado.");
+        }
 }
 export function getStorage(){
-console.log("getStorage");
+    console.log("getStorage");
+
+    //RadioButtons
     const subMenu = document.querySelector('.subMenu');
     const radioButtons = subMenu.querySelectorAll('input[type="radio"]');
-
     radioButtons.forEach(radioButton => {
         const value = localStorage.getItem(radioButton.id);
         if (value !== null) {
             radioButton.checked = value === 'true';
         }
     });
+
+    //color
+    const colorInput = document.getElementById('color');
+        if (colorInput) {
+            const colorValue = localStorage.getItem('colorValue');
+            if (colorValue !== null) {
+                colorInput.value = colorValue;
+            }
+        } else {
+            console.error("El elemento con id 'color' no fue encontrado.");
+        }
 }
 
 
