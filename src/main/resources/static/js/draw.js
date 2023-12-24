@@ -19,10 +19,17 @@ hideTools();
 //Per la pagina /edit
 export function importFigures(imporedFigures){
     let curretDrawing = document.getElementById("currentJson");
-    console.log(curretDrawing.value); //[{...}]
+    console.log(curretDrawing.value);
 
     figures = JSON.parse(curretDrawing.value);
     console.log(figures);
+
+    let curretName = document.getElementById("currentName");
+    document.getElementById("DrawingName").value = curretName.textContent;
+    console.log(curretName.textContent);
+
+    document.getElementById("drawingInput").value = JSON.stringify(figures);
+    updateList();
 }
 
 function getTool(){

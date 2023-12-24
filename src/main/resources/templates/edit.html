@@ -7,7 +7,7 @@
     <title>Edit Drawing</title>
 </head>
 <script type="application/json" id="currentJson" th:text="${currentJson}"></script>
-
+<script type="application/json" id="currentName" th:text="${drawingName}"></script>
 <body>
     <header>
     <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
@@ -82,14 +82,8 @@
         </div>
     </div>
 
-    <script type="module">
-        import { dibuixa } from "/js/view.js";
-        import { importFigures } from "/js/draw.js";
-        window.onload = () => {
-            dibuixa();
-            importFigures();
-        };
-    </script>
+    <script type="module" th:src="@{/js/edit.js}"></script>
+
     <script type="module" th:src="@{/js/draw.js}"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 
