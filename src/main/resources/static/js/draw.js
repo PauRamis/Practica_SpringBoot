@@ -18,6 +18,13 @@ hideTools();
 
 //Per la pagina /edit
 export function importFigures(imporedFigures){
+    let wasPublic = document.getElementById("wasPublic");
+    console.log("wasPublic");
+    console.log(wasPublic.textContent);
+    if (wasPublic == "true"){
+        document.getElementById("isPublic").checked = true;
+    }
+
     let curretDrawing = document.getElementById("currentJson");
     console.log(curretDrawing.value);
 

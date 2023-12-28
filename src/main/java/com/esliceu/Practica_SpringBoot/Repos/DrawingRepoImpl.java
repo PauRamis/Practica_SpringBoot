@@ -74,19 +74,13 @@ public class DrawingRepoImpl implements DrawingRepo{
     public void editDrawing(Drawing newDrawing) {
         System.out.println("Editing...");
         int id = newDrawing.getId();
-        System.out.println(id);
         String newJson = newDrawing.getJson();
-        System.out.println(newJson);
         String newName = newDrawing.getName();
-        System.out.println(newName);
         Boolean isPublic = newDrawing.isPublic();
-        System.out.println("isPublic: " + isPublic);
         int tinyint = 0;
         if (isPublic){
             tinyint = 1;
         }
-        System.out.println(tinyint);
-
         String sql = "UPDATE drawings SET name = ?, json = ?, isPublic = ? WHERE id = ?";
         Object[] params = {newName, newJson, tinyint, id};
         jdbcTemplate.update(sql, params);

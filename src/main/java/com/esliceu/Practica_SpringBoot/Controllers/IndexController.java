@@ -171,6 +171,8 @@ public class IndexController {
         model.addAttribute("currentJson", currentDrawing.getJson());
         model.addAttribute("drawingUser", currentDrawing.getUser());
         model.addAttribute("drawingName", currentDrawing.getName());
+        model.addAttribute("wasPublic", currentDrawing.isPublic());
+        System.out.println(currentDrawing.isPublic());
 
         return "edit";
     }
@@ -184,10 +186,8 @@ public class IndexController {
                            @RequestParam String DrawingName){
 
         boolean isPublic = "true".equals(isPublicParam);
-        System.out.println("isPublic: " + isPublic);
 
         String userName = (String) session.getAttribute("userName");
-        System.out.println("username: " + userName);
         User actualUser = userService.findUserByuserName(userName);
 
         Drawing savedDrawing = new Drawing();
