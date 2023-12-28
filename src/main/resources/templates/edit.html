@@ -74,10 +74,14 @@
         <div>
             <button id="clear">Clear</button>
             <form action="/edit" method="post">
-                <input type="hidden" name="currentDrawingId" th:value="${currentDrawingId}" />
+                <label>
+                    <input type="checkbox" id="isPublic" name="isPublic" value="true" />
+                    Public (Altres podran veure el dibuix)
+                </label>
                 <input id="drawingInput" type="hidden" value="${currentJson}" name="drawingInput"/>
                 <p>Nom: <input id="DrawingName" name="DrawingName" type="text" value="drawingName"></p>
                 <p><input type="submit" value="Envia"></p>
+                <input type="hidden" name="currentDrawingId" th:value="${currentDrawingId}" />
             </form>
         </div>
     </div>

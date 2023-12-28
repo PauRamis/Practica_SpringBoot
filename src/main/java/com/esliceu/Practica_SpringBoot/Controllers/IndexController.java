@@ -195,7 +195,7 @@ public class IndexController {
         savedDrawing.setPublic(isPublic);
         savedDrawing.setId(currentDrawingId);
         drawingService.editDrawing(savedDrawing);
-        return null;
+        return "redirect:/gallery";
     }
 
     //Trash can
