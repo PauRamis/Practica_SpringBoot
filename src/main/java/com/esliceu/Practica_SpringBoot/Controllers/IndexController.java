@@ -179,10 +179,12 @@ public class IndexController {
     public String editPost(Model model,
                            @RequestParam String drawingInput,
                            @RequestParam int currentDrawingId,
-                           @RequestParam(value = "isPublic", defaultValue = "false") boolean isPublic,
+                           //@RequestParam(value = "isPublic", defaultValue = "false") boolean isPublic,
+                           @RequestParam(name = "isPublic", required = false) String isPublicParam,
                            @RequestParam String DrawingName){
 
-        System.out.println(isPublic);
+        boolean isPublic = "true".equals(isPublicParam);
+        System.out.println("isPublic: " + isPublic);
 
         String userName = (String) session.getAttribute("userName");
         System.out.println("username: " + userName);
@@ -194,6 +196,7 @@ public class IndexController {
         savedDrawing.setUser(actualUser.getUserName());
         savedDrawing.setPublic(isPublic);
         savedDrawing.setId(currentDrawingId);
+
         drawingService.editDrawing(savedDrawing);
         return "redirect:/gallery";
     }
