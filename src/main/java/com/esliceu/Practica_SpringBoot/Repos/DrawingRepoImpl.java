@@ -4,6 +4,8 @@ import com.esliceu.Practica_SpringBoot.entities.Drawing;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.support.GeneratedKeyHolder;
+import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -15,11 +17,19 @@ public class DrawingRepoImpl implements DrawingRepo{
 
     @Override
     public void storeDrawing(Drawing drawing) {
-        System.out.println(drawing.getJson());
-        System.out.println(drawing.getUser());
-        System.out.println(drawing.getName());
+        KeyHolder keyHolder = new GeneratedKeyHolder();
+
         jdbcTemplate.update("insert into drawings (json,user,name,isPublic) values (?,?,?,?)",
-                drawing.getJson(), drawing.getUser(), drawing.getName(), drawing.isPublic());
+                drawing.getJson(), drawing.getUser(), drawing.getName(), drawing.isPublic(),
+                keyHolder
+        );
+
+        System.out.println(keyHolder);
+        int drawingNewId = keyHolder.getKey().intValue();
+        System.out.println(drawingNewId);
+
+        jdbcTemplate.update("insert into versions (json) values (?)",
+                drawingNewId);
     }
 
     @Override
