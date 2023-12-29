@@ -24,12 +24,13 @@ public class DrawingRepoImpl implements DrawingRepo{
                 keyHolder
         );
 
+        //Versions
         System.out.println(keyHolder);
         int drawingNewId = keyHolder.getKey().intValue();
         System.out.println(drawingNewId);
 
-        jdbcTemplate.update("insert into versions (json) values (?)",
-                drawingNewId);
+        jdbcTemplate.update("insert into versions (id_drawing,json) values (?)",
+                drawingNewId, drawing.getJson());
     }
 
     @Override
@@ -94,5 +95,10 @@ public class DrawingRepoImpl implements DrawingRepo{
         String sql = "UPDATE drawings SET name = ?, json = ?, isPublic = ? WHERE id = ?";
         Object[] params = {newName, newJson, tinyint, id};
         jdbcTemplate.update(sql, params);
+
+        //Versions
+        String sqlV = "UPDATE versions SET json = ? WHERE id = ?";
+        Object[] paramsV = {newJson, id};
+        jdbcTemplate.update(sqlV, paramsV);
     }
 }
