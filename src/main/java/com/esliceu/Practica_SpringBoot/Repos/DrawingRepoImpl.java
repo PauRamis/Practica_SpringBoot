@@ -8,6 +8,8 @@ import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Repository;
 
+import java.sql.PreparedStatement;
+import java.sql.Statement;
 import java.util.List;
 
 @Repository
@@ -17,10 +19,25 @@ public class DrawingRepoImpl implements DrawingRepo{
 
     @Override
     public void storeDrawing(Drawing drawing) {
+        System.out.println("Saving...");
         KeyHolder keyHolder = new GeneratedKeyHolder();
 
-        jdbcTemplate.update("insert into drawings (json,user,name,isPublic) values (?,?,?,?)",
+        /*jdbcTemplate.update("insert into drawings (json,user,name,isPublic) values (?,?,?,?)",
                 drawing.getJson(), drawing.getUser(), drawing.getName(), drawing.isPublic(),
+                keyHolder
+        );*/
+        jdbcTemplate.update(
+                connection -> {
+                    PreparedStatement ps = connection.prepareStatement(
+                            "insert into drawings (json,user,name,isPublic) values (?,?,?,?)",
+                            Statement.RETURN_GENERATED_KEYS
+                    );
+                    ps.setString(1, drawing.getJson());
+                    ps.setString(2, drawing.getUser());
+                    ps.setString(3, drawing.getName());
+                    ps.setBoolean(4, drawing.isPublic());
+                    return ps;
+                },
                 keyHolder
         );
 
@@ -29,7 +46,7 @@ public class DrawingRepoImpl implements DrawingRepo{
         int drawingNewId = keyHolder.getKey().intValue();
         System.out.println(drawingNewId);
 
-        jdbcTemplate.update("insert into versions (id_drawing,json) values (?)",
+        jdbcTemplate.update("insert into versions (id_drawing,json) values (?,?)",
                 drawingNewId, drawing.getJson());
     }
 
@@ -96,9 +113,8 @@ public class DrawingRepoImpl implements DrawingRepo{
         Object[] params = {newName, newJson, tinyint, id};
         jdbcTemplate.update(sql, params);
 
-        //Versions
-        String sqlV = "UPDATE versions SET json = ? WHERE id = ?";
-        Object[] paramsV = {newJson, id};
-        jdbcTemplate.update(sqlV, paramsV);
+        //New version
+        jdbcTemplate.update("insert into versions (id_drawing,json) values (?,?)",
+                id, newJson);
     }
 }
