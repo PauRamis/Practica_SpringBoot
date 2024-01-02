@@ -2,11 +2,11 @@ package com.esliceu.Practica_SpringBoot.services;
 
 import com.esliceu.Practica_SpringBoot.Repos.DrawingRepo;
 import com.esliceu.Practica_SpringBoot.entities.Drawing;
+import com.esliceu.Practica_SpringBoot.entities.Version;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Random;
 
 @Service
 public class DrawingService {
@@ -47,4 +47,7 @@ public class DrawingService {
         drawingRepo.retriveFromTrash(drawingId);
     }
 
+    public List<Version> showDrawingVersions(int currentDrawingId) {
+        return drawingRepo.showDrawingVersions(currentDrawingId);
+    }
 }

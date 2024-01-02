@@ -2,6 +2,7 @@ package com.esliceu.Practica_SpringBoot.Controllers;
 
 import com.esliceu.Practica_SpringBoot.entities.Drawing;
 import com.esliceu.Practica_SpringBoot.entities.User;
+import com.esliceu.Practica_SpringBoot.entities.Version;
 import com.esliceu.Practica_SpringBoot.services.DrawingService;
 import com.esliceu.Practica_SpringBoot.services.UserService;
 import jakarta.servlet.http.HttpSession;
@@ -159,6 +160,27 @@ public class IndexController {
         }
         return "redirect:/gallery";
     }
+
+    //Versions
+    @GetMapping("/versions")
+    public String versions(Model model,
+                           @RequestParam(name = "currentDrawingId")
+                           int currentDrawingId){
+        //Needs:
+            //DrawingVersions
+        String userName = (String) session.getAttribute("userName");
+        List<Version> DrawingVersions = drawingService.showDrawingVersions(currentDrawingId); //TODO versions
+
+        model.addAttribute("userName", userName);
+        model.addAttribute("DrawingVersions", DrawingVersions);
+        return "versions";
+    }
+
+    @PostMapping("/versions")
+    public String versionsPost(Model model){
+        return null;
+    }
+
 
     //Edit
     @GetMapping("/edit")

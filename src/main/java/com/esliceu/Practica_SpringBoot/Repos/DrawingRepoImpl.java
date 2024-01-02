@@ -1,6 +1,7 @@
 package com.esliceu.Practica_SpringBoot.Repos;
 
 import com.esliceu.Practica_SpringBoot.entities.Drawing;
+import com.esliceu.Practica_SpringBoot.entities.Version;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -96,6 +97,12 @@ public class DrawingRepoImpl implements DrawingRepo{
     public void retriveFromTrash(int drawingId) {
         String sql = "UPDATE drawings SET inTrash = 0 WHERE id = ?";
         jdbcTemplate.update(sql, drawingId);
+    }
+
+    @Override
+    public List<Version> showDrawingVersions(int drawingId) {
+        String sql = "SELECT * FROM versions WHERE id_drawing = ?";
+        return jdbcTemplate.query(sql, new BeanPropertyRowMapper<>(Version.class), drawingId);
     }
 
     @Override

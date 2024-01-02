@@ -1,6 +1,7 @@
 package com.esliceu.Practica_SpringBoot.Repos;
 
 import com.esliceu.Practica_SpringBoot.entities.Drawing;
+import com.esliceu.Practica_SpringBoot.entities.Version;
 
 import java.util.List;
 
@@ -24,4 +25,6 @@ public interface DrawingRepo {
     List<Drawing> showUserTrash(String userName);
 
     void retriveFromTrash(int drawingId);
+
+    List<Version> showDrawingVersions(int drawingId);
 }
