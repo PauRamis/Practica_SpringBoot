@@ -51,7 +51,7 @@ public class DrawingService {
         return drawingRepo.showDrawingVersions(currentDrawingId);
     }
 
-    public Version getVersopmById(int versionId) {
-        return drawingRepo.getVersopmById(versionId);
+    public Version getVersionById(int versionId) {
+        return drawingRepo.getVersionById(versionId);
     }
 }

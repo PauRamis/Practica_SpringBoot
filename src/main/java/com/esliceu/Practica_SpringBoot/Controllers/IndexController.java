@@ -154,7 +154,6 @@ public class IndexController {
         String currentUser = (String) session.getAttribute("userName");
         if (author.equals(currentUser)){
             drawingService.sendToTrash(Integer.parseInt(currentDrawingId));
-            //drawingService.deleteDrawing(Integer.parseInt(currentDrawingId));
         }
         return "redirect:/gallery";
     }
@@ -166,11 +165,10 @@ public class IndexController {
 
         String userName = (String) session.getAttribute("userName");
         List<Version> DrawingVersions = drawingService.showDrawingVersions(currentDrawingId);
-        System.out.println("Versions: ");
-        System.out.println(DrawingVersions.toString());
 
-        model.addAttribute("userName", userName); //Todo Necesari?
         model.addAttribute("DrawingVersions", DrawingVersions);
+        model.addAttribute("currentDrawingId", currentDrawingId);
+
         return "versions";
     }
 
@@ -185,28 +183,19 @@ public class IndexController {
                               @RequestParam int versionId,
                               @RequestParam int currentDrawingId){
 
-        Version currentVersion = drawingService.getVersopmById(versionId);
+        Version currentVersion = drawingService.getVersionById(versionId);
         model.addAttribute("currentDrawingId", currentDrawingId);
         model.addAttribute("versionId", versionId);
         model.addAttribute("currentJson", currentVersion.getJson());
-
-        //Comprobam si es el autor del actual dibuix
-        String currentUser = (String) session.getAttribute("userName");
-        author = currentUser.equals(currentDrawing.getUser());
-        model.addAttribute("author", author);
+        model.addAttribute("timeStamp", currentVersion.getTimeStamp());
         return "versionView";
     }
 
     @PostMapping("/versionView")
     public String versionViewPost(Model model,
-                           @RequestParam("currentDrawingId")
-                                   String currentDrawingId){
-        String author = drawingService.getDrawingById(Integer.parseInt(currentDrawingId)).getUser();
-        String currentUser = (String) session.getAttribute("userName");
-        if (author.equals(currentUser)){
-            drawingService.sendToTrash(Integer.parseInt(currentDrawingId));
-            //drawingService.deleteDrawing(Integer.parseInt(currentDrawingId));
-        }
+                                  @RequestParam int versionId,
+                                  @RequestParam String currentDrawingId){
+
         return "redirect:/gallery";
     }
     //Edit
@@ -274,7 +263,6 @@ public class IndexController {
             } else if ("Recuperar".equals(formAction)) {
                 drawingService.retriveFromTrash(Integer.parseInt(currentDrawingId));
             }
-
         }
         return "redirect:/trash";
     }

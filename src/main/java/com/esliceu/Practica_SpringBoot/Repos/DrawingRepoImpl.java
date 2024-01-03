@@ -106,7 +106,7 @@ public class DrawingRepoImpl implements DrawingRepo{
     }
 
     @Override
-    public Version getVersopmById(int versionId) {
+    public Version getVersionById(int versionId) {
         String sql = "SELECT * FROM versions WHERE id = ?";
         return jdbcTemplate.queryForObject(sql, new BeanPropertyRowMapper<>(Version.class), versionId);
     }

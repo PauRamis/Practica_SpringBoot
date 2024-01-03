@@ -28,5 +28,5 @@ public interface DrawingRepo {
 
     List<Version> showDrawingVersions(int drawingId);
 
-    Version getVersopmById(int versionId);
+    Version getVersionById(int versionId);
 }
