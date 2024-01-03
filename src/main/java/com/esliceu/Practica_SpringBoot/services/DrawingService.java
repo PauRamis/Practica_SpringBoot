@@ -50,4 +50,8 @@ public class DrawingService {
     public List<Version> showDrawingVersions(int currentDrawingId) {
         return drawingRepo.showDrawingVersions(currentDrawingId);
     }
+
+    public Version getVersopmById(int versionId) {
+        return drawingRepo.getVersopmById(versionId);
+    }
 }

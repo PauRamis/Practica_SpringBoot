@@ -132,8 +132,7 @@ public class IndexController {
     boolean author = false;
     @GetMapping("/view")
     public String view(Model model,
-                       @RequestParam(name = "currentDrawingId")
-                       int currentDrawingId){
+                       @RequestParam int currentDrawingId){
 
         Drawing currentDrawing = drawingService.getDrawingById(currentDrawingId);
         model.addAttribute("currentDrawingId", currentDrawingId);
@@ -150,8 +149,7 @@ public class IndexController {
 
     @PostMapping("/view")
     public String viewPost(Model model,
-                           @RequestParam("currentDrawingId")
-                           String currentDrawingId){
+                           @RequestParam String currentDrawingId){
         String author = drawingService.getDrawingById(Integer.parseInt(currentDrawingId)).getUser();
         String currentUser = (String) session.getAttribute("userName");
         if (author.equals(currentUser)){
@@ -164,14 +162,14 @@ public class IndexController {
     //Versions
     @GetMapping("/versions")
     public String versions(Model model,
-                           @RequestParam(name = "currentDrawingId")
-                           int currentDrawingId){
-        //Needs:
-            //DrawingVersions
-        String userName = (String) session.getAttribute("userName");
-        List<Version> DrawingVersions = drawingService.showDrawingVersions(currentDrawingId); //TODO versions
+                           @RequestParam int currentDrawingId){
 
-        model.addAttribute("userName", userName);
+        String userName = (String) session.getAttribute("userName");
+        List<Version> DrawingVersions = drawingService.showDrawingVersions(currentDrawingId);
+        System.out.println("Versions: ");
+        System.out.println(DrawingVersions.toString());
+
+        model.addAttribute("userName", userName); //Todo Necesari?
         model.addAttribute("DrawingVersions", DrawingVersions);
         return "versions";
     }
@@ -181,7 +179,36 @@ public class IndexController {
         return null;
     }
 
+    //Igual a view, pero amb una versió especifica
+    @GetMapping("/versionView")
+    public String versionView(Model model,
+                              @RequestParam int versionId,
+                              @RequestParam int currentDrawingId){
 
+        Version currentVersion = drawingService.getVersopmById(versionId);
+        model.addAttribute("currentDrawingId", currentDrawingId);
+        model.addAttribute("versionId", versionId);
+        model.addAttribute("currentJson", currentVersion.getJson());
+
+        //Comprobam si es el autor del actual dibuix
+        String currentUser = (String) session.getAttribute("userName");
+        author = currentUser.equals(currentDrawing.getUser());
+        model.addAttribute("author", author);
+        return "versionView";
+    }
+
+    @PostMapping("/versionView")
+    public String versionViewPost(Model model,
+                           @RequestParam("currentDrawingId")
+                                   String currentDrawingId){
+        String author = drawingService.getDrawingById(Integer.parseInt(currentDrawingId)).getUser();
+        String currentUser = (String) session.getAttribute("userName");
+        if (author.equals(currentUser)){
+            drawingService.sendToTrash(Integer.parseInt(currentDrawingId));
+            //drawingService.deleteDrawing(Integer.parseInt(currentDrawingId));
+        }
+        return "redirect:/gallery";
+    }
     //Edit
     @GetMapping("/edit")
     public String edit(Model model,

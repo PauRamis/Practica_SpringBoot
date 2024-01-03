@@ -28,10 +28,9 @@
     </header>
     <h1>Versions del dibuix</h1>
 
-    //Equivalent en verisons
     <ul>
-        <li th:each="version : ${versions}">
-            <a th:href="@{/view(currentDrawingId=${drawing.id})}" class="btn btn-secondary" th:text="${version.name}"></a>
+        <li th:each="version : ${DrawingVersions}">
+            <a th:href="@{/versionView(currentDrawingId=${version.id_drawing})}" class="btn btn-secondary" th:text="${version.timeStamp}"></a>
         </li>
     </ul>
     <a href="/gallery" class="btn btn-secondary">Tornar a la galeria</a>

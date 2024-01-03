@@ -13,6 +13,6 @@ public class AppConfig implements WebMvcConfigurer {
 
     @Override
     public void addInterceptors(InterceptorRegistry registry){
-        registry.addInterceptor(sessionInterceptor).addPathPatterns("/draw", "/gallery", "/view", "/edit", "/trash");
+        registry.addInterceptor(sessionInterceptor).addPathPatterns("/draw", "/gallery", "/view", "/edit", "/trash", "/versions");
     }
 }

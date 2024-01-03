@@ -27,4 +27,6 @@ public interface DrawingRepo {
     void retriveFromTrash(int drawingId);
 
     List<Version> showDrawingVersions(int drawingId);
+
+    Version getVersopmById(int versionId);
 }
