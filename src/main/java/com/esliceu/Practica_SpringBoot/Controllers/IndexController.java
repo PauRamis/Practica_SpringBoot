@@ -205,16 +205,16 @@ public class IndexController {
     @GetMapping("/edit")
     public String edit(Model model,
                        @RequestParam("currentDrawingId")
-                       String currentDrawingId){
-        Drawing currentDrawing = drawingService.getDrawingById(Integer.parseInt(currentDrawingId));
-
+                       int currentDrawingId){
+        Drawing currentDrawing = drawingService.getDrawingById(currentDrawingId);
         model.addAttribute("currentDrawingId", currentDrawingId);
-        model.addAttribute("currentJson", currentDrawing.getJson());
         model.addAttribute("drawingUser", currentDrawing.getUser());
         model.addAttribute("drawingName", currentDrawing.getName());
         model.addAttribute("wasPublic", currentDrawing.isPublic());
-        System.out.println(currentDrawing.isPublic());
 
+        Version currentVersion = drawingService.getLatestVersion(currentDrawingId);
+        model.addAttribute("currentJson", currentVersion.getJson());
+        System.out.println(currentDrawing.isPublic());
         return "edit";
     }
 
