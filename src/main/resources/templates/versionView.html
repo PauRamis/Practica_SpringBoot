@@ -35,9 +35,10 @@
 <a href="/gallery" class="btn btn-secondary">Tornar a la galeria</a>
 
     <a th:href="@{'/edit?currentDrawingId=' + ${currentDrawingId}}" class="btn btn-secondary">Editar</a>
-    <form action="/view" method="post" onclick="return confirm('Segur que vols esborrar el dibuix?')" >
+
+    <form action="/view" method="post" onclick="return confirm('Segur que vols restaurar aquesta versio?')" >
         <input type="hidden" name="currentDrawingId" th:value="${currentDrawingId}" />
-        <p><input type="submit" value="Esborrar"></p>
+        <p><input type="submit" value="Restaurar"></p>
     </form>
 
 <script type="module">

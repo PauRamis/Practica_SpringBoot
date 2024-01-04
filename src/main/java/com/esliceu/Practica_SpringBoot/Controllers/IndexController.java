@@ -195,7 +195,6 @@ public class IndexController {
     public String versionViewPost(Model model,
                                   @RequestParam int versionId,
                                   @RequestParam String currentDrawingId){
-
         return "redirect:/gallery";
     }
     //Edit

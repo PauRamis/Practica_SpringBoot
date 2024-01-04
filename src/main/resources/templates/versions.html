@@ -30,7 +30,7 @@
 
     <ul>
         <li th:each="version : ${DrawingVersions}">
-            <a th:href="@{/versionView(currentDrawingId=${currentDrawingId}, versionId=${version.id_drawing})}" class="btn btn-secondary" th:text="${version.timeStamp}"></a>
+            <a th:href="@{/versionView(currentDrawingId=${currentDrawingId}, versionId=${version.id})}" class="btn btn-secondary" th:text="${version.timeStamp}"></a>
         </li>
     </ul>
     <a href="/gallery" class="btn btn-secondary">Tornar a la galeria</a>
