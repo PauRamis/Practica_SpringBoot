@@ -113,6 +113,23 @@ public class DrawingRepoImpl implements DrawingRepo{
     }
 
     @Override
+    public Version getLatestVersion(int drawingId) {
+        System.out.println(drawingId);
+        String sql = "SELECT * FROM versions WHERE id_drawing = ? ORDER BY id DESC LIMIT 1";
+        return jdbcTemplate.queryForObject(sql, new BeanPropertyRowMapper<>(Version.class), drawingId);
+    }
+
+    @Override
+    public void overrideLatestVersion(int id_drawing, String newJson){
+        System.out.println("overrideLatestVersion...");
+        System.out.println(id_drawing);
+        System.out.println(newJson);
+
+        jdbcTemplate.update("insert into versions (id_drawing,json) values (?,?)",
+                id_drawing, newJson);
+    }
+
+    @Override
     public void editDrawing(Drawing newDrawing) {
         System.out.println("Editing...");
         int id = newDrawing.getId();

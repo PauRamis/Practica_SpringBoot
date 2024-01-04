@@ -47,11 +47,15 @@ public class DrawingService {
         drawingRepo.retriveFromTrash(drawingId);
     }
 
-    public List<Version> showDrawingVersions(int currentDrawingId) {
-        return drawingRepo.showDrawingVersions(currentDrawingId);
-    }
+    public List<Version> showDrawingVersions(int currentDrawingId) {return drawingRepo.showDrawingVersions(currentDrawingId);}
 
     public Version getVersionById(int versionId) {
         return drawingRepo.getVersionById(versionId);
     }
+
+    public Version getLatestVersion(int drawingId) {
+        return drawingRepo.getLatestVersion(drawingId);
+    }
+
+    public void overrideLatestVersion(int id_drawing, String newJson) {drawingRepo.overrideLatestVersion(id_drawing, newJson);};
 }

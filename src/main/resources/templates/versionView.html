@@ -36,8 +36,9 @@
 
     <a th:href="@{'/edit?currentDrawingId=' + ${currentDrawingId}}" class="btn btn-secondary">Editar</a>
 
-    <form action="/view" method="post" onclick="return confirm('Segur que vols restaurar aquesta versio?')" >
+    <form action="/versionView" method="post" onclick="return confirm('Segur que vols restaurar aquesta versio?')" >
         <input type="hidden" name="currentDrawingId" th:value="${currentDrawingId}" />
+        <input type="hidden" name="versionId" th:value="${versionId}" />
         <p><input type="submit" value="Restaurar"></p>
     </form>
 

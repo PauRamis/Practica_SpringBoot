@@ -16,6 +16,10 @@ public interface DrawingRepo {
 
     void deleteDrawing(int id);
 
+    Version getLatestVersion(int drawingId);
+
+    void overrideLatestVersion(int id_drawing, String newJson);
+
     void editDrawing(Drawing newDrawing);
 
     List<Drawing> showPublicDrawings();

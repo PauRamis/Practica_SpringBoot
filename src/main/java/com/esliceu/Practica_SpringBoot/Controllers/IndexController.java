@@ -136,9 +136,10 @@ public class IndexController {
 
         Drawing currentDrawing = drawingService.getDrawingById(currentDrawingId);
         model.addAttribute("currentDrawingId", currentDrawingId);
-        model.addAttribute("currentJson", currentDrawing.getJson());
         model.addAttribute("drawingUser", currentDrawing.getUser());
 
+        Version currentVersion = drawingService.getLatestVersion(currentDrawingId);
+        model.addAttribute("currentJson", currentVersion.getJson());
 
         //Comprobam si es el autor del actual dibuix
         String currentUser = (String) session.getAttribute("userName");
@@ -194,7 +195,10 @@ public class IndexController {
     @PostMapping("/versionView")
     public String versionViewPost(Model model,
                                   @RequestParam int versionId,
-                                  @RequestParam String currentDrawingId){
+                                  @RequestParam int currentDrawingId){
+        //Restaurar Versio
+        Version currentVersion = drawingService.getVersionById(versionId);
+        drawingService.overrideLatestVersion(currentDrawingId, currentVersion.getJson());
         return "redirect:/gallery";
     }
     //Edit
