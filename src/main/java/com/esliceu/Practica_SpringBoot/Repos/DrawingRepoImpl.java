@@ -2,6 +2,8 @@ package com.esliceu.Practica_SpringBoot.Repos;
 
 import com.esliceu.Practica_SpringBoot.entities.Drawing;
 import com.esliceu.Practica_SpringBoot.entities.Version;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -148,4 +150,15 @@ public class DrawingRepoImpl implements DrawingRepo{
         jdbcTemplate.update("insert into versions (id_drawing,json) values (?,?)",
                 id, newJson);
     }
+
+    @Override
+    public void shareWithUsers(int[] users, int id) throws JsonProcessingException {
+        ObjectMapper objectMapper = new ObjectMapper();
+        String usersJson = objectMapper.writeValueAsString(users);
+        System.out.println(usersJson);
+        String sql = "Update drawings SET shared = ? WHERE id = ?";
+
+        jdbcTemplate.update(sql, usersJson, id);
+    }
+
 }

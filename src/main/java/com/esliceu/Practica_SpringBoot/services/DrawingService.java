@@ -58,4 +58,6 @@ public class DrawingService {
     }
 
     public void overrideLatestVersion(int id_drawing, String newJson) {drawingRepo.overrideLatestVersion(id_drawing, newJson);};
+
+    public void shareWithUsers(int[] users, int id) {drawingRepo.shareWithUsers(users, id);}
 }
