@@ -3,9 +3,11 @@ package com.esliceu.Practica_SpringBoot.services;
 import com.esliceu.Practica_SpringBoot.Repos.DrawingRepo;
 import com.esliceu.Practica_SpringBoot.entities.Drawing;
 import com.esliceu.Practica_SpringBoot.entities.Version;
+import com.fasterxml.jackson.core.JsonProcessingException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.swing.plaf.LabelUI;
 import java.util.List;
 
 @Service
@@ -59,5 +61,7 @@ public class DrawingService {
 
     public void overrideLatestVersion(int id_drawing, String newJson) {drawingRepo.overrideLatestVersion(id_drawing, newJson);};
 
-    public void shareWithUsers(int[] users, int id) {drawingRepo.shareWithUsers(users, id);}
+    public void shareWithUsers(int[] users, int id) throws JsonProcessingException {drawingRepo.shareWithUsers(users, id);}
+
+    List<Drawing> getSharedDrawings(int id) {return drawingRepo.getSharedDrawings(id);}
 }

@@ -161,4 +161,10 @@ public class DrawingRepoImpl implements DrawingRepo{
         jdbcTemplate.update(sql, usersJson, id);
     }
 
+    @Override
+    public List<Drawing> getSharedDrawings(int id) {
+        String sql = "SELECT * FROM drawings WHERE JSON_CONTAINS(shared, CAST(? AS JSON), '$')";
+        return jdbcTemplate.query(sql, new BeanPropertyRowMapper<>(Drawing.class), "[" + id + "]");
+    }
+
 }
