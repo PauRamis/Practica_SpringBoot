@@ -118,7 +118,10 @@ public class DrawingRepoImpl implements DrawingRepo{
     public Version getLatestVersion(int drawingId) {
         System.out.println(drawingId);
         String sql = "SELECT * FROM versions WHERE id_drawing = ? ORDER BY id DESC LIMIT 1";
-        return jdbcTemplate.queryForObject(sql, new BeanPropertyRowMapper<>(Version.class), drawingId);
+        Version v = jdbcTemplate.queryForObject(sql, new BeanPropertyRowMapper<>(Version.class), drawingId);
+        if (v.getId() > 0){
+            return v;
+        } else return null;
     }
 
     @Override

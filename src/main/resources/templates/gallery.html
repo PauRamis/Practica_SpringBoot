@@ -5,6 +5,7 @@
     <link rel="stylesheet" th:href="@{/css/style.css}" />
     <title>Galeria</title>
 </head>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 <body class="bg1">
     <header>
     <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
@@ -27,21 +28,41 @@
     </nav>
 </header>
     <h1>Galeria de Dibuixos</h1>
-    <h2>Els teus dibuixos, [[${userName}]]</h2>
-    <ul>
-        <li th:each="drawing : ${userDrawings}">
-            <a th:href="@{/view(currentDrawingId=${drawing.id})}" class="btn btn-secondary" th:text="${drawing.name}"></a>
-            <p th:text="${drawing.name}"></p>
-        </li>
-    </ul>
-    <div>
-        <a th:href="@{/trash}" class="btn btn-secondary">Paperera</a>
+    <div class="row">
+        <div class="col-6 col-md-4">
+            <h2>Els teus dibuixos, [[${userName}]]</h2>
+            <div class="dropdown">
+                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                    Mostrar dibuixos
+                </button>
+                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                    <li th:each="drawing : ${userDrawings}">
+                        <a th:href="@{/view(currentDrawingId=${drawing.id})}" class="dropdown-item" th:text="${drawing.name}"></a>
+                    </li>
+                </ul>
+            </div>
+
+            <div>
+                <a th:href="@{/trash}" class="btn btn-secondary">Paperera</a>
+            </div>
+        </div>
+        <div class="col-6 col-md-4">
+            <h2>Dibuixos Publics</h2>
+            <div class="dropdown">
+                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                    Mostrar dibuixos
+                </button>
+                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                    <li th:each="drawing : ${allDrawings}">
+                        <a th:href="@{/view(currentDrawingId=${drawing.id})}" class="dropdown-item" th:text="${drawing.name}"></a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="col-6 col-md-4">
+            <h2>Compartit amb Tu</h2>
+        </div>
     </div>
-    <h2>Tots els dibuixos</h2>
-    <ul>
-        <li th:each="drawing : ${allDrawings}">
-            <a th:href="@{/view(currentDrawingId=${drawing.id})}" class="btn btn-secondary" th:text="${drawing.name}"></a>
-        </li>
-    </ul>
+
 </body>
 </html>
