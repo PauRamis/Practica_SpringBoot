@@ -31,16 +31,12 @@
     <div class="row">
         <div class="col-6 col-md-4">
             <h2>Els teus dibuixos, [[${userName}]]</h2>
-            <div class="dropdown">
-                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-                    Mostrar dibuixos
-                </button>
-                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                    <li th:each="drawing : ${userDrawings}">
-                        <a th:href="@{/view(currentDrawingId=${drawing.id})}" class="dropdown-item" th:text="${drawing.name}"></a>
-                    </li>
-                </ul>
-            </div>
+            <ul>
+                <li th:each="drawing : ${userDrawings}">
+                    <a th:href="@{/view(currentDrawingId=${drawing.id})}" class="btn btn-secondary" th:text="${drawing.name}"></a>
+                    <p th:text="${drawing.name}"></p>
+                </li>
+            </ul>
 
             <div>
                 <a th:href="@{/trash}" class="btn btn-secondary">Paperera</a>
@@ -48,16 +44,12 @@
         </div>
         <div class="col-6 col-md-4">
             <h2>Dibuixos Publics</h2>
-            <div class="dropdown">
-                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-                    Mostrar dibuixos
-                </button>
-                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                    <li th:each="drawing : ${allDrawings}">
-                        <a th:href="@{/view(currentDrawingId=${drawing.id})}" class="dropdown-item" th:text="${drawing.name}"></a>
-                    </li>
-                </ul>
-            </div>
+            <ul>
+                <li th:each="drawing : ${allDrawings}">
+                    <a th:href="@{/view(currentDrawingId=${drawing.id})}" class="btn btn-secondary" th:text="${drawing.name}"></a>
+                    <p th:text="${drawing.name}"></p>
+                </li>
+            </ul>
         </div>
         <div class="col-6 col-md-4">
             <h2>Compartit amb Tu</h2>
