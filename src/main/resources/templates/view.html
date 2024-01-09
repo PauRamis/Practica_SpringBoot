@@ -30,10 +30,9 @@
     </nav>
 </header>
 
-    <h2>El dibuix, [[${currentDrawingId}]], de [[${drawingUser}]]</h2>
+    <h2>Dibuix de [[${drawingUser}]]</h2>
     <canvas id="canvas"  width="800" height="400"></canvas>
     <a href="/gallery" class="btn btn-secondary">Tornar a la galeria</a>
-
 
     <div th:if="${author}">
         <a th:href="@{'/edit?currentDrawingId=' + ${currentDrawingId}}" class="btn btn-secondary">Editar</a>

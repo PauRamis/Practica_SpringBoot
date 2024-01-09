@@ -33,8 +33,7 @@
             <h2>Els teus dibuixos, [[${userName}]]</h2>
             <ul>
                 <li th:each="drawing : ${userDrawings}">
-                    <a th:href="@{/view(currentDrawingId=${drawing.id})}" class="btn btn-secondary" th:text="${drawing.name}"></a>
-                    <p th:text="${drawing.name}"></p>
+                    <a th:href="@{/view(currentDrawingId=${drawing.id})}" class="btn btn-primary" th:text="${drawing.name}"></a>
                 </li>
             </ul>
 
@@ -46,13 +45,17 @@
             <h2>Dibuixos Publics</h2>
             <ul>
                 <li th:each="drawing : ${allDrawings}">
-                    <a th:href="@{/view(currentDrawingId=${drawing.id})}" class="btn btn-secondary" th:text="${drawing.name}"></a>
-                    <p th:text="${drawing.name}"></p>
+                    <a th:href="@{/view(currentDrawingId=${drawing.id})}" class="btn btn-primary" th:text="${drawing.name}"></a>
                 </li>
             </ul>
         </div>
         <div class="col-6 col-md-4">
             <h2>Compartit amb Tu</h2>
+            <ul>
+                <li th:each="drawing : ${sharedDrawings}">
+                    <a th:href="@{/view(currentDrawingId=${drawing.id})}" class="btn btn-primary" th:text="${drawing.name}"></a>
+                </li>
+            </ul>
         </div>
     </div>
 
