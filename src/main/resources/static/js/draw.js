@@ -75,6 +75,7 @@ canvas.addEventListener("mousedown", function (event) {
     const boundingRect = canvas.getBoundingClientRect();
     const x = event.offsetX;
     const y = event.offsetY;
+    setStorage();
     //Ens aseguram que l'acció es un click esquerre
     if (event.button == 0) {
         //Usam l'eina triada

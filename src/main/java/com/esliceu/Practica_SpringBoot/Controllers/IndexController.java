@@ -273,4 +273,24 @@ public class IndexController {
         }
         return "redirect:/trash";
     }
+
+    //Share
+    @GetMapping("/share")
+    public String share(Model model,
+                       @RequestParam int currentDrawingId){
+
+        Drawing currentDrawing = drawingService.getDrawingById(currentDrawingId);
+        model.addAttribute("currentDrawingId", currentDrawingId);
+        return "share";
+    }
+
+    @PostMapping("/share")
+    public String sharePost(Model model,
+                           @RequestParam String currentDrawingId,
+                            @RequestParam String shareUsers,
+                            @RequestParam(value = "canEdit", defaultValue = "false") boolean canEdit){
+
+
+        return "redirect:/share";
+    }
 }
