@@ -156,18 +156,19 @@ public class DrawingRepoImpl implements DrawingRepo{
 
     @Override
     public void shareWithUsers(int[] users, int id) throws JsonProcessingException {
-        ObjectMapper objectMapper = new ObjectMapper();
+        /*ObjectMapper objectMapper = new ObjectMapper();
         String usersJson = objectMapper.writeValueAsString(users);
         System.out.println(usersJson);
         String sql = "Update drawings SET shared = ? WHERE id = ?";
 
-        jdbcTemplate.update(sql, usersJson, id);
+        jdbcTemplate.update(sql, usersJson, id);*/
     }
 
     @Override
     public List<Drawing> getSharedDrawings(int id) {
-        String sql = "SELECT * FROM drawings WHERE JSON_CONTAINS(shared, CAST(? AS JSON), '$')";
-        return jdbcTemplate.query(sql, new BeanPropertyRowMapper<>(Drawing.class), "[" + id + "]");
+        /*String sql = "SELECT * FROM drawings WHERE JSON_CONTAINS(shared, CAST(? AS JSON), '$')";
+        return jdbcTemplate.query(sql, new BeanPropertyRowMapper<>(Drawing.class), "[" + id + "]");*/
+        return null;
     }
 
 }
