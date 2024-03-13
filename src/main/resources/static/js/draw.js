@@ -166,7 +166,6 @@ function saveWhole(figure){
 }
 
 function save(fill, x, y, size, color, type){
-    //Guardam la figura
     console.log("save");
     figure = {
         type: type,
@@ -196,10 +195,6 @@ function clear() {
     document.getElementById("drawingInput").value = JSON.stringify(figures);
     console.log("cleared");
 }
-
-////LocalStorage, guardar en local////
-//localStorage.setItem("json", JSON.stringify(figura))
-//let jsonString = JSON.parse(localStorage.getItem("json"))
 
 function setStorage(){
     console.log("setStorage");

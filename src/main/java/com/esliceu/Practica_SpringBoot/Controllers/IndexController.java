@@ -28,6 +28,11 @@ public class IndexController {
         this.drawingService = drawingService;
     }
 
+    @GetMapping("/")
+    public String homepage(){
+        return "login";
+    }
+
     //Login
     @GetMapping("/login")
     public String login(){

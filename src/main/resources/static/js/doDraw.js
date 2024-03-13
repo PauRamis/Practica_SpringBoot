@@ -30,7 +30,7 @@ export function keepDrawing(e) {
 }
 
 export function stopDrawing() {
-console.log("stopDrawing");
+  console.log("stopDrawing");
   if (isDrawing == false) {
       return null;
   }
