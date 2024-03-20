@@ -88,14 +88,17 @@ canvas.addEventListener("mousedown", function (event) {
                 startDrawing(event);
                 canvas.onmousemove = keepDrawing;
                 canvas.onmouseup = stopDrawing;
+                //TODO dont stop?
                 canvas.addEventListener('mouseup', () => {
-                    figure = getFigure();
-                    if(figure == null){
-                        console.log("empty");
-                    } else {
-                        console.log("save ma-figure")
-                        save(false, figure.x, null, null, color, "handDrawing");
-                        figure = null;
+                    if(tool == "ma"){
+                        figure = getFigure();
+                        if(figure == null){
+                            console.log("--empty--");
+                        } else {
+                            console.log("--save ma-figure--")
+                            save(false, figure.x, null, null, color, "handDrawing");
+                            figure = null;
+                        }
                     }
                 });
                 break;
@@ -161,7 +164,7 @@ function updateList(){
 function saveWhole(figure){
     figures.push(figure);
     document.getElementById("drawingInput").value = JSON.stringify(figures);
-    console.log(JSON.stringify(figures));
+    //console.log(JSON.stringify(figures));
     render(figures);
     updateList();
 }
@@ -178,7 +181,7 @@ function save(fill, x, y, size, color, type){
     };
     saveWhole(figure);
     //TODO
-    //figure = null;
+    figure = null;
 }
 
 document.getElementById("clear").onclick = function() {clear()};
