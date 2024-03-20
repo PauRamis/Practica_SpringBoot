@@ -1,6 +1,5 @@
 import {startDrawing, keepDrawing, stopDrawing, getFigure, doLine, render } from '/js/doDraw.js';
 
-//TODO after hand, line dobuble saves as hand
 const canvas = document.querySelector("canvas");
 const ctx = canvas.getContext("2d");
 let figures = [];
@@ -88,19 +87,19 @@ canvas.addEventListener("mousedown", function (event) {
                 startDrawing(event);
                 canvas.onmousemove = keepDrawing;
                 canvas.onmouseup = stopDrawing;
-                //TODO dont stop?
-                canvas.addEventListener('mouseup', () => {
-                    if(tool == "ma"){
+                const mouseupListener = () => {
+                    if (tool === "ma") {
+                        canvas.removeEventListener('mouseup', mouseupListener); // Elimina el event listener
                         figure = getFigure();
-                        if(figure == null){
-                            console.log("--empty--");
+                        if (figure === null) {
+                            console.log("empty hand-drawing");
                         } else {
-                            console.log("--save ma-figure--")
                             save(false, figure.x, null, null, color, "handDrawing");
                             figure = null;
                         }
                     }
-                });
+                };
+                canvas.addEventListener('mouseup', mouseupListener);
                 break;
 
             case "linia":
@@ -180,7 +179,6 @@ function save(fill, x, y, size, color, type){
         fill: fill,
     };
     saveWhole(figure);
-    //TODO
     figure = null;
 }
 
