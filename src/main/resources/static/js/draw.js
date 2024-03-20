@@ -93,6 +93,7 @@ canvas.addEventListener("mousedown", function (event) {
                     if(figure == null){
                         console.log("empty");
                     } else {
+                        console.log("save ma-figure")
                         save(false, figure.x, null, null, color, "handDrawing");
                         figure = null;
                     }
@@ -175,14 +176,9 @@ function save(fill, x, y, size, color, type){
         color: color,
         fill: fill,
     };
-    //TODO this figure is wrong
-    figures.push(figure);
-    console.log(figure);
-    figure = null;
-    document.getElementById("drawingInput").value = JSON.stringify(figures);
-    console.log(JSON.stringify(figures));
-    render(figures);
-    updateList();
+    saveWhole(figure);
+    //TODO
+    //figure = null;
 }
 
 document.getElementById("clear").onclick = function() {clear()};
