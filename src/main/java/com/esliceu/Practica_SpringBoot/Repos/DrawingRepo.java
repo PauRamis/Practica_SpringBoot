@@ -15,6 +15,8 @@ public interface DrawingRepo {
 
     Drawing getDrawingById(int id);
 
+    Drawing getDrawingByName(String name);
+
     void deleteDrawing(int id);
 
     Version getLatestVersion(int drawingId);

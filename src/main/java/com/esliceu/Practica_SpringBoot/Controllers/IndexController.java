@@ -12,6 +12,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.List;
 
@@ -249,6 +250,36 @@ public class IndexController {
 
         drawingService.editDrawing(savedDrawing);
         return "redirect:/gallery";
+    }
+
+    //Copy
+    @GetMapping("/copy")
+    public String copy(Model model,
+                       @RequestParam("currentDrawingId") int currentDrawingId,
+                       RedirectAttributes redirectAttributes){
+        //Get original drawing
+        Drawing currentDrawing = drawingService.getDrawingById(currentDrawingId);
+        Version currentVersion = drawingService.getLatestVersion(currentDrawingId);
+
+        //Create drawing copy for new user
+        String userName = (String) session.getAttribute("userName");
+        System.out.println("username: " + userName);
+        User actualUser = userService.findUserByuserName(userName);
+
+        Drawing savedDrawing = new Drawing();
+        String drawingName = "Copy of " + currentDrawing.getName();
+        savedDrawing.setName(drawingName);
+        savedDrawing.setUser(actualUser.getUserName());
+        savedDrawing.setJson(currentVersion.getJson());
+        savedDrawing.setPublic(false);
+        drawingService.saveDrawing(savedDrawing);
+
+        //Get created drawing
+        Drawing copiedDrawing = drawingService.getDrawingByName(drawingName);
+        int copiedDrawingId = copiedDrawing.getId();
+
+        redirectAttributes.addAttribute("currentDrawingId", copiedDrawingId);
+        return "redirect:/edit";
     }
 
     //Trash can

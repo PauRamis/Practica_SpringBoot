@@ -64,4 +64,6 @@ public class DrawingService {
     public void shareWithUsers(int[] users, int id) throws JsonProcessingException {drawingRepo.shareWithUsers(users, id);}
 
     public List<Drawing> getSharedDrawings(int id) {return drawingRepo.getSharedDrawings(id);}
+
+    public Drawing getDrawingByName(String name) {return drawingRepo.getDrawingByName(name);}
 }
