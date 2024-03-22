@@ -4,6 +4,7 @@ const canvas = document.querySelector("canvas");
 const ctx = canvas.getContext("2d");
 let figures = [];
 let figure;
+let isDrawingSaved = false;
 
 var maCheckbox = document.getElementById('ma');
 var liniaCheckbox = document.getElementById('linia');
@@ -163,9 +164,9 @@ function updateList(){
 function saveWhole(figure){
     figures.push(figure);
     document.getElementById("drawingInput").value = JSON.stringify(figures);
-    //console.log(JSON.stringify(figures));
     render(figures);
     updateList();
+    //TODO save version
 }
 
 function save(fill, x, y, size, color, type){
@@ -180,6 +181,42 @@ function save(fill, x, y, size, color, type){
     };
     saveWhole(figure);
     figure = null;
+}
+
+function firstDrawingSave(){
+    if (!isDrawingSaved) {
+        // Construir los datos a enviar al controlador
+        const data = {
+            jsonDrawing: JSON.stringify(figures),
+            drawingName: document.getElementById("currentName"),
+            isPublic: document.getElementById("isPublic").checked //(Boolean)
+        };
+
+        // Configurar la petición fetch
+        fetch('/draw', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(data)
+        })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Error al guardar los datos');
+            }
+            isDrawingSaved = true;
+            console.log('Datos guardados exitosamente');
+        })
+        .catch(error => {
+            console.error('Error:', error);
+        });
+    } else {
+        versionSave();
+    }
+}
+
+function versionSave(){
+    //Todo
 }
 
 document.getElementById("clear").onclick = function() {clear()};
@@ -278,18 +315,3 @@ export function getStorage(){
         }
     }
 }
-
-////Promise////
-/*
-fetch(url)
-    then((response) => response.json())
-    then((body) => console.log(body))
-    catch((error) => console.error(error));
-//Vs Await
-try {
-    const response = await fetch(url);
-    const body = await response.json();
-    console.log(body);
-} catch (error) {
-    console.log(error);
-}*/

@@ -12,6 +12,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.List;
@@ -95,13 +96,11 @@ public class IndexController {
     }
 
     @PostMapping("/draw")
+    @ResponseBody
     public String drawPost(Model model,
                            @RequestParam String drawingInput,
                            @RequestParam(value = "isPublic", defaultValue = "false") boolean isPublic,
                            @RequestParam String DrawingName){
-
-        System.out.printf("PUBLIC");
-        System.out.printf(String.valueOf(isPublic));
 
         String userName = (String) session.getAttribute("userName");
         System.out.println("username: " + userName);
@@ -113,7 +112,7 @@ public class IndexController {
         savedDrawing.setUser(actualUser.getUserName());
         savedDrawing.setPublic(isPublic);
         drawingService.saveDrawing(savedDrawing);
-        return "redirect:/gallery";
+        return "Guardado";
     }
 
     //Gallery
