@@ -74,7 +74,7 @@ public class DrawingRepoImpl implements DrawingRepo{
 
     @Override
     public Drawing getDrawingByName(String name) {
-        String sql = "SELECT * FROM drawings WHERE name = ?";
+        String sql = "SELECT * FROM drawings WHERE name = ? ORDER BY id DESC LIMIT 1";
         return jdbcTemplate.queryForObject(sql, new BeanPropertyRowMapper<>(Drawing.class), name);
     }
 
