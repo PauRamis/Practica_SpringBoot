@@ -113,7 +113,7 @@ public class IndexController {
         savedDrawing.setUser(actualUser.getUserName());
         savedDrawing.setPublic(isPublic);
         drawingService.saveDrawing(savedDrawing);
-        return null;
+        return "redirect:/gallery";
     }
 
     //Gallery
