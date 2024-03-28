@@ -187,8 +187,8 @@ function save(fill, x, y, size, color, type){
 function fetchSave(){
     console.log("fetchSave")
     const data = {
-        jsonDrawing: JSON.stringify(figures),
-        drawingName: document.getElementById("currentName"),
+        drawingInput: JSON.stringify(figures),
+        drawingName: document.getElementById("DrawingName").value,
         isPublic: document.getElementById("isPublic").checked
     };
 

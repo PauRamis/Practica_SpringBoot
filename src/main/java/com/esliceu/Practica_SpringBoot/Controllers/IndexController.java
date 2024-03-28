@@ -9,13 +9,11 @@ import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.List;
+import java.util.Map;
 
 @Controller
 public class IndexController {
@@ -97,23 +95,30 @@ public class IndexController {
 
     @PostMapping("/draw")
     @ResponseBody
-    public String drawPost(Model model,
-                           @RequestParam String drawingInput,
-                           @RequestParam(value = "isPublic", defaultValue = "false") boolean isPublic,
-                           @RequestParam String DrawingName){
+    public String drawPost(@RequestBody Map<String, Object> payload){
 
+        System.out.println("drawinginput");
+        System.out.println(payload.get("drawingInput"));
+
+        //get user
         String userName = (String) session.getAttribute("userName");
         System.out.println("username: " + userName);
         User actualUser = userService.findUserByuserName(userName);
 
+        //save
         Drawing savedDrawing = new Drawing();
-        savedDrawing.setJson(drawingInput);
-        savedDrawing.setName(DrawingName);
+        savedDrawing.setJson((String) payload.get("drawingInput"));
+        savedDrawing.setName((String) payload.get("drawingName"));
         savedDrawing.setUser(actualUser.getUserName());
-        savedDrawing.setPublic(isPublic);
+        savedDrawing.setPublic((Boolean) payload.get("isPublic"));
         drawingService.saveDrawing(savedDrawing);
         return "Guardado";
     }
+
+    /*@PostMapping("/api/save")
+    public String apiSave(){
+
+    }*/
 
     //Gallery
     @GetMapping("/gallery")
