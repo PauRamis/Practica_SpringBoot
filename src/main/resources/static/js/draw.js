@@ -218,7 +218,7 @@ function fetchSave(){
 }
 
 function updateVersion(){
-    //Todo updateVersion
+    //Todo fetch a controlador con drawingService.editDrawing
 
 }
 
