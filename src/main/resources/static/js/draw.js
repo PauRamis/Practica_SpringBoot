@@ -120,7 +120,7 @@ canvas.addEventListener("mousedown", function (event) {
                 break;
 
         }
-
+        fetchSave();
     }
 });
 
@@ -183,15 +183,17 @@ function save(fill, x, y, size, color, type){
     figure = null;
 }
 
-function firstDrawingSave(){
-    if (!isDrawingSaved) {
-        // Construir los datos a enviar al controlador
-        const data = {
-            jsonDrawing: JSON.stringify(figures),
-            drawingName: document.getElementById("currentName"),
-            isPublic: document.getElementById("isPublic").checked //(Boolean)
-        };
+//TODO execute this every change
+function fetchSave(){
+    console.log("fetchSave")
+    const data = {
+        jsonDrawing: JSON.stringify(figures),
+        drawingName: document.getElementById("currentName"),
+        isPublic: document.getElementById("isPublic").checked
+    };
 
+    console.log(data)
+    if (!isDrawingSaved) {
         // Configurar la petición fetch
         fetch('/draw', {
             method: 'POST',
@@ -211,12 +213,13 @@ function firstDrawingSave(){
             console.error('Error:', error);
         });
     } else {
-        versionSave();
+        updateVersion();
     }
 }
 
-function versionSave(){
-    //Todo
+function updateVersion(){
+    //Todo updateVersion
+
 }
 
 document.getElementById("clear").onclick = function() {clear()};
