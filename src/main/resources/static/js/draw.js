@@ -185,40 +185,42 @@ function save(fill, x, y, size, color, type){
 
 //TODO execute this every change
 function fetchSave(){
-    console.log("fetchSave")
     const data = {
         drawingInput: JSON.stringify(figures),
         drawingName: document.getElementById("DrawingName").value,
         isPublic: document.getElementById("isPublic").checked
     };
-
+    console.log("fetchSave data:")
     console.log(data)
-    if (!isDrawingSaved) {
-        // Configurar la petición fetch
-        fetch('/draw', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(data)
-        })
-        .then(response => {
-            if (!response.ok) {
-                throw new Error('Error al guardar los datos');
-            }
-            isDrawingSaved = true;
-            console.log('Datos guardados exitosamente');
-        })
-        .catch(error => {
-            console.error('Error:', error);
-        });
-    } else {
-        updateVersion();
+
+    let path = '/draw';
+    if (isDrawingSaved){
+        path = '/draw/version'
     }
+
+    fetch(path, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data)
+    })
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('Error al guardar los datos');
+        }
+        isDrawingSaved = true;
+        console.log('Datos guardados exitosamente');
+    })
+    .catch(error => {
+        console.error('Error:', error);
+    });
+
 }
 
-function updateVersion(){
+function updateVersion(data){
     //Todo fetch a controlador con drawingService.editDrawing
+    //Need id
 
 }
 

@@ -96,10 +96,6 @@ public class IndexController {
     @PostMapping("/draw")
     @ResponseBody
     public String drawPost(@RequestBody Map<String, Object> payload){
-
-        System.out.println("drawinginput");
-        System.out.println(payload.get("drawingInput"));
-
         //get user
         String userName = (String) session.getAttribute("userName");
         System.out.println("username: " + userName);
@@ -115,10 +111,22 @@ public class IndexController {
         return "Guardado";
     }
 
-    /*@PostMapping("/api/save")
-    public String apiSave(){
+    @PostMapping("/draw/version")
+    public String drawPostVersion(@RequestBody Map<String, Object> payload){
+        //get user
+        String userName = (String) session.getAttribute("userName");
+        System.out.println("username: " + userName);
+        User actualUser = userService.findUserByuserName(userName);
 
-    }*/
+        //save
+        Drawing savedDrawing = new Drawing();
+        savedDrawing.setJson((String) payload.get("drawingInput"));
+        savedDrawing.setName((String) payload.get("drawingName"));
+        savedDrawing.setUser(actualUser.getUserName()); //Need?
+        savedDrawing.setPublic((Boolean) payload.get("isPublic"));
+        drawingService.editDrawing(savedDrawing); //TODO need id
+        return "Guardado";
+    }
 
     //Gallery
     @GetMapping("/gallery")

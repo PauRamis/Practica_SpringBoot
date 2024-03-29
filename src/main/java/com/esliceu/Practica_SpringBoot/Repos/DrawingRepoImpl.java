@@ -81,8 +81,11 @@ public class DrawingRepoImpl implements DrawingRepo{
 
     @Override
     public void deleteDrawing(int id){
-        String sql = "DELETE FROM drawings WHERE id = ?";
-        jdbcTemplate.update(sql, id);
+        String deleteVersionsSql = "DELETE FROM versions WHERE id_drawing = ?";
+        jdbcTemplate.update(deleteVersionsSql, id);
+
+        String deleteDrawingSql  = "DELETE FROM drawings WHERE id = ?";
+        jdbcTemplate.update(deleteDrawingSql , id);
     }
 
     @Override
