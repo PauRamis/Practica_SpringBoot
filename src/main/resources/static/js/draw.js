@@ -213,9 +213,10 @@ function fetchSave(){
         isDrawingSaved = true;
         console.log('Datos guardados exitosamente');
     })
-    .then(newDrawingIdString => {
-        currentDrawingId = parseInt(newDrawingIdString);
-        console.log('saved id:', newDrawingId);
+    .then(newDrawingId => {
+        console.log('newDrawingIdString:', newDrawingId); //TODO undefined
+        currentDrawingId = parseInt(newDrawingId);
+        console.log('saved id:', currentDrawingId);
     })
 
     .catch(error => {

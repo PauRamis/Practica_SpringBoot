@@ -109,7 +109,7 @@ public class IndexController {
         savedDrawing.setUser(actualUser.getUserName());
         savedDrawing.setPublic((Boolean) payload.get("isPublic"));
         int newDrawingId = drawingService.saveDrawing(savedDrawing);
-
+        System.out.println("currentDrawingId"+newDrawingId);
         return ResponseEntity.ok(Integer.toString(newDrawingId));
     }
 
@@ -127,6 +127,7 @@ public class IndexController {
         savedDrawing.setUser(actualUser.getUserName()); //Need?
         savedDrawing.setPublic((Boolean) payload.get("isPublic"));
         savedDrawing.setId((Integer) payload.get("currentDrawingId"));
+        System.out.println("currentDrawingId"+ payload.get("currentDrawingId"));
         drawingService.editDrawing(savedDrawing);
         return "Guardado";
     }
