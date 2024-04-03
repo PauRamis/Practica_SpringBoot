@@ -7,6 +7,7 @@ import com.esliceu.Practica_SpringBoot.services.DrawingService;
 import com.esliceu.Practica_SpringBoot.services.UserService;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -95,7 +96,7 @@ public class IndexController {
 
     @PostMapping("/draw")
     @ResponseBody
-    public String drawPost(@RequestBody Map<String, Object> payload){
+    public ResponseEntity<String> drawPost(@RequestBody Map<String, Object> payload){
         //get user
         String userName = (String) session.getAttribute("userName");
         System.out.println("username: " + userName);
@@ -107,8 +108,9 @@ public class IndexController {
         savedDrawing.setName((String) payload.get("drawingName"));
         savedDrawing.setUser(actualUser.getUserName());
         savedDrawing.setPublic((Boolean) payload.get("isPublic"));
-        drawingService.saveDrawing(savedDrawing);
-        return "Guardado";
+        int newDrawingId = drawingService.saveDrawing(savedDrawing);
+
+        return ResponseEntity.ok(Integer.toString(newDrawingId));
     }
 
     @PostMapping("/draw/version")
@@ -284,11 +286,10 @@ public class IndexController {
         savedDrawing.setUser(actualUser.getUserName());
         savedDrawing.setJson(currentVersion.getJson());
         savedDrawing.setPublic(false);
-        drawingService.saveDrawing(savedDrawing);
+        int copiedDrawingId = drawingService.saveDrawing(savedDrawing);
 
-        //Get created drawing
-        Drawing copiedDrawing = drawingService.getDrawingByName(drawingName);
-        int copiedDrawingId = copiedDrawing.getId();
+        /*Drawing copiedDrawing = drawingService.getDrawingByName(drawingName);
+        int copiedDrawingId = copiedDrawing.getId();*/
 
         redirectAttributes.addAttribute("currentDrawingId", copiedDrawingId);
         return "redirect:/edit";

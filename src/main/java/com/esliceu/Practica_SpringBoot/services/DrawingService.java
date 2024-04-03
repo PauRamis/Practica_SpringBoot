@@ -15,8 +15,8 @@ public class DrawingService {
     @Autowired
     DrawingRepo drawingRepo;
 
-    public void saveDrawing(Drawing drawing) {
-        drawingRepo.storeDrawing(drawing);
+    public int saveDrawing(Drawing drawing) {
+        return drawingRepo.storeDrawing(drawing);
     }
 
     public List<Drawing> showDrawings() {

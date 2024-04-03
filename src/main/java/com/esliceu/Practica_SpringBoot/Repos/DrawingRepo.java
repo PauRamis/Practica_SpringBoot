@@ -7,7 +7,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import java.util.List;
 
 public interface DrawingRepo {
-    void storeDrawing(Drawing drawing);
+    int storeDrawing(Drawing drawing);
 
     List<Drawing> showDrawings();
 

@@ -15,12 +15,12 @@ import java.sql.Statement;
 import java.util.List;
 
 @Repository
-public class DrawingRepoImpl implements DrawingRepo{
+public class DrawingRepoImpl implements DrawingRepo {
     @Autowired
     JdbcTemplate jdbcTemplate;
 
     @Override
-    public void storeDrawing(Drawing drawing) {
+    public int storeDrawing(Drawing drawing) {
         System.out.println("Saving...");
         KeyHolder keyHolder = new GeneratedKeyHolder();
 
@@ -40,12 +40,13 @@ public class DrawingRepoImpl implements DrawingRepo{
         );
 
         //Versions
-        System.out.println(keyHolder);
         int drawingNewId = keyHolder.getKey().intValue();
-        System.out.println(drawingNewId);
+        System.out.println("Drawing ID: " + drawingNewId);
 
         jdbcTemplate.update("insert into versions (id_drawing,json) values (?,?)",
                 drawingNewId, drawing.getJson());
+
+        return drawingNewId;
     }
 
     @Override
@@ -72,7 +73,7 @@ public class DrawingRepoImpl implements DrawingRepo{
         return jdbcTemplate.queryForObject(sql, new BeanPropertyRowMapper<>(Drawing.class), id);
     }
 
-    @Override
+    @Override //May be out of use
     public Drawing getDrawingByName(String name) {
         String sql = "SELECT * FROM drawings WHERE name = ? ORDER BY id DESC LIMIT 1";
         return jdbcTemplate.queryForObject(sql, new BeanPropertyRowMapper<>(Drawing.class), name);
@@ -80,12 +81,12 @@ public class DrawingRepoImpl implements DrawingRepo{
 
 
     @Override
-    public void deleteDrawing(int id){
+    public void deleteDrawing(int id) {
         String deleteVersionsSql = "DELETE FROM versions WHERE id_drawing = ?";
         jdbcTemplate.update(deleteVersionsSql, id);
 
-        String deleteDrawingSql  = "DELETE FROM drawings WHERE id = ?";
-        jdbcTemplate.update(deleteDrawingSql , id);
+        String deleteDrawingSql = "DELETE FROM drawings WHERE id = ?";
+        jdbcTemplate.update(deleteDrawingSql, id);
     }
 
     @Override
@@ -124,13 +125,13 @@ public class DrawingRepoImpl implements DrawingRepo{
         System.out.println(drawingId);
         String sql = "SELECT * FROM versions WHERE id_drawing = ? ORDER BY id DESC LIMIT 1";
         Version v = jdbcTemplate.queryForObject(sql, new BeanPropertyRowMapper<>(Version.class), drawingId);
-        if (v.getId() > 0){
+        if (v.getId() > 0) {
             return v;
         } else return null;
     }
 
     @Override
-    public void overrideLatestVersion(int id_drawing, String newJson){
+    public void overrideLatestVersion(int id_drawing, String newJson) {
         System.out.println("overrideLatestVersion...");
         System.out.println(id_drawing);
         System.out.println(newJson);
@@ -147,7 +148,7 @@ public class DrawingRepoImpl implements DrawingRepo{
         String newName = newDrawing.getName();
         Boolean isPublic = newDrawing.isPublic();
         int tinyint = 0;
-        if (isPublic){
+        if (isPublic) {
             tinyint = 1;
         }
         String sql = "UPDATE drawings SET name = ?, json = ?, isPublic = ? WHERE id = ?";

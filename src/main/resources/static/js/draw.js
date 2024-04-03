@@ -183,7 +183,6 @@ function save(fill, x, y, size, color, type){
     figure = null;
 }
 
-//TODO execute this every change
 function fetchSave(){
     const data = {
         drawingInput: JSON.stringify(figures),
@@ -215,13 +214,6 @@ function fetchSave(){
     .catch(error => {
         console.error('Error:', error);
     });
-
-}
-
-function updateVersion(data){
-    //Todo fetch a controlador con drawingService.editDrawing
-    //Need id
-
 }
 
 document.getElementById("clear").onclick = function() {clear()};
