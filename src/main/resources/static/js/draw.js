@@ -5,6 +5,7 @@ const ctx = canvas.getContext("2d");
 let figures = [];
 let figure;
 let isDrawingSaved = false;
+let currentDrawingId;
 
 var maCheckbox = document.getElementById('ma');
 var liniaCheckbox = document.getElementById('linia');
@@ -195,6 +196,7 @@ function fetchSave(){
     let path = '/draw';
     if (isDrawingSaved){
         path = '/draw/version'
+        data.currentDrawingId = currentDrawingId;
     }
 
     fetch(path, {
@@ -211,6 +213,11 @@ function fetchSave(){
         isDrawingSaved = true;
         console.log('Datos guardados exitosamente');
     })
+    .then(newDrawingIdString => {
+        currentDrawingId = parseInt(newDrawingIdString);
+        console.log('saved id:', newDrawingId);
+    })
+
     .catch(error => {
         console.error('Error:', error);
     });

@@ -126,7 +126,8 @@ public class IndexController {
         savedDrawing.setName((String) payload.get("drawingName"));
         savedDrawing.setUser(actualUser.getUserName()); //Need?
         savedDrawing.setPublic((Boolean) payload.get("isPublic"));
-        drawingService.editDrawing(savedDrawing); //TODO need id
+        savedDrawing.setId((Integer) payload.get("currentDrawingId"));
+        drawingService.editDrawing(savedDrawing);
         return "Guardado";
     }
 
