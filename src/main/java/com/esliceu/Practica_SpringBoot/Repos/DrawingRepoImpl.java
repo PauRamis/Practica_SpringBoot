@@ -4,6 +4,7 @@ import com.esliceu.Practica_SpringBoot.entities.Drawing;
 import com.esliceu.Practica_SpringBoot.entities.Version;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
@@ -165,11 +166,10 @@ public class DrawingRepoImpl implements DrawingRepo {
         String sql = "SELECT id FROM usuaris WHERE userName = ? ORDER BY id DESC LIMIT 1";
         Integer result;
         try {
-            result = jdbcTemplate.queryForObject(sql, new BeanPropertyRowMapper<>(Integer.class), userName);
-        } catch (Error error){
+            return jdbcTemplate.queryForObject(sql, new BeanPropertyRowMapper<>(Integer.class), userName);
+        } catch (EmptyResultDataAccessException e){
             return null;
         }
-        return result;
     }
 
     /**
