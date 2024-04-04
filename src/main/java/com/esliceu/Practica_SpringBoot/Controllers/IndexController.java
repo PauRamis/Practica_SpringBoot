@@ -13,6 +13,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -96,7 +97,7 @@ public class IndexController {
 
     @PostMapping("/draw")
     @ResponseBody
-    public ResponseEntity<String> drawPost(@RequestBody Map<String, Object> payload){
+    public ResponseEntity<Integer> drawPost(@RequestBody Map<String, Object> payload){
         //get user
         String userName = (String) session.getAttribute("userName");
         System.out.println("username: " + userName);
@@ -110,7 +111,8 @@ public class IndexController {
         savedDrawing.setPublic((Boolean) payload.get("isPublic"));
         int newDrawingId = drawingService.saveDrawing(savedDrawing);
         System.out.println("currentDrawingId"+newDrawingId);
-        return ResponseEntity.ok(Integer.toString(newDrawingId));
+
+        return ResponseEntity.ok(newDrawingId);
     }
 
     @PostMapping("/draw/version")
