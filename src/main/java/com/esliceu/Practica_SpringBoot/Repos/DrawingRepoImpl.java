@@ -160,6 +160,18 @@ public class DrawingRepoImpl implements DrawingRepo {
                 id, newJson);
     }
 
+    @Override
+    public Integer getUserIdByName(String userName){
+        String sql = "SELECT id FROM usuaris WHERE userName = ? ORDER BY id DESC LIMIT 1";
+        Integer result;
+        try {
+            result = jdbcTemplate.queryForObject(sql, new BeanPropertyRowMapper<>(Integer.class), userName);
+        } catch (Error error){
+            return null;
+        }
+        return result;
+    }
+
     /**
      * La idea del share, es fer una nova taula amb la id del usuari i el dibuix que se li ha compartit.
      * A la Gallery, es mostrara un apartat on es veuran tots els dibuxios que tengui aquest usuari compartits.

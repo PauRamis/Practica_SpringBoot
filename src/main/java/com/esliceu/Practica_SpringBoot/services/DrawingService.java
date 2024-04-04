@@ -66,4 +66,6 @@ public class DrawingService {
     public List<Drawing> getSharedDrawings(int id) {return drawingRepo.getSharedDrawings(id);}
 
     public Drawing getDrawingByName(String name) {return drawingRepo.getDrawingByName(name);}
+
+    public Integer getUserIdByName(String userName) {return drawingRepo.getUserIdByName(userName);}
 }

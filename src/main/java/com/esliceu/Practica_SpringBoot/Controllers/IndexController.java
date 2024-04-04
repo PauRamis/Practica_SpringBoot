@@ -340,11 +340,20 @@ public class IndexController {
 
     @PostMapping("/share")
     public String sharePost(Model model,
-                           @RequestParam String currentDrawingId,
-                            @RequestParam String shareUsers,
+                           @RequestParam Integer currentDrawingId,
+                            @RequestParam String users,
                             @RequestParam(value = "canEdit", defaultValue = "false") boolean canEdit){
 
+        if (users.length()==0)
+            return "redirect:/share";
+        String[] usersAr = users.split(" ");
 
+        for (int i = 0; i < usersAr.length; i++) {
+            Integer id = drawingService.getUserIdByName(usersAr[i]);
+        }
+
+        Drawing currentDrawing = drawingService.getDrawingById(currentDrawingId);
+        model.addAttribute("currentDrawingId", currentDrawingId);
         return "redirect:/share";
     }
 }
