@@ -13,6 +13,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -347,9 +348,16 @@ public class IndexController {
         if (shareUsers.length()==0)
             return "redirect:/share";
         String[] usersAr = shareUsers.split(" ");
+        List<String> existingUsers = new ArrayList<>();
+        List<String> nonExistingUsers = new ArrayList<>();
 
         for (int i = 0; i < usersAr.length; i++) {
             Integer id = drawingService.getUserIdByName(usersAr[i]);
+            if (id != null) {
+                existingUsers.add(usersAr[i]);
+            } else {
+                nonExistingUsers.add(usersAr[i]); //Mostrar un mensaje de que no se han encontrado
+            }
         }
 
         Drawing currentDrawing = drawingService.getDrawingById(currentDrawingId);
