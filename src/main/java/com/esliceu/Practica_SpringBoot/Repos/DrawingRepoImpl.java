@@ -160,6 +160,10 @@ public class DrawingRepoImpl implements DrawingRepo {
                 id, newJson);
     }
 
+    /**
+     * La idea del share, es fer una nova taula amb la id del usuari i el dibuix que se li ha compartit.
+     * A la Gallery, es mostrara un apartat on es veuran tots els dibuxios que tengui aquest usuari compartits.
+     */
     @Override
     public void shareWithUsers(int[] users, int id) throws JsonProcessingException {
         /*ObjectMapper objectMapper = new ObjectMapper();

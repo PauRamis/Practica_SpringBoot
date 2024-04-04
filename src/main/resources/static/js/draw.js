@@ -212,9 +212,11 @@ function fetchSave(){
         }
         isDrawingSaved = true;
         console.log('Datos guardados exitosamente');
+        console.log(response);
+        return response.json();
     })
-    .then(newDrawingId => { //TODO newDrawingId is undefined
-        console.log('newDrawingId:', newDrawingId);
+    .then(newDrawingId => {
+        console.log('newDrawingId:', newDrawingId);//TODO newDrawingId is undefined
         currentDrawingId = parseInt(newDrawingId);
         console.log('saved id:', currentDrawingId);
     })

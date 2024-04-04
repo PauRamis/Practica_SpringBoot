@@ -110,13 +110,13 @@ public class IndexController {
         savedDrawing.setUser(actualUser.getUserName());
         savedDrawing.setPublic((Boolean) payload.get("isPublic"));
         int newDrawingId = drawingService.saveDrawing(savedDrawing);
-        System.out.println("currentDrawingId"+newDrawingId);
+        System.out.println("currentDrawingId = "+newDrawingId);
 
         return ResponseEntity.ok(newDrawingId);
     }
 
     @PostMapping("/draw/version")
-    public String drawPostVersion(@RequestBody Map<String, Object> payload){
+    public ResponseEntity<Integer> drawPostVersion(@RequestBody Map<String, Object> payload){
         //get user
         String userName = (String) session.getAttribute("userName");
         System.out.println("username: " + userName);
@@ -131,7 +131,8 @@ public class IndexController {
         savedDrawing.setId((Integer) payload.get("currentDrawingId"));
         System.out.println("currentDrawingId"+ payload.get("currentDrawingId"));
         drawingService.editDrawing(savedDrawing);
-        return "Guardado";
+
+        return ResponseEntity.ok((Integer) payload.get("currentDrawingId"));
     }
 
     //Gallery
