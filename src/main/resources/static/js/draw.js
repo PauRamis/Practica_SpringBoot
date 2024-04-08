@@ -69,8 +69,6 @@ function hideTools() {
       x.style.display = "none";
 }
 
-
-
 //Click al canvas
 canvas.addEventListener("mousedown", function (event) {
     const boundingRect = canvas.getBoundingClientRect();
@@ -125,6 +123,17 @@ canvas.addEventListener("mousedown", function (event) {
     }
 });
 
+//TODO this
+    //Update on a change in a drawings settings
+    const isPublicCheckbox = document.getElementById("isPublic");
+    const drawingNameInput = document.getElementById("DrawingName");
+    const saveButton = document.querySelector('input[type="submit"]');
+
+    isPublicCheckbox.addEventListener("change", fetchSave);
+    drawingNameInput.addEventListener("change", fetchSave);
+    saveButton.addEventListener("click", fetchSave);
+
+
 function updateList(){
     console.log("updateList");
     let figureList = document.getElementById('figureList');
@@ -162,12 +171,12 @@ function updateList(){
         figureList.appendChild(listItem);
     });
 }
+
 function saveWhole(figure){
     figures.push(figure);
     document.getElementById("drawingInput").value = JSON.stringify(figures);
     render(figures);
     updateList();
-    //TODO save version
 }
 
 function save(fill, x, y, size, color, type){
@@ -190,7 +199,7 @@ function fetchSave(){
         drawingName: document.getElementById("DrawingName").value,
         isPublic: document.getElementById("isPublic").checked
     };
-    console.log("fetchSave data:")
+    console.log("fetch data:")
     console.log(data)
 
     let path = '/draw';
@@ -216,7 +225,7 @@ function fetchSave(){
         return response.json();
     })
     .then(newDrawingId => {
-        console.log('newDrawingId:', newDrawingId);//TODO newDrawingId is undefined
+        console.log('newDrawingId:', newDrawingId);
         currentDrawingId = parseInt(newDrawingId);
         console.log('saved id:', currentDrawingId);
     })

@@ -294,9 +294,6 @@ public class IndexController {
         savedDrawing.setPublic(false);
         int copiedDrawingId = drawingService.saveDrawing(savedDrawing);
 
-        /*Drawing copiedDrawing = drawingService.getDrawingByName(drawingName);
-        int copiedDrawingId = copiedDrawing.getId();*/
-
         redirectAttributes.addAttribute("currentDrawingId", copiedDrawingId);
         return "redirect:/edit";
     }
@@ -361,6 +358,7 @@ public class IndexController {
         }
 
         Drawing currentDrawing = drawingService.getDrawingById(currentDrawingId);
+        //TODO share with existingUsers
         model.addAttribute("currentDrawingId", currentDrawingId);
         return "redirect:/gallery";
     }

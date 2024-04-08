@@ -1,12 +1,13 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-    <link rel="stylesheet" th:href="@{/css/style.css}" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" th:href="@{/css/style.css}"/>
     <title>Draw</title>
 </head>
 <body class="bg1">
-    <header>
+<header>
     <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
         <div class="container-fluid">
             <ul class="navbar-nav">
@@ -26,70 +27,70 @@
         </div>
     </nav>
 </header>
-    <h2>Dibuix</h2>
+<h2>Dibuix</h2>
 
-    <aside>
-        <p>Llista de figures:</p>
-        <ul id="figureList">
-        </ul>
-    </aside>
+<aside>
+    <p>Llista de figures:</p>
+    <ul id="figureList">
+    </ul>
+</aside>
 
-    <div>
-        <canvas id="canvas"  width="800" height="400"></canvas>
-        <div class="menu">
-            <div class="subMenu">
-                <p>Tria una eina per dibuixar:</p>
-                <input type="radio" id="ma" value="ma" name="tool">
-                <label for="ma">A mà alçada</label><br>
+<div>
+    <canvas id="canvas" width="800" height="400"></canvas>
+    <div class="menu">
+        <div class="subMenu">
+            <p>Tria una eina per dibuixar:</p>
+            <input type="radio" id="ma" value="ma" name="tool">
+            <label for="ma">A mà alçada</label><br>
 
-                <input type="radio" id="linia" value="linia" name="tool">
-                <label for="linia">Linia</label><br>
+            <input type="radio" id="linia" value="linia" name="tool">
+            <label for="linia">Linia</label><br>
 
-                <input type="radio" id="figura" value="figura" name="tool">
-                <label for="figura">Figura</label>
-            </div>
-
-            <div class="subMenu">
-                <p>Color: <input id="color" name="color" type="color" value="#ff0000"></p>
-            </div>
-
-            <div id="selectFigura" class="subMenu">
-                <label for="tipusFigura">Tria una figura:</label>
-                <select name="figura" id="tipusFigura">
-                    <option value="triangle">Triangle</option>
-                    <option value="quadrat">Quadrat</option>
-                    <option value="cercle">Cercle</option>
-                    <option value="estrella">Estrella</option>
-                </select>
-
-                <p>Tamany: <input id="fSize" name="size" type="number" value=50></p>
-                <label for="fill">Omplir:</label>
-                <input type="checkbox" id="fill">
-            </div>
+            <input type="radio" id="figura" value="figura" name="tool">
+            <label for="figura">Figura</label>
         </div>
-        <div>
-            <button id="clear">Clear</button>
-            <form action="/draw" method="post">
-                <label>
-                    <input type="checkbox" id="isPublic" name="isPublic" value="true" />
-                    Public (Altres podran veure el dibuix)
-                </label>
-                <input id="drawingInput" type="hidden" value="" name="drawingInput" />
-                <p>Nom: <input id="DrawingName" name="DrawingName" type="text" value="defaultName"></p>
-                <p><input type="submit" value="Guardar"></p>
-            </form>
 
+        <div class="subMenu">
+            <p>Color: <input id="color" name="color" type="color" value="#ff0000"></p>
+        </div>
+
+        <div id="selectFigura" class="subMenu">
+            <label for="tipusFigura">Tria una figura:</label>
+            <select name="figura" id="tipusFigura">
+                <option value="triangle">Triangle</option>
+                <option value="quadrat">Quadrat</option>
+                <option value="cercle">Cercle</option>
+                <option value="estrella">Estrella</option>
+            </select>
+
+            <p>Tamany: <input id="fSize" name="size" type="number" value=50></p>
+            <label for="fill">Omplir:</label>
+            <input type="checkbox" id="fill">
         </div>
     </div>
+    <div>
+        <button id="clear">Clear</button>
+        <label>
+            <input type="checkbox" id="isPublic" name="isPublic" value="true"/>
+            Public (Altres podran veure el dibuix)
+        </label>
+        <input id="drawingInput" type="hidden" value="" name="drawingInput"/>
+        <p>Nom: <input id="DrawingName" name="DrawingName" type="text" value="defaultName"></p>
+        <p><input type="submit" value="Guardar"></p>
+    </div>
+</div>
 
-    <script type="module" th:src="@{/js/draw.js}"></script>
-    <script type="module">
+<script type="module" th:src="@{/js/draw.js}"></script>
+<script type="module">
         import { getStorage } from "/js/draw.js";
         window.onload = () => {
             getStorage();
         };
-    </script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+
+</script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"></script>
 
 </body>
 </html>
