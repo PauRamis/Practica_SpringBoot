@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -333,7 +332,6 @@ public class IndexController {
     public String share(Model model,
                        @RequestParam int currentDrawingId){
 
-        Drawing currentDrawing = drawingService.getDrawingById(currentDrawingId);
         model.addAttribute("currentDrawingId", currentDrawingId);
         return "share";
     }
@@ -344,8 +342,10 @@ public class IndexController {
                             @RequestParam String shareUsers,
                             @RequestParam(value = "canEdit", defaultValue = "false") boolean canEdit){
 
-        if (shareUsers.length()==0)
-            return "redirect:/share";
+        if (shareUsers.isEmpty()){
+            return null; //TODO should do nothing
+        }
+
         String[] usersAr = shareUsers.split(" ");
         List<String> existingUsers = new ArrayList<>();
         List<String> nonExistingUsers = new ArrayList<>();
@@ -355,13 +355,25 @@ public class IndexController {
             if (id != null) {
                 existingUsers.add(usersAr[i]);
             } else {
-                nonExistingUsers.add(usersAr[i]); //Mostrar un mensaje de que no se han encontrado
+                nonExistingUsers.add(usersAr[i]);
             }
         }
+        String existingUsersString = String.join(" ", existingUsers);
+        String nonExistingUsersString = String.join(" ", nonExistingUsers);
 
-        Drawing currentDrawing = drawingService.getDrawingById(currentDrawingId);
-        //TODO share with existingUsers
-        model.addAttribute("currentDrawingId", currentDrawingId);
-        return "redirect:/gallery";
+        model.addAttribute("existingUsers", existingUsersString);
+        model.addAttribute("nonExistingUsers", nonExistingUsersString);
+
+        System.out.println("Current id: "+currentDrawingId);
+        System.out.println("Existing users: "+existingUsersString);
+        System.out.println("NonExisting: "+nonExistingUsersString);
+        return "redirect:/sharedMs";
+    }
+
+    @GetMapping("/sharedMs")
+    public String sharedMs(Model model, @RequestParam String existingUsers, @RequestParam String nonExistingUsers){
+        model.addAttribute("existingUsers", existingUsers);
+        model.addAttribute("nonExistingUsers", nonExistingUsers);
+        return "sharedMs";
     }
 }

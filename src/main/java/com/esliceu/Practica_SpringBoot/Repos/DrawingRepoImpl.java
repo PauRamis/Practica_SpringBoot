@@ -164,9 +164,8 @@ public class DrawingRepoImpl implements DrawingRepo {
     @Override
     public Integer getUserIdByName(String userName){
         String sql = "SELECT id FROM usuaris WHERE userName = ? ORDER BY id DESC LIMIT 1";
-        Integer result;
         try {
-            return jdbcTemplate.queryForObject(sql, new BeanPropertyRowMapper<>(Integer.class), userName);
+            return jdbcTemplate.queryForObject(sql, Integer.class, userName);
         } catch (EmptyResultDataAccessException e){
             return null;
         }
