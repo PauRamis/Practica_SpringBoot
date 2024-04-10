@@ -68,4 +68,6 @@ public class DrawingService {
     public Drawing getDrawingByName(String name) {return drawingRepo.getDrawingByName(name);}
 
     public Integer getUserIdByName(String userName) {return drawingRepo.getUserIdByName(userName);}
+
+    public boolean isPublic(int currentDrawingId) {return drawingRepo.isPublic(currentDrawingId);}
 }

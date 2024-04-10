@@ -240,7 +240,9 @@ public class IndexController {
         model.addAttribute("currentDrawingId", currentDrawingId);
         model.addAttribute("drawingUser", currentDrawing.getUser());
         model.addAttribute("drawingName", currentDrawing.getName());
-        model.addAttribute("wasPublic", currentDrawing.isPublic());
+        boolean isPublic = drawingService.isPublic(currentDrawingId);
+        model.addAttribute("wasPublic", isPublic);
+        System.out.println("is public?: "+isPublic);
 
         Version currentVersion = drawingService.getLatestVersion(currentDrawingId);
         model.addAttribute("currentJson", currentVersion.getJson());

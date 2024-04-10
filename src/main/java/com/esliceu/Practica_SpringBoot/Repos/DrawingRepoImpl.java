@@ -193,4 +193,11 @@ public class DrawingRepoImpl implements DrawingRepo {
         return null;
     }
 
+    @Override
+    public boolean isPublic(int currentDrawingId) {
+        String sql = "SELECT isPublic FROM drawings WHERE id = ?";
+        int isPublicInt = jdbcTemplate.queryForObject(sql, Integer.class, currentDrawingId);
+        return (isPublicInt == 1);
+    }
+
 }

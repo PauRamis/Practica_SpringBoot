@@ -18,13 +18,18 @@ let tool = "ma";
 hideTools();
 
 //Per la pagina /edit
-export function importFigures(imporedFigures){
-    let wasPublic = document.getElementById("wasPublic");
-    console.log("wasPublic");
-    console.log(wasPublic.textContent);
+export function importFigures(importedFigures){
+    isDrawingSaved = true;
+    console.log("importedFigures: "+importedFigures)
+
+    let wasPublic = document.getElementById("wasPublic").textContent;
+    console.log("wasPublic: " + wasPublic);
     if (wasPublic == "true"){
         document.getElementById("isPublic").checked = true;
     }
+
+    currentDrawingId = document.getElementById("currentDrawingId").value;
+    console.log("currentDrawingId: " + currentDrawingId);
 
     let curretDrawing = document.getElementById("currentJson");
     console.log(curretDrawing.value);
@@ -123,7 +128,7 @@ canvas.addEventListener("mousedown", function (event) {
     }
 });
 
-//TODO this
+//TODO autsave fail?
     //Update on a change in a drawings settings
     const isPublicCheckbox = document.getElementById("isPublic");
     const drawingNameInput = document.getElementById("DrawingName");

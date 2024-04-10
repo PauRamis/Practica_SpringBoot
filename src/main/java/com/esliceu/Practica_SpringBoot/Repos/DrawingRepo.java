@@ -42,4 +42,6 @@ public interface DrawingRepo {
     void shareWithUsers(int[] users, int id) throws JsonProcessingException;
 
     List<Drawing> getSharedDrawings(int id);
+
+    boolean isPublic(int currentDrawingId);
 }
