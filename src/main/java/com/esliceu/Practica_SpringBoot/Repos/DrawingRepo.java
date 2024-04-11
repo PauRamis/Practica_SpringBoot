@@ -39,7 +39,7 @@ public interface DrawingRepo {
 
     Integer getUserIdByName(String userName);
 
-    void shareWithUsers(int[] users, int id) throws JsonProcessingException;
+    void shareWithUsers(int id_drawing, int id_user);
 
     List<Drawing> getSharedDrawings(int id);
 

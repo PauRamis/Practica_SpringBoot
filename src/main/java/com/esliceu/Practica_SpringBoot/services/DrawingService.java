@@ -61,7 +61,10 @@ public class DrawingService {
 
     public void overrideLatestVersion(int id_drawing, String newJson) {drawingRepo.overrideLatestVersion(id_drawing, newJson);};
 
-    public void shareWithUsers(int[] users, int id) throws JsonProcessingException {drawingRepo.shareWithUsers(users, id);}
+    public void shareWithUsers(int id_drawing, int id_user) {
+        //
+        drawingRepo.shareWithUsers(id_drawing, id_user);
+    }
 
     public List<Drawing> getSharedDrawings(int id) {return drawingRepo.getSharedDrawings(id);}
 

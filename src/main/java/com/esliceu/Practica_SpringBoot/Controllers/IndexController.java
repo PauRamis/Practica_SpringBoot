@@ -13,9 +13,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @Controller
 public class IndexController {
@@ -342,10 +340,6 @@ public class IndexController {
                             @RequestParam String shareUsers,
                             @RequestParam(value = "canEdit", defaultValue = "false") boolean canEdit){
 
-        if (shareUsers.isEmpty()){
-            return null; //TODO should do nothing
-        }
-
         String[] usersAr = shareUsers.split(" ");
         List<String> existingUsers = new ArrayList<>();
         List<String> nonExistingUsers = new ArrayList<>();
@@ -361,19 +355,27 @@ public class IndexController {
         String existingUsersString = String.join(" ", existingUsers);
         String nonExistingUsersString = String.join(" ", nonExistingUsers);
 
-        model.addAttribute("existingUsers", existingUsersString);
-        model.addAttribute("nonExistingUsers", nonExistingUsersString);
-
         System.out.println("Current id: "+currentDrawingId);
         System.out.println("Existing users: "+existingUsersString);
         System.out.println("NonExisting: "+nonExistingUsersString);
-        return "redirect:/sharedMs";
-    }
 
-    @GetMapping("/sharedMs")
-    public String sharedMs(Model model, @RequestParam String existingUsers, @RequestParam String nonExistingUsers){
-        model.addAttribute("existingUsers", existingUsers);
-        model.addAttribute("nonExistingUsers", nonExistingUsers);
-        return "sharedMs";
+        if (nonExistingUsers.isEmpty() && !existingUsers.isEmpty()){
+            model.addAttribute("sharedMessage", "Shared with: " + existingUsers);
+        } else {
+            model.addAttribute("sharedMessage", "Error, this users were not found: " + nonExistingUsers);
+        }
+
+        Set<Integer> checkedUsers = new HashSet<Integer>();
+
+        for (int i = 0; i < existingUsers.size(); i++) {
+            User user = userService.findUserByuserName(existingUsers.get(i));
+            int userId =  user.getId();
+            if (!checkedUsers.contains(userId)){
+                drawingService.shareWithUsers(currentDrawingId, userId);
+                checkedUsers.add(userId);
+            }
+        }
+
+        return "share";
     }
 }

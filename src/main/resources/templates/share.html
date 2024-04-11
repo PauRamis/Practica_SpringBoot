@@ -33,14 +33,16 @@
         <p>Escriu el nom d'usuari</p>
         <p>Si vols compartir a varis usuaris, no usis coma entre els noms: Joan123 Pep99 Miki21</p>
 
-        <form action="/share" method="post" >
+        <form method="post" >
             <input type="hidden" name="currentDrawingId" th:value="${currentDrawingId}" />
-            <p>Usuari/s: <input name="shareUsers" type="text"></p>
+            <p>Usuari/s: <input name="shareUsers" type="text" required></p>
             <p>Permis per editar
                 <input type="checkbox" id="canEdit" name="canEdit" value="true"/>
             </p>
             <p><input type="submit" value="Confirmar"></p>
         </form>
+
+        <p>[[${sharedMessage}]]</p>
     </div>
 
 </body>

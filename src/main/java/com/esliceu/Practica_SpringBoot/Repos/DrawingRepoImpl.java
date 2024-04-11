@@ -176,13 +176,9 @@ public class DrawingRepoImpl implements DrawingRepo {
      * A la Gallery, es mostrara un apartat on es veuran tots els dibuxios que tengui aquest usuari compartits.
      */
     @Override
-    public void shareWithUsers(int[] users, int id) throws JsonProcessingException {
-        /*ObjectMapper objectMapper = new ObjectMapper();
-        String usersJson = objectMapper.writeValueAsString(users);
-        System.out.println(usersJson);
-        String sql = "Update drawings SET shared = ? WHERE id = ?";
-
-        jdbcTemplate.update(sql, usersJson, id);*/
+    public void shareWithUsers(int id_drawing, int id_user){
+        String sql = "insert into shared (id_drawing,id_user) values (?,?)";
+        jdbcTemplate.update(sql, id_drawing, id_user);
     }
 
     @Override
