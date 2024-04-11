@@ -44,7 +44,7 @@
         <div class="col-6 col-md-4">
             <h2>Dibuixos Publics</h2>
             <ul>
-                <li th:each="drawing : ${allDrawings}">
+                <li th:each="drawing : ${publicDrawings}">
                     <a th:href="@{/view(currentDrawingId=${drawing.id})}" class="btn btn-primary" th:text="${drawing.name}"></a>
                 </li>
             </ul>

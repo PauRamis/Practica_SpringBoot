@@ -2,7 +2,6 @@ package com.esliceu.Practica_SpringBoot.Repos;
 
 import com.esliceu.Practica_SpringBoot.entities.Drawing;
 import com.esliceu.Practica_SpringBoot.entities.Version;
-import com.fasterxml.jackson.core.JsonProcessingException;
 
 import java.util.List;
 
@@ -41,7 +40,7 @@ public interface DrawingRepo {
 
     void shareWithUsers(int id_drawing, int id_user);
 
-    List<Drawing> getSharedDrawings(int id);
+    List<Integer> getSharedDrawings(int id);
 
     boolean isPublic(int currentDrawingId);
 }

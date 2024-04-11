@@ -2,7 +2,6 @@ package com.esliceu.Practica_SpringBoot.Repos;
 
 import com.esliceu.Practica_SpringBoot.entities.Drawing;
 import com.esliceu.Practica_SpringBoot.entities.Version;
-import com.fasterxml.jackson.core.JsonProcessingException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
@@ -14,6 +13,7 @@ import org.springframework.stereotype.Repository;
 import java.sql.PreparedStatement;
 import java.sql.Statement;
 import java.util.List;
+import java.util.Map;
 
 @Repository
 public class DrawingRepoImpl implements DrawingRepo {
@@ -171,21 +171,24 @@ public class DrawingRepoImpl implements DrawingRepo {
         }
     }
 
-    /**
-     * La idea del share, es fer una nova taula amb la id del usuari i el dibuix que se li ha compartit.
-     * A la Gallery, es mostrara un apartat on es veuran tots els dibuxios que tengui aquest usuari compartits.
-     */
     @Override
     public void shareWithUsers(int id_drawing, int id_user){
+        //Check for repeats
+        String presql = "SELECT id_drawing FROM shared WHERE id_user = ? AND id_drawing = ?";
+        List<Map<String, Object>> existingEntries = jdbcTemplate.queryForList(presql, id_user, id_drawing);
+        if (!existingEntries.isEmpty()) {
+            System.out.println("Already Exists");
+            return;
+        }
+
         String sql = "insert into shared (id_drawing,id_user) values (?,?)";
         jdbcTemplate.update(sql, id_drawing, id_user);
     }
 
     @Override
-    public List<Drawing> getSharedDrawings(int id) {
-        /*String sql = "SELECT * FROM drawings WHERE JSON_CONTAINS(shared, CAST(? AS JSON), '$')";
-        return jdbcTemplate.query(sql, new BeanPropertyRowMapper<>(Drawing.class), "[" + id + "]");*/
-        return null;
+    public List<Integer> getSharedDrawings(int id_user) {
+        String sql = "SELECT id_drawing FROM shared WHERE id_user = ?";
+        return jdbcTemplate.queryForList(sql, Integer.class, id_user);
     }
 
     @Override

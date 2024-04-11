@@ -140,19 +140,20 @@ public class IndexController {
         User currentUser = userService.findUserByuserName(userName);
 
         List<Drawing> userDrawings = drawingService.showUserDrawings(userName);
-        List<Drawing> allDrawings = drawingService.showPublicDrawings();
-        List<Drawing> sharedDrawings = drawingService.getSharedDrawings(currentUser.getId());
+        List<Drawing> publicDrawings = drawingService.showPublicDrawings();
+        List<Integer> sharedDrawingsIDs = drawingService.getSharedDrawings(currentUser.getId());
+
+        List<Drawing> sharedDrawings = new ArrayList<>();
+        for (int i = 0; i < sharedDrawingsIDs.size(); i++) {
+            Drawing d = drawingService.getDrawingById(sharedDrawingsIDs.get(i));
+            sharedDrawings.add(d);
+        }
 
         model.addAttribute("userName", userName);
         model.addAttribute("userDrawings", userDrawings);
-        model.addAttribute("allDrawings", allDrawings);
+        model.addAttribute("publicDrawings", publicDrawings);
         model.addAttribute("sharedDrawings", sharedDrawings);
         return "gallery";
-    }
-
-    @PostMapping("/gallery")
-    public String galleryPost(Model model){
-        return null;
     }
 
     //View
