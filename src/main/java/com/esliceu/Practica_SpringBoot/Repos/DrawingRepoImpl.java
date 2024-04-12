@@ -201,8 +201,12 @@ public class DrawingRepoImpl implements DrawingRepo {
     @Override
     public boolean getSharedPermisions(int currentDrawingId, int userId) {
         String sql = "SELECT writing FROM shared WHERE id_drawing = ? AND id_user = ?";
-        Integer writing = jdbcTemplate.queryForObject(sql, Integer.class, currentDrawingId, userId);
-        return writing != null && writing == 1;
+        List<Integer> writingList = jdbcTemplate.queryForList(sql, Integer.class, currentDrawingId, userId);
+        if (writingList.isEmpty()) {
+            return false;
+        }
+        //If writing == 1 -> true
+        return writingList.get(0) == 1;
     }
 
     @Override

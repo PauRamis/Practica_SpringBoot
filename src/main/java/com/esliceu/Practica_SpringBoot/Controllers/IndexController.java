@@ -243,6 +243,36 @@ public class IndexController {
         drawingService.overrideLatestVersion(currentDrawingId, currentVersion.getJson());
         return "redirect:/gallery";
     }
+
+    @PostMapping("/versionCopy")
+    public String versionCopyPost(Model model,
+                                  @RequestParam int versionId,
+                                  @RequestParam int currentDrawingId,
+                                  RedirectAttributes redirectAttributes){
+
+        Version currentVersion = drawingService.getVersionById(versionId);
+        Drawing currentDrawing = drawingService.getDrawingById(currentDrawingId);
+
+        //Create drawing copy for new user
+        String userName = (String) session.getAttribute("userName");
+        System.out.println("username: " + userName);
+        User actualUser = userService.findUserByuserName(userName);
+
+        Drawing savedDrawing = new Drawing();
+        String drawingName = "Copy of " + currentDrawing.getName();
+        savedDrawing.setName(drawingName);
+        savedDrawing.setUser(actualUser.getUserName());
+        savedDrawing.setJson(currentVersion.getJson());
+        savedDrawing.setPublic(false);
+
+        //Save Drawing
+        int copiedDrawingId = drawingService.saveDrawing(savedDrawing);
+
+        //Redirecto to edit
+        redirectAttributes.addAttribute("currentDrawingId", copiedDrawingId);
+        return "redirect:/edit";
+    }
+
     //Edit
     @GetMapping("/edit")
     public String edit(Model model,
