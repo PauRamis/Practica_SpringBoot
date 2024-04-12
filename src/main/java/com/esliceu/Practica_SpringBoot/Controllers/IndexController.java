@@ -157,7 +157,6 @@ public class IndexController {
     }
 
     //View
-    boolean author = false;
     @GetMapping("/view")
     public String view(Model model,
                        @RequestParam int currentDrawingId){
@@ -171,8 +170,17 @@ public class IndexController {
 
         //Comprobam si es el autor del actual dibuix
         String currentUser = (String) session.getAttribute("userName");
-        author = currentUser.equals(currentDrawing.getUser());
+        boolean author = currentUser.equals(currentDrawing.getUser());
         model.addAttribute("author", author);
+
+        boolean canWrite = false;
+        if (!author){
+            //Comprobam si te permis per dibuixar
+            int userId = userService.findUserByuserName(currentUser).getId();
+            canWrite = drawingService.getSharedPermisions(currentDrawingId, userId);
+            System.out.println("Can write? " + canWrite);
+        }
+        model.addAttribute("canWrite", canWrite);
         return "view";
     }
 
@@ -368,11 +376,12 @@ public class IndexController {
 
         Set<Integer> checkedUsers = new HashSet<Integer>();
 
+        System.out.println("Can edit? " + canEdit);
         for (int i = 0; i < existingUsers.size(); i++) {
             User user = userService.findUserByuserName(existingUsers.get(i));
             int userId =  user.getId();
             if (!checkedUsers.contains(userId)){
-                drawingService.shareWithUsers(currentDrawingId, userId);
+                drawingService.shareWithUsers(currentDrawingId, userId, canEdit);
                 checkedUsers.add(userId);
             }
         }

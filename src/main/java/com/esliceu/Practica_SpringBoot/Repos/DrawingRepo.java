@@ -38,9 +38,11 @@ public interface DrawingRepo {
 
     Integer getUserIdByName(String userName);
 
-    void shareWithUsers(int id_drawing, int id_user);
+    void shareWithUsers(int id_drawing, int id_user, boolean canEdit);
 
     List<Integer> getSharedDrawings(int id);
 
     boolean isPublic(int currentDrawingId);
+
+    boolean getSharedPermisions(int currentDrawingId, int userId);
 }

@@ -45,6 +45,15 @@
             <p><input type="submit" value="Esborrar"></p>
         </form>
     </div>
+    <div th:if="${canWrite}">
+        <a th:href="@{'/edit?currentDrawingId=' + ${currentDrawingId}}" class="btn btn-secondary">Editar</a>
+        <a th:href="@{'/versions?currentDrawingId=' + ${currentDrawingId}}" class="btn btn-secondary">Versions</a>
+        <a th:href="@{'/share?currentDrawingId=' + ${currentDrawingId}}" class="btn btn-secondary">Compartir</a>
+        <form action="/view" method="post" onclick="return confirm('Segur que vols esborrar el dibuix?')" >
+            <input type="hidden" name="currentDrawingId" th:value="${currentDrawingId}" />
+            <p><input type="submit" value="Esborrar"></p>
+        </form>
+    </div>
 
     <script type="module">
         import { dibuixa } from "/js/view.js";
