@@ -101,6 +101,7 @@ canvas.addEventListener("mousedown", function (event) {
                         } else {
                             save(false, figure.x, null, null, color, "handDrawing");
                             figure = null;
+                            fetchSave();
                         }
                     }
                 };
@@ -128,7 +129,6 @@ canvas.addEventListener("mousedown", function (event) {
     }
 });
 
-//TODO autsave fail?
     //Update on a change in a drawings settings
     const isPublicCheckbox = document.getElementById("isPublic");
     const drawingNameInput = document.getElementById("DrawingName");

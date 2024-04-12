@@ -34,13 +34,14 @@
 <canvas id="canvas"  width="800" height="400"></canvas>
 <a href="/gallery" class="btn btn-secondary">Tornar a la galeria</a>
 
-    <a th:href="@{'/edit?currentDrawingId=' + ${currentDrawingId}}" class="btn btn-secondary">Editar</a>
-
-    <form action="/versionView" method="post" onclick="return confirm('Segur que vols restaurar aquesta versio?')" >
-        <input type="hidden" name="currentDrawingId" th:value="${currentDrawingId}" />
-        <input type="hidden" name="versionId" th:value="${versionId}" />
-        <p><input type="submit" value="Restaurar"></p>
-    </form>
+    <div th:if="${allowed}">
+        <a th:href="@{'/edit?currentDrawingId=' + ${currentDrawingId}}" class="btn btn-secondary">Editar</a>
+        <form action="/versionView" method="post" onclick="return confirm('Segur que vols restaurar aquesta versio?')" >
+            <input type="hidden" name="currentDrawingId" th:value="${currentDrawingId}" />
+            <input type="hidden" name="versionId" th:value="${versionId}" />
+            <p><input type="submit" value="Restaurar"></p>
+        </form>
+    </div>
     <form action="/versionCopy" method="post" onclick="return confirm('Es creara una copia de la teva propietat')" >
         <input type="hidden" name="currentDrawingId" th:value="${currentDrawingId}" />
         <input type="hidden" name="versionId" th:value="${versionId}" />

@@ -34,11 +34,11 @@
     <canvas id="canvas"  width="800" height="400"></canvas>
     <a href="/gallery" class="btn btn-secondary">Tornar a la galeria</a>
     <a th:href="@{'/copy?currentDrawingId=' + ${currentDrawingId}}" class="btn btn-secondary">Copiar</a>
+    <a th:href="@{'/versions?currentDrawingId=' + ${currentDrawingId}}" class="btn btn-secondary">Versions</a>
 
 
     <div th:if="${author}">
         <a th:href="@{'/edit?currentDrawingId=' + ${currentDrawingId}}" class="btn btn-secondary">Editar</a>
-        <a th:href="@{'/versions?currentDrawingId=' + ${currentDrawingId}}" class="btn btn-secondary">Versions</a>
         <a th:href="@{'/share?currentDrawingId=' + ${currentDrawingId}}" class="btn btn-secondary">Compartir</a>
         <form action="/view" method="post" onclick="return confirm('Segur que vols esborrar el dibuix?')" >
             <input type="hidden" name="currentDrawingId" th:value="${currentDrawingId}" />
@@ -47,7 +47,6 @@
     </div>
     <div th:if="${canWrite}">
         <a th:href="@{'/edit?currentDrawingId=' + ${currentDrawingId}}" class="btn btn-secondary">Editar</a>
-        <a th:href="@{'/versions?currentDrawingId=' + ${currentDrawingId}}" class="btn btn-secondary">Versions</a>
         <a th:href="@{'/share?currentDrawingId=' + ${currentDrawingId}}" class="btn btn-secondary">Compartir</a>
         <form action="/view" method="post" onclick="return confirm('Segur? Nomes deixaras de veure aquest dibuix perque no ets propietari')" >
             <input type="hidden" name="currentDrawingId" th:value="${currentDrawingId}" />

@@ -148,6 +148,16 @@ public class DrawingRepoImpl implements DrawingRepo {
         String newJson = newDrawing.getJson();
         String newName = newDrawing.getName();
         Boolean isPublic = newDrawing.isPublic();
+
+        //TODO Check if its the same
+        Version v = getLatestVersion(id);
+        boolean diferentJson = true;
+        if (v.getJson().equals(newJson)){
+            diferentJson = false;
+        }
+
+
+
         int tinyint = 0;
         if (isPublic) {
             tinyint = 1;

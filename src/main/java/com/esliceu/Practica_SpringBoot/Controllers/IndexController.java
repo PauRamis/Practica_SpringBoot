@@ -126,11 +126,11 @@ public class IndexController {
         savedDrawing.setName((String) payload.get("drawingName"));
         savedDrawing.setUser(actualUser.getUserName()); //Need?
         savedDrawing.setPublic((Boolean) payload.get("isPublic"));
-        savedDrawing.setId((Integer) payload.get("currentDrawingId"));
+        savedDrawing.setId(Integer.parseInt(payload.get("currentDrawingId").toString()));
         System.out.println("currentDrawingId"+ payload.get("currentDrawingId"));
         drawingService.editDrawing(savedDrawing);
 
-        return ResponseEntity.ok((Integer) payload.get("currentDrawingId"));
+        return ResponseEntity.ok(Integer.valueOf(payload.get("currentDrawingId").toString()));
     }
 
     //Gallery
@@ -179,8 +179,8 @@ public class IndexController {
             int userId = userService.findUserByuserName(currentUser).getId();
             canWrite = drawingService.getSharedPermisions(currentDrawingId, userId);
             System.out.println("Can write? " + canWrite);
+            model.addAttribute("canWrite", canWrite);
         }
-        model.addAttribute("canWrite", canWrite);
         return "view";
     }
 
@@ -231,6 +231,22 @@ public class IndexController {
         model.addAttribute("versionId", versionId);
         model.addAttribute("currentJson", currentVersion.getJson());
         model.addAttribute("timeStamp", currentVersion.getTimeStamp());
+
+        //Check if allowed to restore
+        String currentUser = (String) session.getAttribute("userName");
+        String authorName = drawingService.getDrawingById(currentDrawingId).getUser();
+        boolean author = currentUser.equals(authorName);
+        model.addAttribute("allowed", author);
+
+        //Maybe he can edit
+        if (!author){
+            boolean canWrite = false;
+            int userId = userService.findUserByuserName(currentUser).getId();
+            canWrite = drawingService.getSharedPermisions(currentDrawingId, userId);
+            System.out.println("Can write? " + canWrite);
+            model.addAttribute("allowed", canWrite);
+        }
+
         return "versionView";
     }
 
@@ -238,9 +254,26 @@ public class IndexController {
     public String versionViewPost(Model model,
                                   @RequestParam int versionId,
                                   @RequestParam int currentDrawingId){
-        //Restaurar Versio
-        Version currentVersion = drawingService.getVersionById(versionId);
-        drawingService.overrideLatestVersion(currentDrawingId, currentVersion.getJson());
+        //Comprobam si es el autor del actual dibuix
+        String currentUser = (String) session.getAttribute("userName");
+        String authorName = drawingService.getDrawingById(currentDrawingId).getUser();
+        boolean allowed = currentUser.equals(authorName);
+        //model.addAttribute("allowed", author);
+
+        if (!allowed){
+            boolean canWrite = false;
+            //Comprobam si te permis per editar
+            int userId = userService.findUserByuserName(currentUser).getId();
+            canWrite = drawingService.getSharedPermisions(currentDrawingId, userId);
+            System.out.println("Can write? " + canWrite);
+            allowed = canWrite;
+            //model.addAttribute("allowed", canWrite);
+        }
+        if (allowed){
+            //Restaurar Versio
+            Version currentVersion = drawingService.getVersionById(versionId);
+            drawingService.overrideLatestVersion(currentDrawingId, currentVersion.getJson());
+        }
         return "redirect:/gallery";
     }
 
