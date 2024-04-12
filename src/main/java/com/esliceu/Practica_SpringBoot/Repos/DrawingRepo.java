@@ -45,4 +45,6 @@ public interface DrawingRepo {
     boolean isPublic(int currentDrawingId);
 
     boolean getSharedPermisions(int currentDrawingId, int userId);
+
+    void removeShare(String currentDrawingId, int userId);
 }

@@ -190,7 +190,13 @@ public class IndexController {
         String author = drawingService.getDrawingById(Integer.parseInt(currentDrawingId)).getUser();
         String currentUser = (String) session.getAttribute("userName");
         if (author.equals(currentUser)){
+            //Comprobam si es l'autor
             drawingService.sendToTrash(Integer.parseInt(currentDrawingId));
+        } else {
+            //Comprobam si te el dibux compartit, i l'eliminam.
+            System.out.println("To delete");
+            int userId = userService.findUserByuserName(currentUser).getId();
+            drawingService.removeShare(currentDrawingId, userId);
         }
         return "redirect:/gallery";
     }

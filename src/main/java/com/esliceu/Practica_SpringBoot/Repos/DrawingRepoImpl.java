@@ -172,6 +172,13 @@ public class DrawingRepoImpl implements DrawingRepo {
     }
 
     @Override
+    public boolean isPublic(int currentDrawingId) {
+        String sql = "SELECT isPublic FROM drawings WHERE id = ?";
+        int isPublicInt = jdbcTemplate.queryForObject(sql, Integer.class, currentDrawingId);
+        return (isPublicInt == 1);
+    }
+
+    @Override
     public void shareWithUsers(int id_drawing, int id_user, boolean writing){
         //Check for repeats
         String presql = "SELECT id_drawing FROM shared WHERE id_user = ? AND id_drawing = ?";
@@ -192,17 +199,16 @@ public class DrawingRepoImpl implements DrawingRepo {
     }
 
     @Override
-    public boolean isPublic(int currentDrawingId) {
-        String sql = "SELECT isPublic FROM drawings WHERE id = ?";
-        int isPublicInt = jdbcTemplate.queryForObject(sql, Integer.class, currentDrawingId);
-        return (isPublicInt == 1);
-    }
-
-    @Override
     public boolean getSharedPermisions(int currentDrawingId, int userId) {
         String sql = "SELECT writing FROM shared WHERE id_drawing = ? AND id_user = ?";
         Integer writing = jdbcTemplate.queryForObject(sql, Integer.class, currentDrawingId, userId);
         return writing != null && writing == 1;
+    }
+
+    @Override
+    public void removeShare(String currentDrawingId, int userId) {
+        String sql = "DELETE FROM shared WHERE id_drawing = ? AND id_user = ?";
+        jdbcTemplate.update(sql, currentDrawingId, userId);
     }
 
 }

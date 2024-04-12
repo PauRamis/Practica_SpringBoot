@@ -75,4 +75,6 @@ public class DrawingService {
     public boolean getSharedPermisions(int currentDrawingId, int userId) {
         return drawingRepo.getSharedPermisions(currentDrawingId, userId);
     }
+
+    public void removeShare(String currentDrawingId, int userId) {drawingRepo.removeShare(currentDrawingId, userId);}
 }

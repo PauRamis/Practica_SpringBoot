@@ -49,9 +49,9 @@
         <a th:href="@{'/edit?currentDrawingId=' + ${currentDrawingId}}" class="btn btn-secondary">Editar</a>
         <a th:href="@{'/versions?currentDrawingId=' + ${currentDrawingId}}" class="btn btn-secondary">Versions</a>
         <a th:href="@{'/share?currentDrawingId=' + ${currentDrawingId}}" class="btn btn-secondary">Compartir</a>
-        <form action="/view" method="post" onclick="return confirm('Segur que vols esborrar el dibuix?')" >
+        <form action="/view" method="post" onclick="return confirm('Segur? Nomes deixaras de veure aquest dibuix perque no ets propietari')" >
             <input type="hidden" name="currentDrawingId" th:value="${currentDrawingId}" />
-            <p><input type="submit" value="Esborrar"></p>
+            <p><input type="submit" value="Eliminar"></p>
         </form>
     </div>
 
