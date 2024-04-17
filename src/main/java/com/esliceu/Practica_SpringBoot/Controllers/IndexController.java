@@ -141,13 +141,7 @@ public class IndexController {
 
         List<Drawing> userDrawings = drawingService.showUserDrawings(userName);
         List<Drawing> publicDrawings = drawingService.showPublicDrawings();
-        List<Integer> sharedDrawingsIDs = drawingService.getSharedDrawings(currentUser.getId());
-
-        List<Drawing> sharedDrawings = new ArrayList<>();
-        for (int i = 0; i < sharedDrawingsIDs.size(); i++) {
-            Drawing d = drawingService.getDrawingById(sharedDrawingsIDs.get(i));
-            sharedDrawings.add(d);
-        }
+        List<Drawing> sharedDrawings = drawingService.getSharedDrawings(currentUser.getId());
 
         model.addAttribute("userName", userName);
         model.addAttribute("userDrawings", userDrawings);

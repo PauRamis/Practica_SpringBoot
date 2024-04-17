@@ -45,14 +45,17 @@
             <p><input type="submit" value="Esborrar"></p>
         </form>
     </div>
-    <div th:if="${canWrite}">
-        <a th:href="@{'/edit?currentDrawingId=' + ${currentDrawingId}}" class="btn btn-secondary">Editar</a>
-        <a th:href="@{'/share?currentDrawingId=' + ${currentDrawingId}}" class="btn btn-secondary">Compartir</a>
+    <div th:if="${!author}">
+        <div th:if="${canWrite}">
+            <a th:href="@{'/edit?currentDrawingId=' + ${currentDrawingId}}" class="btn btn-secondary">Editar</a>
+            <a th:href="@{'/share?currentDrawingId=' + ${currentDrawingId}}" class="btn btn-secondary">Compartir</a>
+        </div>
         <form action="/view" method="post" onclick="return confirm('Segur? Nomes deixaras de veure aquest dibuix perque no ets propietari')" >
             <input type="hidden" name="currentDrawingId" th:value="${currentDrawingId}" />
-            <p><input type="submit" value="Eliminar"></p>
+            <p><input type="submit" value="Deixar de compartir amb mi"></p>
         </form>
     </div>
+
 
     <script type="module">
         import { dibuixa } from "/js/view.js";

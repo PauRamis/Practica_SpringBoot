@@ -40,7 +40,7 @@ public interface DrawingRepo {
 
     void shareWithUsers(int id_drawing, int id_user, boolean canEdit);
 
-    List<Integer> getSharedDrawings(int id);
+    List<Drawing> getSharedDrawings(int id);
 
     boolean isPublic(int currentDrawingId);
 

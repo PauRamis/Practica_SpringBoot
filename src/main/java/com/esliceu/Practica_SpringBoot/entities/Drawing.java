@@ -6,6 +6,7 @@ public class Drawing {
     private int id;
     private String name;
     private boolean isPublic;
+    private boolean inTrash;
 
     public String getJson() {
         return json;
@@ -45,5 +46,13 @@ public class Drawing {
 
     public void setPublic(boolean aPublic) {
         isPublic = aPublic;
+    }
+
+    public boolean isInTrash() {
+        return inTrash;
+    }
+
+    public void setInTrash(boolean inTrash) {
+        this.inTrash = inTrash;
     }
 }

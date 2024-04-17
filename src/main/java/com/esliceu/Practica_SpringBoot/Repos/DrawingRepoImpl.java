@@ -12,6 +12,7 @@ import org.springframework.stereotype.Repository;
 
 import java.sql.PreparedStatement;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -156,8 +157,6 @@ public class DrawingRepoImpl implements DrawingRepo {
             diferentJson = false;
         }
 
-
-
         int tinyint = 0;
         if (isPublic) {
             tinyint = 1;
@@ -197,15 +196,31 @@ public class DrawingRepoImpl implements DrawingRepo {
             System.out.println("Already Exists");
             return;
         }
+        Drawing drawing = getDrawingById(id_drawing);
+        if (getUserIdByName(drawing.getUser()) == id_user){
+            System.out.println("Sharing with owner");
+            return;
+        }
 
         String sql = "insert into shared (id_drawing,id_user,writing) values (?,?,?)";
         jdbcTemplate.update(sql, id_drawing, id_user, writing);
     }
 
     @Override
-    public List<Integer> getSharedDrawings(int id_user) {
+    public List<Drawing> getSharedDrawings(int id_user) {
         String sql = "SELECT id_drawing FROM shared WHERE id_user = ?";
-        return jdbcTemplate.queryForList(sql, Integer.class, id_user);
+
+        List<Integer> sharedDrawings = jdbcTemplate.queryForList(sql, Integer.class, id_user);
+        List<Drawing> avaliableDrawings = new ArrayList<>();
+
+        //Remove if inTrash
+        sharedDrawings.stream().forEach(sharedDrawing -> {
+            Drawing drawing = getDrawingById(sharedDrawing);
+            if (!drawing.isInTrash()) {
+                avaliableDrawings.add(drawing);
+            }
+        });
+        return avaliableDrawings;
     }
 
     @Override
