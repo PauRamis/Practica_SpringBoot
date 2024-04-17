@@ -155,6 +155,7 @@ public class IndexController {
     public String view(Model model,
                        @RequestParam int currentDrawingId){
 
+        //Obtenim les dades del dibuix
         Drawing currentDrawing = drawingService.getDrawingById(currentDrawingId);
         model.addAttribute("currentDrawingId", currentDrawingId);
         model.addAttribute("drawingUser", currentDrawing.getUser());
@@ -175,6 +176,17 @@ public class IndexController {
             System.out.println("Can write? " + canWrite);
             model.addAttribute("canWrite", canWrite);
         }
+
+        //Comprobam si li han compartit
+        boolean isShared = false;
+        List<Drawing> shareds = drawingService.getSharedDrawings(drawingService.getUserIdByName(currentUser));
+        for (int i = 0; i < shareds.size(); i++) {
+            if (shareds.get(i).getId() == currentDrawingId){
+                isShared = true;
+            }
+        }
+        System.out.println("IsShared "+isShared);
+        model.addAttribute("isShared", isShared);
         return "view";
     }
 

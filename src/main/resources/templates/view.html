@@ -45,7 +45,7 @@
             <p><input type="submit" value="Esborrar"></p>
         </form>
     </div>
-    <div th:if="${!author}">
+    <div th:if="${isShared}">
         <div th:if="${canWrite}">
             <a th:href="@{'/edit?currentDrawingId=' + ${currentDrawingId}}" class="btn btn-secondary">Editar</a>
             <a th:href="@{'/share?currentDrawingId=' + ${currentDrawingId}}" class="btn btn-secondary">Compartir</a>
